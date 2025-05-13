@@ -1,0 +1,82 @@
+
+.section-exchange
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 28px;
+}
+
+.livre-grid{
+    display: grid;
+    gap: 15px 15px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.Card-livre{
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 3px 19px 0 #00000003;
+    width: 100%;
+    position: relative;
+    .Card-livre_titre:after{
+        content:'';
+        position: absolute;
+        inset: 0;
+    }
+}
+
+.Card-livre_img{
+    width: 100%;
+    aspect-ratio: 161/160;
+    height: auto;
+    object-fit: cover;
+}
+
+.card-livre_statut_indispo{
+    width: 90px;
+    height: 25px;
+    background: var(--ColorVignette);
+    color: white;
+    position: absolute;
+    font-size: 12px;
+    top: 1.125rem;
+    right: 0.625rem;
+    border-radius: 10px 10px 10px 10px;
+    display: grid;
+    place-items: center;
+}
+.card-livre_statut_dispo{
+    width: 90px;
+    height: 25px;
+    background: var(--colorVertPrincipal);
+    color: white;
+    position: absolute;
+    font-size: 12px;
+    top: 18px;
+    right: 10px;
+    border-radius: 10px 10px 10px 10px;
+    display: grid;
+    place-items: center;
+}
+
+@media(min-width: 700px){
+    .section-exchange{
+        gap:4.375rem ;
+        flex-direction: Row;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+    .livre-grid{
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3rem 2.375rem;
+    }
+    .card-livre_statut_indispo{
+        top: 0.625rem;
+    }
+    .card-livre_statut_dispo{
+        top: 10px;
+    }
+}

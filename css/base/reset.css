@@ -1,0 +1,25 @@
+body {
+    font-family: inter,Verdana,"Arial Nova",sans-serif;
+    color: var(--ColorText);
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: currentColor;
+    text-decoration: unset;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-size: unset;
+    font-weight: unset;
+    margin: unset;
+    padding: unset;
+    font-family: 'Playfair Display',Verdana,"Arial Nova",sans-serif
+}
+
+ul {
+    list-style: none;
+    padding: unset;
+    margin: unset;
+}

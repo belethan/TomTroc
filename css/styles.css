@@ -1,0 +1,15 @@
+
+@import "base/reset.css";
+@import "base/layout.css";
+@import "base/variables.css";
+@import "base/text.css";
+@import "blocs/menu.css";
+@import "blocs/livres.css";
+@import "blocs/piedpage.css";
+@import "elements/forms.css";
+@import "elements/burger.css";
+@import "elements/general.css";
+body{
+  background-color: var(--ColorBackGround);
+  font-family: inter,"Playfair Display",Verdana,"Arial Nova",sans-serif;
+}

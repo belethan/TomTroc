@@ -1,0 +1,22 @@
+.search-box {
+    position: relative;
+    width: 300px;
+}
+
+.search-box input[type="text"] {
+    width: 100%;
+    padding: 10px 10px 10px 35px; /* padding gauche pour l’icône */
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.search-box .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    pointer-events: none; /* pour que l'icône ne gêne pas le clic dans l'input */
+}

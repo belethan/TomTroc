@@ -1,0 +1,51 @@
+
+.section-main{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    width: 20.625rem;
+}
+
+.left-block {
+    flex: 1;
+}
+
+.left-block h1 {
+    font-size: 2.25rem;
+    margin-bottom: 10px;
+    font-family: Playfair Display;
+    font-weight: 100;
+}
+
+.left-block p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    font-family: inter;
+}
+
+.left-block button {
+    padding: 10px 20px;
+    background-color: var(--colorVertPrincipal);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 152px;
+    height: 63px;
+    font-size: 1.125rem;
+}
+
+.right-block img {
+    width: 404px;
+    height: 539px;
+    object-fit: cover;
+    margin-bottom: 128px;
+}
+
+@media (max-width: 768px) {
+    .container-main {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+}
