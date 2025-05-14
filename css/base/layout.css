@@ -19,3 +19,22 @@ h1{
     padding-inline: 20px;
     margin-top: 80px;
 }
+
+.container-top-read{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1480px;
+    margin-inline: auto;
+    padding-inline: 20px;
+    margin-top: 80px;
+}
+
+.container-useit > *{
+    max-width: min(1480px, calc(100% - 2rem));
+    margin-inline: auto;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
