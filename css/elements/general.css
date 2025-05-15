@@ -17,14 +17,14 @@
 .left-block h1 {
     font-size: 2.25rem;
     margin-bottom: 10px;
-    font-family: Playfair Display;
+    font-family: "Playfair Display", inter, sans-serif;
     font-weight: 100;
 }
 
 .left-block p {
     font-size: 1.1em;
     margin-bottom: 20px;
-    font-family: inter;
+    font-family: inter, sans-serif;
 }
 
 .left-block button {
@@ -97,6 +97,7 @@
     font-size: 1.1em;
     color: #555;
     margin-bottom: 40px;
+    max-width: 31.25rem;
 }
 
 .boxes {
@@ -130,6 +131,61 @@
     margin-top: 48px;
     margin-bottom: 64px;
 }
+
+/****************************************/
+/* Gestion Bandeau                      */
+/****************************************/
+ .bandeau {
+     max-width: 1446px;
+     max-height: 230px;
+     width: 100%;
+     height: auto;
+     overflow: hidden;
+     margin: 0 auto; /* Centrer horizontalement */
+ }
+.bandeau img{
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain; /* Garde le ratio, ne rogne pas l'image */
+}
+/****************************************/
+/* Gestion Nos Valeurs                  */
+/****************************************/
+.container-valeurs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+}
+.cadre {
+    position: relative; /* Nécessaire pour positionner le logo par rapport à ce bloc */
+    width: 60%;
+    max-width: 23.75rem;
+    padding: 30px 30px 95px;
+    margin-top: 50px;
+
+}
+.cadre h2 {
+    font-size: 2em;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.cadre  p {
+    text-align: left;
+    line-height: 1.6;
+}
+
+.cadre .logosignature {
+    position: absolute;
+    bottom: 25px;
+    right: 0;
+    width: 50px; /* Ajustable */
+    height: auto;
+}
+
+
 /****************************************/
 /* Gestion Mobile                       */
 /****************************************/
@@ -138,7 +194,7 @@
         flex-direction: column-reverse;
         text-align: center;
     }
-    container-top-read{
+    .container-top-read{
         flex-direction: column;
         text-align: center;
         width: 100%;
