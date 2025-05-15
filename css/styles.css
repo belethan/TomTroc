@@ -12,5 +12,4 @@
 @import "elements/general.css";
 body{
   background-color: var(--ColorBackGround);
-  font-family: inter,"Playfair Display",Verdana,"Arial Nova",sans-serif;
 }
