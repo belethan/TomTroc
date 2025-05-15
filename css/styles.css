@@ -5,6 +5,7 @@
 @import "base/text.css";
 @import "blocs/menu.css";
 @import "blocs/livres.css";
+@import "blocs/pagelivre.css";
 @import "blocs/piedpage.css";
 @import "elements/forms.css";
 @import "elements/burger.css";

@@ -197,7 +197,7 @@
         text-align: center;
     }
     .container-top-read{
-        flex-direction: column;
+        /*flex-direction: column;*/
         text-align: center;
         width: 100%;
     }
