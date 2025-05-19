@@ -10,6 +10,7 @@
 @import "elements/forms.css";
 @import "elements/burger.css";
 @import "elements/general.css";
+@import "elements/inscription.css";
 body{
   background-color: var(--ColorBackGround);
 }

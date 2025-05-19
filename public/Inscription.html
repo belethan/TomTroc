@@ -1,0 +1,85 @@
+<!-- filepath: c:\wamp64\www\soutenance\TomTroc\index.php -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TomTroc</title>
+  <!--Import des polices depuis Google Fonts -->
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/styles.css"> <!-- Lien vers un fichier CSS -->
+</head>
+<body>
+<header class="navbar container" role="presentation">
+  <div class="logo-title">
+    <div class="logo_cadre">
+      <img src="../images/LogoTitre.svg" alt="Logo TomTroc" class="logo">
+    </div>
+    <span class="site_title">Tom Troc </span>
+  </div>
+  <div class="navbar-main">
+    <div class="navbar-left">
+      <ul class="navbar-links-left">
+        <li class="navbar-link-left"><a href="#">Accueil</a></li>
+        <li class="navbar-link-left"><a href="#">Nos livres à l'échange</a></li>
+      </ul>
+    </div>
+    <div class="navbar-right">
+      <ul class="navbar-links-right">
+        <li class="navbar-link-right"><a href="#">💬 Messagerie <span class="badge">5</span> </a></li>
+        <li  class="navbar-link-right"><a href="#"><i class="fa fa-user"></i> Mon compte</a></li>
+        <li  class="navbar-link-right"><a href="#">Connexion</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="burger"> <!--show-burger-->
+    <ul class="navbar-links-burger">
+      <li class="navbar-link-burger"><a href="#">Accueil</a></li>
+      <li class="navbar-link-burger"><a href="#">Nos livres à l'échange</a></li>
+      <li class="navbar-link-burger"><a href="#">Messagerie</a></li>
+      <li  class="navbar-link-burger"><a href="#">Mon compte</a></li>
+      <li  class="navbar-link-burger"><a href="#">Connexion</a></li>
+    </ul>
+    <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+    <button class="btn-burger">
+      <span class="bar"> </span>
+    </button>
+  </div>
+</header>
+<main>
+  <section class="container-inscription">
+    <div class="left-column">
+      <h1>Prescription</h1>
+      <form action="#" method="post">
+         <label for="pseudo">Pseudo</label>
+          <input type="text" name="pseudo" id="pseudo" placeholder="Pseudo" required>
+          <label for="email">Adresse mail</label>
+          <input type="email" name="email" id="email" placeholder="Adresse mail" required>
+          <label for="password">Mot de passe</label>
+          <input type="password" name="password" id="password" placeholder="Mot de passe" required>
+          <button type="submit">S'inscrire</button>
+      </form>
+        <div class="login-link">
+          <p>Déjà inscrit ? <a href="#">Connectez-vous</a></p>
+        </div>
+    </div>
+    <div class="right-column">
+      <img src="../images/inscription.png" alt="Image Bibliothéque">
+    </div>
+  </section>
+</main>
+<footer class="footer container">
+  <div class="footer-content">
+    <ul class="footer-menu">
+      <li><a href="#">Politique de confidentialité</a></li>
+      <li><a href="#">Mentions légales</a></li>
+      <li><a href="#">Tom Troc©</a></li>
+      <li><a href="#"><img src="../images/logott.svg" alt="Logo Tom Troc"></a></li>
+    </ul>
+  </div>
+</footer>
+<script src="../js/menu.js"></script>
+</body>
+</html>
