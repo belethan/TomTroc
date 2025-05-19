@@ -95,12 +95,17 @@
     text-decoration: underline;
 }
 
-@media (max-width: 768px) {
-    .container-inscription .right-column {
-        display: flex;
-        min-width: 150px;
-        flex-direction: column;
-        justify-content: flex-start;
-    }
-}
+  @media (max-width: 1100px) {
+      .container-inscription{
+          flex-direction: column;
+          flex-wrap: nowrap;
+      }
+      .container-inscription .right-column {
+            display: flex;
+            min-width: 150px;
+            flex-direction: column;
+            justify-content: flex-start;
+            margin-top: 40px;
+        }
+  }
 
