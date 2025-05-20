@@ -1,0 +1,115 @@
+.compte {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.Titre{
+    font-family: Playfair Display;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 100%;
+}
+
+.carduser{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.left-section, .right-aside {
+    width: 45%;
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.left-section {
+    text-align: center;
+    background-color: white;
+}
+
+.left-section img {
+    max-width: 100%;
+    height: auto;
+}
+
+.label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.right-aside {
+    background-color: #f9f9f9;
+    border-left-width: 15px;
+    margin-left: 33px;
+}
+
+.right-aside h2 {
+    margin-top: 0;
+}
+
+.profile-img {
+    width: 135px;
+    height: 157px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+.divider {
+    width: 235px;
+    height: 1px;
+    background-color: #ccc;
+    margin: 15px auto;
+}
+.labels {
+    text-align: center;
+}
+
+.labels p {
+    margin: 5px 0;
+    font-weight: normal;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    border-left-width: 15px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+label {
+    font-weight: 200;
+    margin-bottom: 5px;
+    color: grey;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    .compte {
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .right-aside {
+        margin-left: 0;
+    }
+    .left-section, .right-aside {
+        width: 75%;
+    }
+}
