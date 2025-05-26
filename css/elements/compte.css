@@ -45,9 +45,8 @@
     border: 2px solid var(--colorVertPrincipal);
     border-radius: 8px;
     cursor: pointer;
-    margin-left: 40px;
     margin-top: 32px;
-
+    margin-left: 40px;
 }
 
 .left-section, .right-aside {
@@ -185,8 +184,9 @@ input[type="text"] {
     background-color: var(--Colorfondinput);
     height: 1.563rem;
 }
-
-
+/******************************/
+/******* Gestion Tablette *****/
+/******************************/
 @media (max-width: 1085px) {
     .left-section {
         margin-right: 0;
@@ -197,6 +197,10 @@ input[type="text"] {
         margin-right: 20%;
     }
 }
+/******************************/
+/******* Gestion Mobile *******/
+/******************************/
+
 @media (max-width: 768px) {
     .compte {
         flex-direction: column;

@@ -12,6 +12,7 @@
 @import "elements/general.css";
 @import "elements/inscription.css";
 @import "elements/compte.css";
+@import "elements/TableauCard.css";
 body{
   background-color: var(--ColorBackGround);
 }
