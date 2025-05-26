@@ -4,31 +4,65 @@
     justify-content: center;
 }
 
-.Titre{
-    font-family: Playfair Display;
+.header-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.titre{
+    font-family: "Playfair Display", serif;
     font-weight: 400;
     font-size: 26px;
     line-height: 100%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
+
+.infouser{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 48px;
+    margin-bottom: 93px;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
 
 .carduser{
     display: flex;
     flex-direction: column;
     justify-content: left;
-    margin-top: 100px;
     margin-bottom: 100px;
 }
 
+.carduser button{
+    background-color: var(--colorGrisClair);
+    color: var(--colorVertPrincipal);
+    padding: 0.75rem;
+    font-size: 1rem;
+    gap: 0.625rem;
+    border: 2px solid var(--colorVertPrincipal);
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 40px;
+    margin-top: 32px;
+
+}
+
 .left-section, .right-aside {
-    width: 45%;
+    /*width: 45%;*/
     box-sizing: border-box;
     padding: 20px;
     border-radius: 10px;
+    width: 508px;
+    height: 555px;
 }
 
 .left-section {
     text-align: center;
     background-color: white;
+    margin-right: 33px;
 }
 
 .left-section img {
@@ -42,13 +76,15 @@
 }
 
 .right-aside {
-    background-color: #f9f9f9;
+    background-color: white;
     border-left-width: 15px;
-    margin-left: 33px;
 }
 
 .right-aside h2 {
-    margin-top: 0;
+   margin-left: 40px;
+    margin-top: 36px;
+    margin-bottom: 26px;
+    font-size: 1.125rem;
 }
 
 .profile-img {
@@ -60,30 +96,78 @@
     margin: 0 auto;
 }
 
+.lien-photo{
+    color: gray;           /* Couleur gris clair */
+    text-decoration: underline; /* Soulignement */
+    font-size: 0.875rem;
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+.lien-photo:hover{
+    color: gray; /* Couleur plus foncée au survol, optionnel */
+}
+
 .divider {
-    width: 235px;
+    width: 70%;
     height: 1px;
     background-color: #ccc;
-    margin: 15px auto;
+    margin: 30px auto;
 }
 .labels {
     text-align: center;
 }
 
-.labels p {
+.labels h3 {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.label-normal {
     margin: 5px 0;
     font-weight: normal;
+    color: #706e6e;
+ }
+
+.label-Nom {
+    margin: 5px 0;
+    font-weight: normal;
+    color: lightgrey;
+    padding-top: 11px;
+    padding-bottom: 21px;
 }
+
+.biblio{
+    font-size: 0.625rem;
+}
+
+.book-paragraph {
+    font-family: "inter", sans-serif;
+    font-size: 0.813rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-icon {
+    width: 0.938rem;
+    margin-right: 6px;
+}
+
+.book-count {
+    font-weight: bold;
+    margin-right: 4px;
+}
+
 
 form > div {
     display: flex;
     flex-direction: column;
-    gap: 0px;
-    margin-bottom: 5px;
-    margin-top: 15px;
+    gap: 10px;
     border-left-width: 15px;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin: 15px 40px 5px;
 }
 
 label {
@@ -97,19 +181,34 @@ input[type="password"],
 input[type="text"] {
     padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
+    background-color: var(--Colorfondinput);
+    height: 1.563rem;
 }
 
+
+@media (max-width: 1085px) {
+    .left-section {
+        margin-right: 0;
+        margin-bottom: 32px;
+    }
+    .titre{
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+}
 @media (max-width: 768px) {
     .compte {
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
     }
-    .right-aside {
-        margin-left: 0;
-    }
+
     .left-section, .right-aside {
         width: 75%;
+    }
+    .titre{
+      margin-left: 14%;
+      margin-right: 14%;
     }
 }

@@ -11,80 +11,88 @@
   <link rel="stylesheet" href="../css/styles.css"> <!-- Lien vers un fichier CSS -->
 </head>
 <body>
-  <header class="navbar container" role="presentation">
-    <div class="logo-title">
-      <div class="logo_cadre">
-        <img src="../images/LogoTitre.svg" alt="Logo TomTroc" class="logo">
-      </div>
-      <span class="site_title">Tom Troc </span>
+<header class="navbar container" role="presentation">
+  <div class="logo-title">
+    <div class="logo_cadre">
+      <img src="../images/LogoTitre.svg" alt="Logo TomTroc" class="logo">
     </div>
-    <div class="navbar-main">
-      <div class="navbar-left">
-        <ul class="navbar-links-left">
-          <li class="navbar-link-left"><a href="#">Accueil</a></li>
-          <li class="navbar-link-left"><a href="#">Nos livres à l'échange</a></li>
-        </ul>
-      </div>
-      <div class="navbar-right">
-        <ul class="navbar-links-right">
-          <li class="navbar-link-right"><a href="#" class="bulle">Messagerie <span class="badge">5</span> </a></li>
-          <li  class="navbar-link-right"><a href="#">Mon compte</a></li>
-          <li  class="navbar-link-right"><a href="#">Connexion</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="burger"> <!--show-burger-->
-      <ul class="navbar-links-burger">
-        <li class="navbar-link-burger"><a href="#">Accueil</a></li>
-        <li class="navbar-link-burger"><a href="#">Nos livres à l'échange</a></li>
-        <li class="navbar-link-burger"><a href="#">Messagerie</a></li>
-        <li  class="navbar-link-burger"><a href="#">Mon compte</a></li>
-        <li  class="navbar-link-burger"><a href="#">Connexion</a></li>
+    <span class="site_title">Tom Troc </span>
+  </div>
+  <div class="navbar-main">
+    <div class="navbar-left">
+      <ul class="navbar-links-left">
+        <li class="navbar-link-left"><a href="#">Accueil</a></li>
+        <li class="navbar-link-left"><a href="#">Nos livres à l'échange</a></li>
       </ul>
-      <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
-      <button class="btn-burger">
-        <span class="bar"> </span>
-      </button>
     </div>
-  </header>
+    <div class="navbar-right">
+      <ul class="navbar-links-right">
+        <li class="navbar-link-right"><a href="#">💬 Messagerie <span class="badge">5</span> </a></li>
+        <li  class="navbar-link-right"><a href="#"><i class="fa fa-user"></i> Mon compte</a></li>
+        <li  class="navbar-link-right"><a href="#">Connexion</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="burger"> <!--show-burger-->
+    <ul class="navbar-links-burger">
+      <li class="navbar-link-burger"><a href="#">Accueil</a></li>
+      <li class="navbar-link-burger"><a href="#">Nos livres à l'échange</a></li>
+      <li class="navbar-link-burger"><a href="#">Messagerie</a></li>
+      <li  class="navbar-link-burger"><a href="#">Mon compte</a></li>
+      <li  class="navbar-link-burger"><a href="#">Connexion</a></li>
+    </ul>
+    <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+    <button class="btn-burger">
+      <span class="bar"> </span>
+    </button>
+  </div>
+</header>
   <main class="container" role="main">
-  <h1>Mon Compte</h1>
-    <div class="compte">
-      <!--1er bloc à gauche-->
-      <section class="left-section">
-        <img src="https://picsum.photos/157/157" alt="Image Profil" class="profile-img">
-        <div class="divider"></div>
-        <div class="labels">
-          <h3>nathalire</h3>
-          <p>membre depuis 1 ans</p>
-          <p>Bibliothéque</p>
-          <p>4 livres</p>
-        </div>
-      </section>
-      <!--2eme bloc à droite-->
-      <aside class="right-aside">
-        <div class="carduser">
-          <h2>Vos informations personnelles</h2>
-          <form>
-            <div>
-              <label for="email">Adresse Mail</label>
-              <input type="email" id="email" name="email" required>
-            </div>
-            <div>
-              <label for="password">Mot de passe</label>
-              <input type="password" id="password" name="password" required>
-            </div>
-            <div>
-              <label for="pseudo">Pseudo</label>
-              <input type="text" id="pseudo" name="pseudo" required>
-            </div>
-            <button type="submit">Enregistrer</button>
-          </form>
-        </div>
-      </aside>
-    </div>
 
-
+      <div class="titre">
+          <h1 >Mon Compte</h1>
+      </div>
+      <div class="compte">
+          <!--1er bloc à gauche-->
+          <section class="left-section">
+            <div class="infouser">
+              <img src="https://picsum.photos/157/157" alt="Image Profil" class="profile-img">
+              <a href="#"  class="lien-photo">modifier</a>
+              <div class="divider"></div>
+              <div class="labels">
+                <h3>nathalire</h3>
+                <p class="label-Nom">membre depuis 1 ans</p>
+                <p class="biblio">Bibliothéque</p>
+                <p class="book-paragraph">
+                  <img src="../images/LivreTexte.svg" alt="Livres" class="book-icon">
+                  <span class="book-count">4 </span>
+                  livres
+                </p>
+              </div>
+            </div>
+          </section>
+          <!--2eme bloc à droite-->
+          <aside class="right-aside">
+            <div class="carduser">
+              <h2>Vos informations personnelles</h2>
+              <form>
+                <div>
+                  <label for="email">Adresse Mail</label>
+                  <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                  <label for="password">Mot de passe</label>
+                  <input type="password" id="password" name="password" required>
+                </div>
+                <div>
+                  <label for="pseudo">Pseudo</label>
+                  <input type="text" id="pseudo" name="pseudo" required>
+                </div>
+                <button type="submit">Enregistrer</button>
+              </form>
+            </div>
+          </aside>
+        </div>
 
     <!--Bloc du bas Tableau-->
     <section class="full-width-section">
