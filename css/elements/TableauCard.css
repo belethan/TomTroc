@@ -1,0 +1,163 @@
+/* --- TABLEAU PAR DÉFAUT --- */
+.table-wrapper {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.custom-table {
+    width: 83%;
+    border-collapse: separate;
+    border-spacing: 0 8px; /* 80px d'espacement entre les colonnes */
+    margin-left: 11%;
+    margin-top: 32px;
+}
+
+.custom-table thead tr{
+    height: 80px;
+    vertical-align: middle;
+    padding: 0 25px; /* Moitié de 50px */
+    text-align: left;
+    background-color: white;
+}
+.custom-table thead th {
+    border-bottom: 2px solid #ccc;
+}
+
+.custom-table th,
+.custom-table td {
+    height: 130px;
+    vertical-align: middle;
+    padding: 0 10px; /* Moitié de 50px */
+    text-align: left;
+    width:100px;
+}
+
+.custom-table th {
+    height: 55px;
+    background-color: white;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #EDF2F6;
+}
+
+td:nth-child(1), th:nth-child(1) {
+    width: 90px; /* plus petite */
+}
+
+
+.custom-table th:nth-child(1),
+.custom-table td:nth-child(1) {
+    text-align: center;
+}
+.custom-table img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+td:nth-child(6), th:nth-child(6) {
+    width: 110px; /* plus large */
+}
+
+
+.actions a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: blue;
+}
+
+.actions a:hover {
+    text-decoration: underline;
+}
+
+.actions a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.edit {
+    background-color: #007bff;
+}
+
+.delete {
+    background-color: #dc3545;
+}
+
+.actions a:hover {
+    opacity: 0.8;
+}
+
+/* --- RESPONSIVE MODE EN CARDS --- */
+@media screen and (max-width: 768px) {
+    .full-width-section table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    .full-width-section thead {
+        display: none;
+    }
+
+    .full-width-section tr {
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 10%;
+        margin-bottom: 20px;
+        padding: 15px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+
+    td {
+        border: none;
+        padding: 0;
+    }
+
+    /* Bloc 1 : image + nom/catégorie */
+    .card-top {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+     .card-top img {
+        margin-right: 10px;
+    }
+
+     .card-title {
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+
+     .card-category {
+        color: #666;
+        font-size: 0.9em;
+    }
+
+    /* Bloc 2 : description */
+    .card-description {
+        margin: 10px 0;
+        font-size: 0.95em;
+        color: #333;
+    }
+
+    /* Bloc 3 : actions */
+    .card-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .card-actions a {
+        flex: 0 0 auto;
+    }
+
+}
