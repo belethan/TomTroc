@@ -1,0 +1,94 @@
+.profilelivreimg {
+    width: 160px;
+    height: 157px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table-header, .table-row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    background-color: #f9f9f9;
+}
+
+.table-header {
+    background-color: #e2e2e2;
+    font-weight: bold;
+}
+
+.cell {
+    flex: 1 1 20%;
+    padding: 10px;
+    min-width: 150px;
+}
+
+.right-asideLivre{
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 10px;
+    width: 60%;
+    height: 555px;
+}
+
+.left-sectionLivre{
+    text-align: center;
+    background-color: white;
+    margin-right: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    width: 25%;
+    height: 520px;
+    margin-top: 20px;
+}
+.compteLivre {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+/* Colonne photo avec largeur fixe */
+.photo {
+    flex: 0 0 70px;
+    max-width: 70px;
+    padding: 10px;
+}
+
+.photo img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    .table-header {
+        display: none;
+    }
+    .table-row {
+        flex-direction: column;
+        border-bottom: 1px solid #ccc;
+    }
+    .cell {
+        flex: 1 1 100%;
+        display: flex;
+        padding: 5px 10px;
+    }
+    .cell::before {
+        content: attr(data-label);
+        flex: 0 0 120px;
+        font-weight: bold;
+        color: #333;
+    }
+}

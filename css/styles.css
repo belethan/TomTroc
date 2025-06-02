@@ -13,6 +13,7 @@
 @import "elements/inscription.css";
 @import "elements/compte.css";
 @import "elements/TableauCard.css";
+@import "elements/Comptelivre.css";
 body{
   background-color: var(--ColorBackGround);
 }

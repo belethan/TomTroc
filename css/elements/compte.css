@@ -1,3 +1,5 @@
+
+
 .compte {
     display: flex;
     flex-wrap: wrap;
@@ -27,7 +29,6 @@
     padding-left: 80px;
     padding-right: 80px;
 }
-
 
 .carduser{
     display: flex;
@@ -184,6 +185,14 @@ input[type="text"] {
     background-color: var(--Colorfondinput);
     height: 1.563rem;
 }
+
+/**************************************************************/
+/*********** Gestion des Card en Mode Tablette ou mobile ******/
+/**************************************************************/
+
+
+
+
 /******************************/
 /******* Gestion Tablette *****/
 /******************************/

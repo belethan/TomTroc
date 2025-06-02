@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TomTroc</title>
+    <!--Import des polices depuis Google Fonts -->
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css"> <!-- Lien vers un fichier CSS -->
+</head>
+<body>
+<header class="navbar container" role="presentation">
+    <div class="logo-title">
+        <div class="logo_cadre">
+            <img src="../images/LogoTitre.svg" alt="Logo TomTroc" class="logo">
+        </div>
+        <span class="site_title">Tom Troc </span>
+    </div>
+    <div class="navbar-main">
+        <div class="navbar-left">
+            <ul class="navbar-links-left">
+                <li class="navbar-link-left"><a href="#">Accueil</a></li>
+                <li class="navbar-link-left"><a href="#">Nos livres à l'échange</a></li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <ul class="navbar-links-right">
+                <li class="navbar-link-right"><a href="#">💬 Messagerie <span class="badge">5</span> </a></li>
+                <li  class="navbar-link-right"><a href="#"><i class="fa fa-user"></i> Mon compte</a></li>
+                <li  class="navbar-link-right"><a href="#">Connexion</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="burger"> <!--show-burger-->
+        <ul class="navbar-links-burger">
+            <li class="navbar-link-burger"><a href="#">Accueil</a></li>
+            <li class="navbar-link-burger"><a href="#">Nos livres à l'échange</a></li>
+            <li class="navbar-link-burger"><a href="#">Messagerie</a></li>
+            <li  class="navbar-link-burger"><a href="#">Mon compte</a></li>
+            <li  class="navbar-link-burger"><a href="#">Connexion</a></li>
+        </ul>
+        <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+        <button class="btn-burger">
+            <span class="bar"> </span>
+        </button>
+    </div>
+</header>
+<main class="container" role="main">
+    <div class="compteLivre">
+        <section class="left-sectionLivre">
+            <div class="infouser">
+                <img src="https://picsum.photos/157/157" alt="Image Profil" class="profilelivreimg">
+                <a href="#"  class="lien-photo">modifier</a>
+                <div class="divider"></div>
+                <div class="labels">
+                    <h3>nathalire</h3>
+                    <p class="label-Nom">membre depuis 1 ans</p>
+                    <p class="biblio">Bibliothéque</p>
+                    <p class="book-paragraph">
+                        <img src="../images/LivreTexte.svg" alt="Livres" class="book-icon">
+                        <span class="book-count">4 </span>
+                        livres
+                    </p>
+                </div>
+            </div>
+        </section>
+        <aside class="right-asideLivre">
+           <div class="table">
+            <div class="table-header">
+                <div class="cell">Photo</div>
+                <div class="cell">Titre</div>
+                <div class="cell">Auteur</div>
+                <div class="cell">Description</div>
+            </div>
+
+            <div class="table-row">
+                <div class="cell photo" data-label="Photo"><img src="https://picsum.photos/60" alt="Photo" /></div>
+                <div class="cell" data-label="Titre">Exemple de Titre</div>
+                <div class="cell" data-label="Auteur">Jean Dupont</div>
+                <div class="cell" data-label="Description">Une brève description du contenu présenté ici.</div>
+            </div>
+
+            <div class="table-row">
+                <div class="cell photo" data-label="Photo"><img src="https://picsum.photos/60" alt="Photo" /></div>
+                <div class="cell" data-label="Titre">Autre Titre</div>
+                <div class="cell" data-label="Auteur">Marie Curie</div>
+                <div class="cell" data-label="Description">Une autre description pertinente pour cette ligne.</div>
+            </div>
+       </div>
+        </aside>
+    </div>
+</main>
+</body>
+</html>

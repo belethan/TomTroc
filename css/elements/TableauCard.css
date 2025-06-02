@@ -1,31 +1,39 @@
 /* --- TABLEAU PAR DÉFAUT --- */
 .table-wrapper {
+    display: block;
+}
+.card-view {
+    display: none;
+}
+
+.table-wrapper {
     max-width: 1140px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 10px;
 }
 .custom-table {
-    width: 83%;
+    width: 93%;
+    background-color: white;
     border-collapse: separate;
-    border-spacing: 0 8px; /* 80px d'espacement entre les colonnes */
-    margin-left: 11%;
+    /*border-spacing: 0 8px;  80px d'espacement entre les colonnes */
+    margin-left: 3%;
     margin-top: 32px;
 }
 
 .custom-table thead tr{
-    height: 80px;
+    height: 45px;
     vertical-align: middle;
     padding: 0 25px; /* Moitié de 50px */
-    text-align: left;
+    text-align: center;
     background-color: white;
 }
 .custom-table thead th {
-    border-bottom: 2px solid #ccc;
+    border-bottom: 0px solid #ccc;
 }
 
 .custom-table th,
 .custom-table td {
-    height: 130px;
+    height: 60px;
     vertical-align: middle;
     padding: 0 10px; /* Moitié de 50px */
     text-align: left;
@@ -44,7 +52,7 @@ tbody tr:nth-child(even) {
 }
 
 td:nth-child(1), th:nth-child(1) {
-    width: 90px; /* plus petite */
+    width: 55px; /* plus petite */
 }
 
 
@@ -58,11 +66,13 @@ td:nth-child(1), th:nth-child(1) {
     object-fit: cover;
     border-radius: 5px;
 }
-
 td:nth-child(6), th:nth-child(6) {
-    width: 110px; /* plus large */
+    width: 170px; /* plus large */
 }
 
+td:nth-child(4), th:nth-child(4) {
+    width: 180px; /* plus large */
+}
 
 .actions a {
     margin-right: 10px;
@@ -96,68 +106,116 @@ td:nth-child(6), th:nth-child(6) {
 }
 
 /* --- RESPONSIVE MODE EN CARDS --- */
-@media screen and (max-width: 768px) {
-    .full-width-section table, thead, tbody, th, td, tr {
-        display: block;
+@media screen and (max-width: 1050px) {
+
+    .full-width-section {
+        display: flex ;
+        align-content: center;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
     }
 
-    .full-width-section thead {
+
+    .table-wrapper {
         display: none;
     }
-
-    .full-width-section tr {
-        background: white;
-        border: 1px solid #ccc;
-        border-radius: 10%;
-        margin-bottom: 20px;
-        padding: 15px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-        margin-left: 50px;
-        margin-right: 50px;
+    .card-view {
+        display: block;
+        max-width: 1140px;
+        margin: 0px 155px;
+        padding: 10px;
     }
-
-    td {
-        border: none;
+    .card {
+        width: 333px;
+        height: 337px;
+        background-color: white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border-radius: 8px;
         padding: 0;
-    }
-
-    /* Bloc 1 : image + nom/catégorie */
-    .card-top {
+        box-sizing: border-box;
         display: flex;
-        align-items: center;
-        margin-bottom: 10px;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+        margin-bottom: 15px;
     }
 
-     .card-top img {
-        margin-right: 10px;
+    .top-section {
+        display: flex;
+        margin-top: 33px;
+        margin-left: 33px;
+        align-items: flex-start;
     }
 
-     .card-title {
+    .top-section img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+
+    .info {
+        margin-left: 15px;
+        margin-right: 18px;
+        flex: 1;
+    }
+
+    .info h3 {
+        margin: 0;
+        font-size: 16px;
         font-weight: bold;
-        font-size: 1.1em;
     }
 
-     .card-category {
-        color: #666;
-        font-size: 0.9em;
+    .info p {
+        margin: 4px 0 0 0;
+        font-size: 14px;
+        color: #555;
     }
 
-    /* Bloc 2 : description */
-    .card-description {
-        margin: 10px 0;
-        font-size: 0.95em;
+    .badge {
+        background-color: green;
+        color: white;
+        border-radius: 10%;
+        text-align: center;
+        width: fit-content;
+        padding: 4px 10px;
+        font-size: 12px;
+        margin: 10px auto 0 33px;
+        margin-left: 0px;
+        margin-top: 15px;
+    }
+
+    .text-zone {
+        width: 90%;
+        margin: 15px auto 0 auto;
+        font-size: 14px;
         color: #333;
+        line-height: 1.4;
+        margin-left: 30px;
+        margin-right: 20px;
+        margin-top: 25px;
     }
 
-    /* Bloc 3 : actions */
-    .card-actions {
+    .button-group {
         display: flex;
         justify-content: space-between;
-        margin-top: 10px;
+        margin: 15px 33px;
     }
 
-    .card-actions a {
-        flex: 0 0 auto;
+    .button-group button {
+        background: none;
+        border: none;
+        font-size: 14px;
+        color:var(--colorGrisTexte);
+        font-weight: normal;
+        cursor: pointer;
     }
 
+    .button-group .delbtn{
+        color: red;
+    }
+    .button-group button:hover {
+        text-decoration: underline;
+    }
 }
