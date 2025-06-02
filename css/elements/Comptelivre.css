@@ -29,12 +29,6 @@
     font-weight: bold;
 }
 
-.cell {
-    flex: 1 1 20%;
-    padding: 10px;
-    min-width: 150px;
-}
-
 .right-asideLivre{
     box-sizing: border-box;
     padding: 20px;
@@ -49,14 +43,14 @@
     margin-right: 20px;
     padding: 20px;
     border-radius: 10px;
-    width: 25%;
-    height: 520px;
-    margin-top: 20px;
+    width: 30%;
+    height: 600px;
+    margin-top: 40px;
 }
 .compteLivre {
     display: flex;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: center;
 }
 /* Colonne photo avec largeur fixe */
 .photo {
@@ -72,23 +66,93 @@
     border-radius: 4px;
 }
 
+.cardcompte{
+    width: 333px;
+    height: 280px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    margin-bottom: 0.938rem;
+    padding-right: 1.125rem;
+}
+
+.comptebutton{
+    background-color: var(--colorGrisClair);
+    color: var(--colorVertPrincipal);
+    padding: 0.75rem;
+    font-size: 1rem;
+    gap: 0.625rem;
+    border: 2px solid var(--colorVertPrincipal);
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.infocompte {
+    margin-left: 0.938rem;
+    margin-right: 1.125rem;
+    flex: 1;
+    padding-top: 0.938rem;
+}
+
+.infocompte > p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.compte-table{
+    width: 93%;
+    background-color: white;
+    border-collapse: separate;
+    margin-left: 3%;
+    margin-top: 32px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+}
+
+.compte-table thead tr {
+    height: 45px;
+    vertical-align: middle;
+    padding: 0 25px;
+    text-align: center;
+    background-color: white;
+}
+
+.compte-table td {
+    height: 60px;
+    vertical-align: middle;
+    padding: 0 10px;
+    text-align: left;
+    width: 100px;
+}
+.compte-table td:nth-child(1) {
+    text-align: center;
+}
+
+.compte-table td:nth-child(4) {
+    text-align: left;
+    width: 100px;
+}
+
+
+@media (max-width: 1075px) {
+    .left-sectionLivre{
+        width: 80%;
+    }
+
+}
+
+
+
 @media (max-width: 768px) {
-    .table-header {
-        display: none;
-    }
-    .table-row {
-        flex-direction: column;
-        border-bottom: 1px solid #ccc;
-    }
-    .cell {
-        flex: 1 1 100%;
-        display: flex;
-        padding: 5px 10px;
-    }
-    .cell::before {
-        content: attr(data-label);
-        flex: 0 0 120px;
-        font-weight: bold;
-        color: #333;
-    }
+   .left-sectionLivre{
+       width: 70%;
+       height: 1%;
+   }
 }
