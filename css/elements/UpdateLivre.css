@@ -3,11 +3,13 @@ a.retour {
     margin-bottom: 10px;
     color: #007bff;
     text-decoration: none;
+    margin-top: 10px;
+
 }
 
 .wrapper {
-    max-width: 1186px;
-    max-height: 941px;
+    /*max-width: 1186px;*/
+    /*max-height: 941px;*/
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
