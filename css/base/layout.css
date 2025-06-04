@@ -7,6 +7,7 @@ h1{
     font-size:1.875rem ;
     font-weight: 400;
     margin-bottom:1.75rem ;
+    font-family: 'Playfair Display',verdana, "Arial Nova", sans-serif;
 }
 .container-main{
     display: flex;
