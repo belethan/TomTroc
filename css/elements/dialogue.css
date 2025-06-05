@@ -1,0 +1,132 @@
+.main-dialogue {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    background-color: var(--ColorBackGround);
+}
+
+.sidebar {
+    width: 25%;
+    background-color:var(--ColorBackGroundLight);
+    padding: 10px;
+    border-right: 1px solid #ccc;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    margin-bottom: 15px;
+}
+
+.user-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: var(--ColorBackGround);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.user-card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.user-memo{
+    display: inline-block;
+    padding: 8px 12px;
+    white-space: nowrap; /* Empêche de passer à la ligne à l'intérieur du span */
+}
+
+
+.user-text {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.chat-area {
+    width: 75%;
+    padding: 20px;
+    background-color: var(--ColorBackGround);
+    overflow-y: auto;
+}
+
+.message-block {
+    clear: both;
+    margin-bottom: 20px;
+}
+
+.message-meta {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.75em;
+    color: #666;
+    margin-bottom: 2px;
+}
+
+.message-meta img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.message {
+    max-width: 60%;
+    margin: 10px 0;
+    padding: 10px 15px;
+    border-radius: 20px;
+    clear: both;
+    position: relative;
+}
+
+.message.left {
+    background-color: #e0e0e0;
+    float: left;
+    border-bottom-left-radius: 5px;
+}
+
+.message.right {
+    background-color: #d1e7dd;
+    float: right;
+    border-bottom-right-radius: 5px;
+}
+
+@media (max-width: 930px) {
+    .chat-area {
+        display: none;
+    }
+    .sidebar{
+        width: 100%;
+    }
+    .user-text{
+        max-width: 100%;
+        white-space: wrap;
+    }
+    .user-memo{
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+}
