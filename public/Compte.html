@@ -56,8 +56,13 @@
           <!--1er bloc à gauche-->
           <section class="left-section">
             <div class="infouser">
-              <img src="https://picsum.photos/157/157" alt="Image Profil" class="profile-img">
-              <a href="#"  class="lien-photo">modifier</a>
+              <img id="visage" src="https://picsum.photos/157/157" alt="Image Profil" class="profile-img">
+              <form action="upload.php" method="post" enctype="multipart/form-data">
+                <input type="file" name="fileInput" id="fileInput" accept="image/*">
+                <input type="submit" class="lien-photo" value="modifier" name="submit">
+              </form>
+<!--                <input type="file" name="image" id="fileInput" accept="image/*" onchange="this.form.submit()">-->
+              <div id="error-message"></div>
               <div class="divider"></div>
               <div class="labels">
                 <h3>nathalire</h3>
@@ -255,6 +260,7 @@
       </ul>
     </div>
   </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="../js/menu.js"></script>
 </body>
 </html>

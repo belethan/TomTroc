@@ -56,7 +56,10 @@
     display: flex;
     list-style: none;
     padding-left: 0;
+    align-items: center;
 }
+
+
 
 .navbar-link-left ,
 .navbar-link-right {
@@ -64,8 +67,15 @@
     padding-left: 10px;
     position: relative;
     margin-right: 25px;
-}
 
+}
+.navbar-msg-left {
+    padding-left: 10px;
+    position: relative;
+    margin-right: 30px;
+    margin-top: 12px;
+    top: 5px;
+}
 .navbarv-link-left a,
 .navbar-link-right a {
     color: var(--ColotMenu);

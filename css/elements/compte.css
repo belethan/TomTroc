@@ -1,4 +1,6 @@
-
+#fileInput {
+    display: none;
+}
 
 .compte {
     display: flex;
@@ -102,6 +104,8 @@
     font-size: 0.875rem;
     cursor: pointer;
     padding-top: 10px;
+    border: none;
+    background: none;
 }
 
 .lien-photo:hover{

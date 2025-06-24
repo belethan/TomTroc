@@ -39,3 +39,4 @@ h1{
     justify-content: center;
     margin-top: 40px;
 }
+#error-message { color: red; margin-top: 5px; }

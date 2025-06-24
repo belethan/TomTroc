@@ -12,6 +12,5 @@
                 navbar.classList.toggle('show-burger');
             });
         })
-
-    }
+    };
 toggleMenu();
