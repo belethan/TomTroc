@@ -18,7 +18,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/styles.css"> <!-- Lien vers un fichier CSS -->
+    <link rel="stylesheet" href="../../css/styles.css"> <!-- Lien vers un fichier CSS -->
 </head>
 <body>
 <header class="navbar container" role="presentation">
@@ -57,9 +57,9 @@
         </button>
     </div>
 </header>
-
-<?= $content /* Ici est affiché le contenu réel de la page. */ ?>
-
+<main>
+    <?= $content /* Ici est affiché le contenu réel de la page. */ ?>
+</main>
 <footer>
     <p>Copyright © TomTroc - Openclassrooms - </p>
 </footer>
