@@ -22,6 +22,11 @@ spl_autoload_register(function($className) {
     }
 
     // On va voir dans le dossier View si la classe existe.
+    if (file_exists(MAIN_VIEWS . $className . '.php')) {
+        require_once MAIN_VIEWS . $className . '.php';
+    }
+
+    // On va voir dans le dossier View si la classe existe.
     if (file_exists(TEMPLATE_VIEW_PATH . $className . '.php')) {
         require_once TEMPLATE_VIEW_PATH . $className . '.php';
     }

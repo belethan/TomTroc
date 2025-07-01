@@ -61,8 +61,8 @@ class View
      * @param string $viewName : le nom de la vue demandée.
      * @return string : le chemin vers la vue demandée.
      */
-    private function buildTEMPLATE_VIEW_PATHViewPath(string $viewName) : string
+    private function buildViewPath(string $viewName) : string
     {
-        return $viewName.'.php';
+        return TEMPLATE_VIEW_PATH.$viewName.'.php';
     }
 }
