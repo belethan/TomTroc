@@ -23,13 +23,19 @@ try {
             $adminController = new AdminController();
             $adminController->disconnectUser();
             break;
-
-
+        Case 'inscription' :
+            $adminController = new AdminController();
+            $adminController->inscription();
+            break;
+        Case 'newUtilisateur' :
+               $adminController = new AdminController();
+               $adminController->newUtilisateur($_REQUEST);;
+                break;
         default:
             throw new Exception("La page demandée n'existe pas.");
     }
 } catch (Exception $e) {
     // En cas d'erreur, on affiche la page d'erreur.
     $errorView = new View('Erreur');
-    $errorView->render('errorPage', ['errorMessage' => $e->getMessage()]);
+    $errorView->render('errorMessage', ['errorMessage' => $e->getMessage()]);
 }

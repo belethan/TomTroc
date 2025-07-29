@@ -6,6 +6,10 @@
  * Exemple : Utils::redirect('home');
  */
 class Utils {
+    private const MAX_FILE_SIZE = 500000; // File size limit in bytes
+    private const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif'];
+    private const IMAGE_DIR = "../images/";
+
     /**
      * Convertit une date vers le format de type "Samedi 15 juillet 2023" en francais.
      * @param DateTime $date : la date à convertir.
@@ -87,57 +91,96 @@ class Utils {
         return $_REQUEST[$variableName] ?? $defaultValue;
     }
 
-    public static function GetImage(): mixed
+
+    public static function uploadImage(): ?string
     {
-        $keyuser = $_SESSION['keyuser'];
-        $origine = $_SESSION['origine'];
-        $target_dir = "uploads/";
-        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-        $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
-        // Check if image file is a actual image or fake image
-        if(isset($_POST["submit"])) {
-            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-            if($check !== false) {
-                echo "File is an image - " . $check["mime"] . ".";
-                $uploadOk = 1;
-            } else {
-                echo "File is not an image.";
-                $uploadOk = 0;
-            }
+        if (!isset($_FILES["fileToUpload"]) || !isset($_POST["submit"])) {
+            return null;
         }
 
-        // Check if file already exists
-        if (file_exists($target_file)) {
-            echo "Sorry, file already exists.";
-            $uploadOk = 0;
+        $targetFile = self::IMAGE_DIR . basename($_FILES["fileToUpload"]["name"]);
+        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+        if (!self::isImage($_FILES["fileToUpload"]["tmp_name"])) {
+            self::logError("Le fichier n'est pas une image.");
+            return null;
         }
 
-        // Check file size
-        if ($_FILES["fileToUpload"]["size"] > 500000) {
-            echo "Sorry, your file is too large.";
-            $uploadOk = 0;
+        if (file_exists($targetFile)) {
+            self::logError("Désolé, le fichier existe déjà.");
+            return null;
         }
 
-        // Allow certain file formats
-        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif" ) {
-            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-            $uploadOk = 0;
+        if (!self::isValidSize($_FILES["fileToUpload"]["size"])) {
+            self::logError("Désolé, le fichier est trop volumineux.");
+            return null;
         }
 
-        // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            echo "Sorry, your file was not uploaded.";
-        // if everything is ok, try to upload file
-        } else {
-            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
-            } else {
-                echo "Sorry, there was an error uploading your file.";
-            }
+        if (!self::isValidExtension($imageFileType)) {
+            self::logError("Désolé, seulement des fichiers avec extensions JPG, JPEG, PNG & GIF sont autorisés.");
+            return null;
         }
+
+        if (!self::moveFile($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
+            self::logError("Désolé, une erreur a été détectée lors du téléchargement.");
+            return null;
+        }
+
+        return htmlspecialchars(basename($_FILES["fileToUpload"]["name"]));
     }
 
+    /**
+     * Checks if the file is a valid image.
+     *
+     * @param string $filePath
+     * @return bool
+     */
+    private static function isImage(string $filePath): bool
+    {
+        return getimagesize($filePath) !== false;
+    }
+
+    /**
+     * Checks if the file size is within the allowed limit.
+     *
+     * @param int $size
+     * @return bool
+     */
+    private static function isValidSize(int $size): bool
+    {
+        return $size <= self::MAX_FILE_SIZE;
+    }
+
+    /**
+     * Checks if the file extension is allowed.
+     *
+     * @param string $extension
+     * @return bool
+     */
+    private static function isValidExtension(string $extension): bool
+    {
+        return in_array($extension, self::ALLOWED_EXTENSIONS, true);
+    }
+
+    /**
+     * Moves the uploaded file to the target directory.
+     *
+     * @param string $tempPath
+     * @param string $targetPath
+     * @return bool
+     */
+    private static function moveFile(string $tempPath, string $targetPath): bool
+    {
+        return move_uploaded_file($tempPath, $targetPath);
+    }
+
+    /**
+     * Logs an error message. Replace with a proper logging system in production.
+     *
+     * @param string $message
+     */
+    private static function logError(string $message): void
+    {
+        echo $message;
+    }
 }

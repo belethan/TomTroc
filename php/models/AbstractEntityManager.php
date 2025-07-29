@@ -14,5 +14,6 @@ abstract class AbstractEntityManager {
     public function __construct()
     {
         $this->db = DBManager::getInstance();
+
     }
 }

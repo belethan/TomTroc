@@ -24,7 +24,7 @@
 <header class="navbar container" role="presentation">
     <div class="logo-title">
         <div class="logo_cadre">
-            <img src="../images/LogoTitre.svg" alt="Logo TomTroc" class="logo">
+            <img src="../../images/LogoTitre.svg" alt="Logo TomTroc" class="logo">
         </div>
         <span class="site_title">Tom Troc </span>
     </div>
@@ -37,15 +37,16 @@
         </div>
         <div class="navbar-right">
             <ul class="navbar-links-right">
-                <li class="navbar-msg-left navbar-link-right"><a href="#" class="bulle">Messagerie <span class="badge">5</span> </a></li>
+                <li class="navbar-msg-left navbar-link-right"><a href="#" class="bulle">Messagerie
+                <span class="badge">5</span> </a></li>
                 <li  class="navbar-link-right"><a href="#">Mon compte</a></li>
-                <li  class="navbar-link-right"><a href="#">Connexion</a></li>
+                <li  class="navbar-link-right"><a href="index.php?action=connectUser">Connexion</a></li>
             </ul>
         </div>
     </div>
     <div class="burger"> <!--show-burger-->
         <ul class="navbar-links-burger">
-            <li class="navbar-link-burger"><a href="#">Accueil</a></li>
+            <li class="navbar-link-burger"><a href="index.php?action=home">Accueil</a></li>
             <li class="navbar-link-burger"><a href="#">Nos livres à l'échange</a></li>
             <li class="navbar-link-burger"><a href="#">Messagerie</a></li>
             <li  class="navbar-link-burger"><a href="#">Mon compte</a></li>
@@ -66,5 +67,6 @@
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+<script src="../../js/menu.js"></script>
 </body>
 </html>
