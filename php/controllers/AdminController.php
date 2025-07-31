@@ -35,7 +35,7 @@ class AdminController
      *
      * @return void
      */
-    public function connectUser() : void{
+    public function displayConnectionForm() : void{
         $view = new View("Connexion");
         $view->render("connectionForm");
     }

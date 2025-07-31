@@ -91,6 +91,27 @@ class Utils {
         return $_REQUEST[$variableName] ?? $defaultValue;
     }
 
+    Public static function UserMenu(string $nomstyle='navbar-link-right')
+    {
+        if ($nomstyle =='navbar-link-right') {
+            echo '<li class="navbar-msg-left navbar-link-right"><a href="#" class="bulle">Messagerie <span class="badge">'.$_SESSION['msgcpt'].'</span> </a></li>';
+        }
+        else{
+               echo '<li class="navbar-link-burger"><a href="#">Messagerie</a></li>';
+        }
+
+        if (isset($_SESSION['user'])) {
+        $user =$_SESSION['user'];
+        echo '<li  class="'.$nomstyle.'"><a href="index.php?action=infouser">'.$user['Pseudo_Utilisateur'].'</a></li>';
+        echo '<li  class="'.$nomstyle.'"><a href="index.php?action=logout">Déconnexion</a></li>';
+        }
+        else{
+            echo '<li  class="'.$nomstyle.'"><a href="#">Compte</a></li>';
+            echo '<li  class="'.$nomstyle.'"><a href="index.php?action=connectUser">comnexion</a></li>';
+        }
+    }
+
+
 
     public static function uploadImage(): ?string
     {

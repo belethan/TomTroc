@@ -6,6 +6,7 @@
  *      $title string : le titre de la page.
  *      $content string : le contenu de la page.
  */
+$_SESSION['msgcpt']=0;
 
 ?>
 <!DOCTYPE html>
@@ -37,10 +38,7 @@
         </div>
         <div class="navbar-right">
             <ul class="navbar-links-right">
-                <li class="navbar-msg-left navbar-link-right"><a href="#" class="bulle">Messagerie
-                <span class="badge">5</span> </a></li>
-                <li  class="navbar-link-right"><a href="#">Mon compte</a></li>
-                <li  class="navbar-link-right"><a href="index.php?action=connectUser">Connexion</a></li>
+                <?php    utils::UserMenu(); ?>
             </ul>
         </div>
     </div>
@@ -48,9 +46,7 @@
         <ul class="navbar-links-burger">
             <li class="navbar-link-burger"><a href="index.php?action=home">Accueil</a></li>
             <li class="navbar-link-burger"><a href="#">Nos livres à l'échange</a></li>
-            <li class="navbar-link-burger"><a href="#">Messagerie</a></li>
-            <li  class="navbar-link-burger"><a href="#">Mon compte</a></li>
-            <li  class="navbar-link-burger"><a href="#">Connexion</a></li>
+            <?php  utils::UserMenu('navbar-link-burger'); ?>
         </ul>
         <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
         <button class="btn-burger">

@@ -16,9 +16,11 @@ try {
 
         case 'connectUser':
             $adminController = new AdminController();
-            $adminController->connectUser();
+            $adminController->displayConnectionForm();
             break;
-
+       case 'login':
+           $userController = new UtilisateurManager();
+           $userController->login($_REQUEST['email'],$_REQUEST['password']);;
         case 'disconnectUser':
             $adminController = new AdminController();
             $adminController->disconnectUser();

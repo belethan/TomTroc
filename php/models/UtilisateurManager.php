@@ -17,4 +17,27 @@ class UtilisateurManager extends AbstractEntityManager
         ]);
         return $result;
     }
+
+    Public function login($mail,$pwd)
+    {
+        $useractif = new Utilisateurs();
+        $password=$useractif->encrypt_decrypt('encrypt',$pwd);
+        $sql="SELECT * FROM Utilisateurs WHERE Mail_Utilisateur=:MailUtilisateur AND Pwd_Utilisateur=:MdpUtilisateur";
+        $result=$this->db->query($sql,[
+            'MailUtilisateur' => $mail,
+            'MdpUtilisateur' => $password
+        ]);
+        $user=$result->fetch();
+        if($user)
+        {
+            $_SESSION['user']=$user;
+            $_SESSION['pseudo']=$user['Pseudo_Utilisateur'];
+            Utils::redirect("home");
+        }
+        else
+        {
+            $_SESSION['mail']=$mail;
+            Utils::redirect("connectUser");
+        }
+    }
 }

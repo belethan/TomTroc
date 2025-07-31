@@ -1,12 +1,16 @@
 <?php
-
+    $mail='';
+    if(isset($_SESSION['mail']))
+    {
+        $mail=$_SESSION['mail'];
+    }
 ?>
 <section class="container-inscription">
     <div class="left-column">
         <h1>Connexion</h1>
-        <form action="index.php?action=newUtilisateur" method="post">
+        <form action="index.php?action=login" method="post">
             <label for="email">Adresse mail</label>
-            <input type="email" name="email" id="email" placeholder="Adresse mail" required>
+            <input type="email" name="email" id="email" placeholder="Adresse mail" value="<?php echo $mail;?>" required>
             <label for="password">Mot de passe</label>
             <input type="password" name="password" id="password" placeholder="Mot de passe" required>
             <button type="submit">Se connecter</button>
