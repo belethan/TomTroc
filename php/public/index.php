@@ -19,8 +19,8 @@ try {
             $adminController->displayConnectionForm();
             break;
        case 'login':
-           $userController = new UtilisateurManager();
-           $userController->login($_REQUEST['email'],$_REQUEST['password']);;
+           $userController = new AdminController();
+           $userController->loginUser();
         case 'disconnectUser':
             $adminController = new AdminController();
             $adminController->disconnectUser();

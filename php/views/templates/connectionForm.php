@@ -17,7 +17,11 @@
         </form>
         <div class="login-link">
             <p>Pas de compte ? <a href="index.php?action=inscription">inscrivez-vous</a></p>
+            <?php if(isset($_SESSION['error'])!=""){
+                echo '<p class="alerte">'.$_SESSION['error'].'</p>';
+            }?>
         </div>
+
     </div>
     <div class="right-column">
         <img src="../../images/inscription.png" alt="Image Bibliothéque">

@@ -93,7 +93,7 @@ class Utils {
 
     Public static function UserMenu(string $nomstyle='navbar-link-right')
     {
-        if ($nomstyle =='navbar-link-right') {
+        if ($nomstyle ==='navbar-link-right') {
             echo '<li class="navbar-msg-left navbar-link-right"><a href="#" class="bulle">Messagerie <span class="badge">'.$_SESSION['msgcpt'].'</span> </a></li>';
         }
         else{

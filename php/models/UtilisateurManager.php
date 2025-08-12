@@ -18,7 +18,7 @@ class UtilisateurManager extends AbstractEntityManager
         return $result;
     }
 
-    Public function login($mail,$pwd)
+    Public function login($mail,$pwd):bool
     {
         $useractif = new Utilisateurs();
         $password=$useractif->encrypt_decrypt('encrypt',$pwd);
@@ -32,11 +32,12 @@ class UtilisateurManager extends AbstractEntityManager
         {
             $_SESSION['user']=$user;
             $_SESSION['pseudo']=$user['Pseudo_Utilisateur'];
-            Utils::redirect("home");
+            return true;
         }
         else
         {
             $_SESSION['mail']=$mail;
+            return false;
             Utils::redirect("connectUser");
         }
     }

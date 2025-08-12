@@ -15,6 +15,40 @@ class AdminController
         }
     }
 
+    public function loginUser(): void
+    {
+        // Initialisation du gestionnaire d'utilisateurs
+        $userController = new UtilisateurManager();
+
+        // Récupération sécurisée des données d'entrée
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+        $password = $_REQUEST['password'];
+
+        // Vérification si les données sont renseignées
+        if (!$email || !$password) {
+            $_SESSION['error'] = "Veuillez renseigner les champs requis.";
+            $this->displayConnectionForm();
+            return;
+        }
+
+        // Validation du login par le gestionnaire
+        $isAuthenticated = $userController->login($email, $password);
+
+        if ($isAuthenticated) {
+            // Authentification réussie
+            $_SESSION['error'] = ""; // Réinitialisation du message d'erreur
+            $view = new View("Accueil");
+            $view->render("home");
+        } else {
+            // Erreur d'identifiants
+            $_SESSION['error'] = "Identifiants incorrects.";
+            $this->displayConnectionForm();
+
+        }
+    }
+
+
+
     /**
      * Creates a new user based on the provided data and attempts to add it to the system.
      *
