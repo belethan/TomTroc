@@ -31,6 +31,7 @@ class UtilisateurManager extends AbstractEntityManager
         if($user)
         {
             $_SESSION['user']=$user;
+            $_SESSION['keyuser']=$user['ID'];
             $_SESSION['pseudo']=$user['Pseudo_Utilisateur'];
             return true;
         }
@@ -40,5 +41,19 @@ class UtilisateurManager extends AbstractEntityManager
             return false;
             Utils::redirect("connectUser");
         }
+    }
+
+    public function updateUser(){
+       $mailUser=utils::request('email');
+       $mpUser=utils::request('password');
+       $pseudo=utils::request('pseudo');
+       $imguser=Utils::uploadImage();
+
+       $sql="UPDATE Utilisateurs SET Pseudo_Utilisateur=:PseudoUtilisateur,Mail_Utilisateur=:MailUtilisateur WHERE Pseudo_Utilisateur=:PseudoUtilisateur AND Mail_Utilisateur=:MailUtilisateur";
+       $result=$this->db->query($sql,[
+           'PseudoUtilisateur' => $pseudo,
+           'MailUtilisateur' => $mailUser
+       ]);
+       return $result;
     }
 }

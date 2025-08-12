@@ -103,7 +103,7 @@ class Utils {
         if (isset($_SESSION['user'])) {
         $user =$_SESSION['user'];
         echo '<li  class="'.$nomstyle.'"><a href="index.php?action=infouser">'.$user['Pseudo_Utilisateur'].'</a></li>';
-        echo '<li  class="'.$nomstyle.'"><a href="index.php?action=logout">Déconnexion</a></li>';
+        echo '<li  class="'.$nomstyle.'"><a href="index.php?action=disconnectUser">Déconnexion</a></li>';
         }
         else{
             echo '<li  class="'.$nomstyle.'"><a href="#">Compte</a></li>';
@@ -115,13 +115,12 @@ class Utils {
 
     public static function uploadImage(): ?string
     {
-        if (!isset($_FILES["fileToUpload"]) || !isset($_POST["submit"])) {
+        if (!isset($_FILES["fileToUpload"])) {
             return null;
         }
 
         $targetFile = self::IMAGE_DIR . basename($_FILES["fileToUpload"]["name"]);
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-
         if (!self::isImage($_FILES["fileToUpload"]["tmp_name"])) {
             self::logError("Le fichier n'est pas une image.");
             return null;

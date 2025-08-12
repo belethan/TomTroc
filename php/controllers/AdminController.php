@@ -84,4 +84,18 @@ class AdminController
         $view->render("inscriptionForm");;
     }
 
+    public function disconnectUser() : void
+    {
+        // On déconnecte l'utilisateur.
+        unset($_SESSION['user']);
+        // On redirige vers la page d'accueil.
+        Utils::redirect("home");
+    }
+
+    public function profiluser() : void
+    {
+        $view = new View("Propfil Utilisateur");
+        $view->render("infoUserForm");;
+    }
+
 }

@@ -13,7 +13,6 @@ try {
             $livreController = new livreControler;
             $livreController->showHome();
             break;
-
         case 'connectUser':
             $adminController = new AdminController();
             $adminController->displayConnectionForm();
@@ -33,6 +32,10 @@ try {
                $adminController = new AdminController();
                $adminController->newUtilisateur($_REQUEST);;
                 break;
+        Case 'infouser' :
+            $adminController = new AdminController();
+            $adminController->profiluser();
+            break;
         default:
             throw new Exception("La page demandée n'existe pas.");
     }
