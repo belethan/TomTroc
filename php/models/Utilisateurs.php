@@ -4,10 +4,10 @@ class Utilisateurs extends AbstractEntity
 {
     private string $secret_key = 'Isidar!9729Ag';
     private string $iv_key = 'Ag=meYlan';
-    private string $pseudo_Utilisateur;
-    private string $photo_Utilisateur;
-    private string $mail_Utilisateur;
-    private string $Pwd_Utilisateur;
+    private string $Pseudo_Utilisateur= '';
+    private string $Photo_Utilisateur ='';
+    private string $Mail_Utilisateur = '';
+    private string $Pwd_Utilisateur = '';
 
 
     /**
@@ -17,12 +17,12 @@ class Utilisateurs extends AbstractEntity
      */
     public function getPseudoUtilisateur(): string
     {
-        return $this->pseudo_Utilisateur;
+        return $this->Pseudo_Utilisateur;
     }
 
     public function setPseudoUtilisateur(string $pseudo_Utilisateur): void
     {
-        $this->pseudo_Utilisateur = htmlspecialchars($pseudo_Utilisateur);
+        $this->Pseudo_Utilisateur = htmlspecialchars($pseudo_Utilisateur);
     }
 
     /**
@@ -32,12 +32,12 @@ class Utilisateurs extends AbstractEntity
      */
     public function getPhotoUtilisateur(): string
     {
-        return $this->photo_Utilisateur;
+        return $this->Photo_Utilisateur;
     }
 
     public function setPhotoUtilisateur(string $photo_Utilisateur): void
     {
-        $this->photo_Utilisateur = $photo_Utilisateur;
+        $this->Photo_Utilisateur = $photo_Utilisateur;
     }
 
     /**
@@ -47,12 +47,12 @@ class Utilisateurs extends AbstractEntity
      */
     public function getMailUtilisateur(): string
     {
-        return $this->mail_Utilisateur;
+        return $this->Mail_Utilisateur;
     }
 
     public function setMailUtilisateur(string $mail_Utilisateur): void
     {
-        $this->mail_Utilisateur = htmlspecialchars($mail_Utilisateur);
+        $this->Mail_Utilisateur = htmlspecialchars($mail_Utilisateur);
     }
 
     /**
@@ -60,7 +60,7 @@ class Utilisateurs extends AbstractEntity
      *
      * @return string The password of the user.
      */
-    public function getMdpUtilisateur(): string
+    public function getPwdUtilisateur(): string
     {
         return $this->Pwd_Utilisateur;
     }
@@ -71,10 +71,10 @@ class Utilisateurs extends AbstractEntity
      * @param string $PwdUtilisateur The plain text password provided by the user.
      * @return void
      */
-    public function setMdpUtilisateur(string $PwdUtilisateur): void
+    public function setPwdUtilisateur(string $PwdUtilisateur): void
     {
         $PwdUser = htmlspecialchars($PwdUtilisateur);
-        $this->Pwd_Utilisateur = $this->encrypt_decrypt('encrypt',$PwdUser);
+        $this->Pwd_Utilisateur = $PwdUser;
     }
 
     /**

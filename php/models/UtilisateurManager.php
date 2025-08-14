@@ -30,14 +30,15 @@ class UtilisateurManager extends AbstractEntityManager
         $user=$result->fetch();
         if($user)
         {
-            $_SESSION['user']=$user;
-            $_SESSION['keyuser']=$user['ID'];
-            $_SESSION['pseudo']=$user['Pseudo_Utilisateur'];
+
+            $useractif->hydrate($user);
+            $_SESSION['user']=$useractif;
             return true;
         }
         else
         {
-            $_SESSION['mail']=$mail;
+            $useractif->setMailUtilisateur($mail);
+            $_SESSION['user']=$useractif;
             return false;
             Utils::redirect("connectUser");
         }

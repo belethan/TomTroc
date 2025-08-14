@@ -20,6 +20,8 @@ try {
        case 'login':
            $userController = new AdminController();
            $userController->loginUser();
+
+           die;
         case 'disconnectUser':
             $adminController = new AdminController();
             $adminController->disconnectUser();

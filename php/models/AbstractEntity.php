@@ -23,7 +23,7 @@ abstract class AbstractEntity
     {
           if (!empty($data)) {
             $this->hydrate($data);
-        }
+          }
     }
 
     /**
@@ -33,9 +33,8 @@ abstract class AbstractEntity
      * Les underscore sont transformés en camelCase (ex: date_creation devient setDateCreation).
      * @return void
      */
-    protected function hydrate(array $data) : void
+    public function hydrate(array $data) : void
     {
-
         foreach ($data as $key => $value) {
             $method = 'set' . str_replace('_', '', ucwords($key, '_'));
             if (method_exists($this, $method)) {
@@ -49,7 +48,7 @@ abstract class AbstractEntity
      * @param int $id
      * @return void
      */
-    public function setId(int $id) : void
+    public function setID(int $id) : void
     {
         $this->id = $id;
     }

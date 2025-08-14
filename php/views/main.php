@@ -6,6 +6,7 @@
  *      $title string : le titre de la page.
  *      $content string : le contenu de la page.
  */
+// conteneur de messages non lu via chat
 $_SESSION['msgcpt']=0;
 
 ?>
@@ -32,13 +33,13 @@ $_SESSION['msgcpt']=0;
     <div class="navbar-main">
         <div class="navbar-left">
             <ul class="navbar-links-left">
-                <li class="navbar-link-left"><a href="#">Accueil</a></li>
+                <li class="navbar-link-left"><a href="index.php?action=home">Accueil</a></li>
                 <li class="navbar-link-left"><a href="#">Nos livres à l'échange</a></li>
             </ul>
         </div>
         <div class="navbar-right">
             <ul class="navbar-links-right">
-                <?php    utils::UserMenu(); ?>
+                <?php utils::UserMenu(); ?>
             </ul>
         </div>
     </div>

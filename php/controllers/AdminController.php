@@ -19,7 +19,6 @@ class AdminController
     {
         // Initialisation du gestionnaire d'utilisateurs
         $userController = new UtilisateurManager();
-
         // Récupération sécurisée des données d'entrée
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
         $password = $_REQUEST['password'];

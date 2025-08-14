@@ -1,5 +1,8 @@
 <?php
-
+// Initialisation du gestionnaire d'utilisateurs
+    if (isset($_SESSION['user'])) {
+        $userobjet = $_SESSION['user'];
+    }
 ?>
 <div class="titre">
     <h1 >Mon Compte</h1>
@@ -8,11 +11,11 @@
     <!--1er bloc à gauche-->
     <section class="left-section">
             <div class="infouser">
-            <form action="upload.php" method="post" enctype="multipart/form-data">
+            <form action="index.php?action=saveuser" method="post" enctype="multipart/form-data">
                 <img id="visage" src="https://picsum.photos/157/157" alt="Image Profil" class="profile-img">
                 <input type="file" name="fileInput" id="fileInput" accept="image/*">
-                <input type="submit" class="lien-photo" value="modifier" name="submit">
-                <!-- <input type="file" name="image" id="fileInput" accept="image/*" onchange="this.form.submit()">-->
+                <input type="button" class="lien-photo" value="modifier" name="submit">
+                 <input type="file" name="image" id="fileInput" accept="image/*" onchange="this.form.submit()">
                     <div id="error-message"></div>
                     <div class="divider"></div>
                     <div class="labels">
@@ -34,15 +37,15 @@
                     <h2>Vos informations personnelles</h2>
                     <div class="PersoData">
                         <label for="email">Adresse Mail</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" value="<?php echo $userobjet->getMailUtilisateur(); ?>"required>
                     </div>
                     <div class="PersoData">
                         <label for="password">Mot de passe</label>
-                        <input type="password" id="password" name="password" required>
+                        <input type="password" id="password" name="password" value="<?php echo $userobjet->getPwdUtilisateur(); ?>"required>
                     </div>
                     <div class="PersoData">
                         <label for="pseudo">Pseudo</label>
-                        <input type="text" id="pseudo" name="pseudo" required>
+                        <input type="text" id="pseudo" name="pseudo" value="<?php echo $userobjet->getPseudoUtilisateur(); ?>" required>
                     </div>
                     <button type="submit">Enregistrer</button>
                 </div>

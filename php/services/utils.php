@@ -101,11 +101,11 @@ class Utils {
         }
 
         if (isset($_SESSION['user'])) {
-        $user =$_SESSION['user'];
-        echo '<li  class="'.$nomstyle.'"><a href="index.php?action=infouser">'.$user['Pseudo_Utilisateur'].'</a></li>';
-        echo '<li  class="'.$nomstyle.'"><a href="index.php?action=disconnectUser">Déconnexion</a></li>';
+            echo '<li  class="'.$nomstyle.'"><a href="index.php?action=infouser">'.$_SESSION['pseudo'].'</a></li>';
+            echo '<li  class="'.$nomstyle.'"><a href="index.php?action=disconnectUser">Déconnexion</a></li>';
         }
         else{
+
             echo '<li  class="'.$nomstyle.'"><a href="#">Compte</a></li>';
             echo '<li  class="'.$nomstyle.'"><a href="index.php?action=connectUser">comnexion</a></li>';
         }

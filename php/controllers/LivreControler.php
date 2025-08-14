@@ -6,7 +6,6 @@ class LivreControler
     {
         $livreManager = new livreManager;
         $livres = $livreManager->getFourPicture();
-
         $view = new View("Accueil");
         $view->render("home", ['livres' => $livres]);
     }
