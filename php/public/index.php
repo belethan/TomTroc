@@ -38,6 +38,10 @@ try {
             $adminController = new AdminController();
             $adminController->profiluser();
             break;
+        Case 'saveuser' :
+            $adminController = new AdminController();
+            $adminController->updateUser();
+            break;
         default:
             throw new Exception("La page demandée n'existe pas.");
     }

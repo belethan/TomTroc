@@ -9,27 +9,27 @@
 </div>
 <div class="compte">
     <!--1er bloc à gauche-->
+
     <section class="left-section">
             <div class="infouser">
-            <form action="index.php?action=saveuser" method="post" enctype="multipart/form-data">
+                <form action="index.php?action=saveuser" method="post" enctype="multipart/form-data">
                 <img id="visage" src="https://picsum.photos/157/157" alt="Image Profil" class="profile-img">
-                <input type="file" name="fileInput" id="fileInput" accept="image/*">
-                <input type="button" class="lien-photo" value="modifier" name="submit">
-                 <input type="file" name="image" id="fileInput" accept="image/*" onchange="this.form.submit()">
-                    <div id="error-message"></div>
-                    <div class="divider"></div>
-                    <div class="labels">
-                        <h3>nathalire</h3>
-                        <p class="label-Nom">membre depuis 1 ans</p>
-                        <p class="biblio">Bibliothéque</p>
-                        <p class="book-paragraph">
-                            <img src="../../images/LivreTexte.svg" alt="Livres" class="book-icon">
-                            <span class="book-count">4 </span>
-                            livres
-                        </p>
-                    </div>
+                <input type="file" name="photo_profil" id="fileInput" accept="image/*" " >
+                <label for="fileInput" class="btn-modifier">Modifier</label>
+                <div id="error-message"></div>
+                <div class="divider"></div>
+                <div class="labels">
+                    <h3>nathalire</h3>
+                    <p class="label-Nom">membre depuis 1 ans</p>
+                    <p class="biblio">Bibliothéque</p>
+                    <p class="book-paragraph">
+                        <img src="../../images/LivreTexte.svg" alt="Livres" class="book-icon">
+                        <span class="book-count">4 </span>
+                        livres
+                    </p>
                 </div>
-            </section>
+           </div>
+    </section>
     <!--2eme bloc à droite-->
         <aside class="right-aside">
             <div class="carduser">
