@@ -13,7 +13,7 @@
     <section class="left-section">
             <div class="infouser">
                 <form action="index.php?action=saveuser" method="post" enctype="multipart/form-data">
-                <img id="visage" src="https://picsum.photos/157/157" alt="Image Profil" class="profile-img">
+                <img id="visage" src=<?php echo JS_IMAGE.'user_picture/ProfilUserMan.png' ?> alt="Image Profil" class="profile-img">
                 <input type="file" name="photo_profil" id="fileInput" accept="image/*" " >
                 <label for="fileInput" class="btn-modifier">Modifier</label>
                 <div id="error-message"></div>

@@ -7,6 +7,8 @@ class UtilisateurManager extends AbstractEntityManager
         $pseudo=$utilisateur->getPseudoUtilisateur();
         $mail=$utilisateur->getMailUtilisateur();
         $pwd=$utilisateur->getMdpUtilisateur();
+        $defaultImg='ProfilUserMan.png';
+        $utilisateur->setPhotoUtilisateur($defaultImg);
         $sql="INSERT INTO Utilisateurs(Pseudo_Utilisateur,Mail_Utilisateur,Pwd_Utilisateur)  
         VALUES (:PseudoUtilisateur,:MailUtilisateur,:MdpUtilisateur)";
 

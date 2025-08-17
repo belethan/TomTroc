@@ -6,7 +6,7 @@
  * Exemple : Utils::redirect('home');
  */
 class Utils {
-    private const MAX_FILE_SIZE = 500000; // File size limit in bytes
+    private const MAX_FILE_SIZE = 500000; // File size limit in bytes (5 Mo)
     private const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif'];
     private const IMAGE_DIR = "../images/";
 
@@ -113,7 +113,7 @@ class Utils {
 
 
 
-    public static function uploadImage(): ?string
+    public static function uploadImage(int $keyuser): ?string
     {
         if (!isset($_FILES["fileToUpload"])) {
             return null;
