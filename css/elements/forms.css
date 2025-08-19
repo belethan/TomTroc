@@ -20,3 +20,23 @@
     color: #888;
     pointer-events: none; /* pour que l'icône ne gêne pas le clic dans l'input */
 }
+
+.label-like-link {
+    /* Apparence type lien */
+    color: grey;                 /* bleu lien */
+    text-decoration: underline;
+    cursor: pointer;                /* main au survol */
+    display: inline-block;          /* pour le transform propre */
+    transition: transform 140ms ease, color 140ms ease, text-decoration-color 140ms ease;
+    text-underline-offset: 2px;
+}
+
+/* Survol souris + navigation clavier */
+.label-like-link:hover,
+.label-like-link:focus-visible {
+    /* Grossissement sans reflow : évite de décaler la mise en page */
+    transform: scale(1.06);
+    color: #084298;
+    text-decoration-color: currentColor;
+    outline: none;
+}

@@ -99,9 +99,8 @@ class Utils {
         else{
                echo '<li class="navbar-link-burger"><a href="#">Messagerie</a></li>';
         }
-
         if (isset($_SESSION['user'])) {
-            echo '<li  class="'.$nomstyle.'"><a href="index.php?action=infouser">'.$_SESSION['pseudo'].'</a></li>';
+            echo '<li  class="'.$nomstyle.'"><a href="index.php?action=infouser">'.$_SESSION['user']->getPseudoUtilisateur().'</a></li>';
             echo '<li  class="'.$nomstyle.'"><a href="index.php?action=disconnectUser">Déconnexion</a></li>';
         }
         else{
