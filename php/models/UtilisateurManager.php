@@ -53,6 +53,9 @@ class UtilisateurManager extends AbstractEntityManager
         {
             $useractif->hydrate($user);
             $_SESSION['user']=$useractif;
+            $_SESSION['keyIdUser']=$useractif->getId();
+//            var_dump($useractif);
+//            die;
             return true;
         }
         else
@@ -64,16 +67,42 @@ class UtilisateurManager extends AbstractEntityManager
         }
     }
 
-    public function updateUser(){
+    /**
+     * Updates the user information such as email, pseudo, password, and profile picture in the database.
+     * The updated data is reflected in the current session for the logged-in user.
+     *
+     * @return PDOStatement Returns the result of the SQL query executed for updating the user data.
+     */
+    public function update_user(): PDOStatement
+    {
+      // Création d'un objet Utilisateurs'
+       $useractif = new Utilisateurs();
+      // affectation ID du user connecté
+       $keyuser=$_SESSION['keyIdUser'];
+       $namephoto=$_SESSION['user']->getPhotoUtilisateur();
+      // Affectation des données pour mise à jour
        $mailUser=utils::request('email');
-       $mpUser=utils::request('password');
        $pseudo=utils::request('pseudo');
-       $imguser=Utils::uploadImage();
-
-       $sql="UPDATE Utilisateurs SET Pseudo_Utilisateur=:PseudoUtilisateur,Mail_Utilisateur=:MailUtilisateur WHERE Pseudo_Utilisateur=:PseudoUtilisateur AND Mail_Utilisateur=:MailUtilisateur";
+       $pwdUser=utils::request('password');
+       if($pwdUser!=$_SESSION['user']->getPwdUtilisateur()){
+          // Cryptage du mot de passe
+          $pwdUser=$useractif->encrypt_decrypt('encrypt',$pwdUser);
+       }
+      // récupérer nom et chemin de l'image profil utilisateur
+       $imguser=Utils::uploadImage($keyuser,$namephoto);
+      // Mise à jour des données dans la base
+       $sql="UPDATE Utilisateurs 
+            SET Pseudo_Utilisateur=:Pseudo,
+            Mail_Utilisateur=:UserMail,
+            Pwd_Utilisateur=:MdpUtilisateur,
+            Photo_Utilisateur=:PhotoUser
+            WHERE id=:keyid";
        $result=$this->db->query($sql,[
-           'PseudoUtilisateur' => $pseudo,
-           'MailUtilisateur' => $mailUser
+           'Pseudo' => $pseudo,
+           'UserMail' => $mailUser,
+           'MdpUtilisateur' => $pwdUser,
+           'PhotoUser' => $imguser,
+           'keyid' => $keyuser
        ]);
         if($result->errorCode()=='00000'){
             $_SESSION['user']->setMailUtilisateur($mailUser);

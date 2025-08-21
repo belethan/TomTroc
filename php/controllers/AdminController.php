@@ -103,4 +103,14 @@ class AdminController
         $view->render("infoUserForm");;
     }
 
+    public function saveuser() : void
+    {
+        $UpdateData=new UtilisateurManager();
+        if ($UpdateData->UpdateUser()->errorCode()=='00000') {
+            utils::logsuccess("Vos modifications ont été enregistrées");
+        }
+        $view = new View("Profil Utilisateur");
+        $view->render("infoUserForm");;
+    }
+
 }
