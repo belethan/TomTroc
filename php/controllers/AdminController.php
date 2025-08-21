@@ -41,7 +41,8 @@ class AdminController
         } else {
             // Erreur d'identifiants
             $_SESSION['error'] = "Identifiants incorrects.";
-            $this->displayConnectionForm();
+            //$this->displayConnectionForm();
+            Utils::redirect("connectUser");
 
         }
     }

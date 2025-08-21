@@ -62,7 +62,7 @@ class UtilisateurManager extends AbstractEntityManager
         {
             $useractif->setMailUtilisateur($mail);
             $_SESSION['user']=$useractif;
-            return false;
+            //return false;
             Utils::redirect("connectUser");
         }
     }
