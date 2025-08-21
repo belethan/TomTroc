@@ -81,7 +81,14 @@ $_SESSION['msgcpt']=0;
         <?= $content /* Ici est affiché le contenu réel de la page. */ ?>
     </main>
     <footer>
-        <p>Copyright © TomTroc - Openclassrooms - </p>
+<!--        <p>Copyright © TomTroc - Openclassrooms - </p>-->
+        <ul class="footer-menu">
+            <li><a href="#">Politique de confidentialité</a></li>
+            <li><a href="#">Mentions légales</a></li>
+            <li><a href="#">Tom Troc©</a></li>
+            <li><a href="#"><img src="../../images/logott.svg" alt="Logo Tom Troc"></a></li>
+        </ul>
+        </div>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

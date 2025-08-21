@@ -110,13 +110,11 @@ class Utilisateurs extends AbstractEntity
 
     public function anciennete():string
     {
-//        var_dump($this);
-//        die;
         $date = new DateTime("now");
-
-//        $dateActuelle = $date->format('Y-m-d');
-//        $dtbd = $this->getDteCreation()->format('Y-m-d');
         $diff = $date->diff($this->getDteCreation());
+//        var_dump('cree le '.$this->getDteCreation()->format('Y-m-d'));
+//        var_dump($diff);
+//        die;
         if ($diff->y > 0) {
             $annee = 'membre depuis '.$diff->y.' an(s)';
         }

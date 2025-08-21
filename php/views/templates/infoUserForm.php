@@ -30,6 +30,7 @@
                 </div>
            </div>
     </section>
+
     <!--2eme bloc à droite-->
         <aside class="right-aside">
             <div class="carduser">
@@ -53,8 +54,12 @@
         </aside>
     </form>
 </div>
+
 <!--Bloc du bas Tableau-->
 <section class="full-width-section">
+    <div class="btnAddContainer">
+        <button class="bouton-ajout">Ajouter un nouveau livre</button>
+    </div>
     <div class="table-wrapper">
         <table class="custom-table">
             <thead>

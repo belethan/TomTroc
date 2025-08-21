@@ -91,7 +91,7 @@
     <button>Voir tous les livres</button>
 </section>
 <section class="bandeau">
-    <img  src="<?= JS_IMAGE."BandeauMilieuMain.png"?> alt="Bandeau" >
+    <img  src="<?= JS_IMAGE.'BandeauMilieuMain.png'?>" alt="Bandeau" >
 </section>
 <section class="container-valeurs">
     <div class="cadre">
@@ -107,7 +107,7 @@
             L'équipe Tom Troc
         </p>
         <p class="logosignature">
-            <img src="../images/logosignature.svg" alt="symbole Tom Troc">
+            <img src="../../images/logosignature.svg" alt="symbole Tom Troc">
         </p>
     </div>
 </section>

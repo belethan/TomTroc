@@ -73,7 +73,7 @@ class UtilisateurManager extends AbstractEntityManager
      *
      * @return PDOStatement Returns the result of the SQL query executed for updating the user data.
      */
-    public function update_user(): PDOStatement
+    public function updateuser(): PDOStatement
     {
       // Création d'un objet Utilisateurs'
        $useractif = new Utilisateurs();
