@@ -57,9 +57,13 @@ class AdminController
     public function newUtilisateur(array $data) : void
     {
         $newUser= new Utilisateurs($data);
+        var_dump($newUser);
         $adduser= new UtilisateurManager();
+        unset($_SESSION['user']);;
         if($adduser->AddUtilisateur($newUser)->errorCode()==='00000'){
-            Utils::redirect("home");
+            $_SESSION['keyIdUser']=$newUser->getId();
+            $livreController = new livreControler;
+            $livreController->showHome();
         }
     }
 
@@ -86,14 +90,16 @@ class AdminController
     public function disconnectUser() : void
     {
         // On déconnecte l'utilisateur.
+
         unset($_SESSION['user']);
-        // On redirige vers la page d'accueil.
+        unset($_SESSION['keyIdUser']);;
+       // On redirige vers la page d'accueil.
         Utils::redirect("home");
     }
 
     public function profiluser() : void
     {
-        $view = new View("Propfil Utilisateur");
+        $view = new View("Profil Utilisateur");
         $view->render("infoUserForm");;
     }
 

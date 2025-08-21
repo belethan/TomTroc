@@ -112,94 +112,84 @@ class Utils {
 
 
 
-    public static function uploadImage(int $keyuser): ?string
+    public static function uploadImage(int $keyuser, string $valueinit): ?string
     {
-        if (!isset($_FILES["fileToUpload"])) {
-            return null;
+        $destPath = $valueinit;
+        if (!isset($_FILES["photo_profil"])) {
+            return $valueinit;
         }
 
-        $targetFile = self::IMAGE_DIR . basename($_FILES["fileToUpload"]["name"]);
-        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-        if (!self::isImage($_FILES["fileToUpload"]["tmp_name"])) {
-            self::logError("Le fichier n'est pas une image.");
-            return null;
-        }
+        if (isset($_FILES['photo_profil']) && $_FILES['photo_profil']['error'] === UPLOAD_ERR_OK) {
+            //var_dump($_FILES);
+            $fileTmpPath = $_FILES['photo_profil']['tmp_name'];
+            $fileName = $_FILES['photo_profil']['name'];
+            $fileSize = $_FILES['photo_profil']['size'];
+            // Extension
+            $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
 
-        if (file_exists($targetFile)) {
-            self::logError("Désolé, le fichier existe déjà.");
-            return null;
-        }
+            // Vérification extension
+            if (!in_array($fileExtension, $allowedExtensions)) {
+                self::logError("Extension non autorisée. Formats valides : " . implode(", ", $allowedExtensions));
+                return $valueinit;
+            }
+            // Vérification taille
+            if ($fileSize > self::MAX_FILE_SIZE) {
+                self::logwarning("Fichier trop volumineux. Taille max : 5 Mo");
+                return $valueinit;
+            }
+            // Vérification type de fichier
+            if (!exif_imagetype($fileTmpPath)) {
+                self::logError("Le fichier n'est pas une image.");
+                return $valueinit;
+            }
 
-        if (!self::isValidSize($_FILES["fileToUpload"]["size"])) {
-            self::logError("Désolé, le fichier est trop volumineux.");
-            return null;
-        }
+            //changement de nom du fichier
+            // Date formatée MMAAAA
+            $dateFormat = date("mY");
+            $id = str_pad($keyuser, 7, "0", STR_PAD_LEFT);
 
-        if (!self::isValidExtension($imageFileType)) {
-            self::logError("Désolé, seulement des fichiers avec extensions JPG, JPEG, PNG & GIF sont autorisés.");
-            return null;
+            $uploadDir = JS_IMAGE . "user_picture/";
+            // Nouveau nom : PRO-[id]-[MMAAAA].extension
+            $newFileName = "PROFIL-" . $id . "-" . $dateFormat . "." . $fileExtension;
+            // Chemin final
+            $destPath = $uploadDir . $newFileName;
+            // Déplacement
+            if (move_uploaded_file($fileTmpPath, $destPath)) {
+                self::logsuccess("Image uploadée avec succès ");
+                $destPath=$newFileName;
+            } else {
+                self::logError("Erreur lors du déplacement du fichier.");
+                return $valueinit;
+            }
         }
-
-        if (!self::moveFile($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
-            self::logError("Désolé, une erreur a été détectée lors du téléchargement.");
-            return null;
-        }
-
-        return htmlspecialchars(basename($_FILES["fileToUpload"]["name"]));
+      return $destPath;
     }
-
-    /**
-     * Checks if the file is a valid image.
-     *
-     * @param string $filePath
-     * @return bool
-     */
-    private static function isImage(string $filePath): bool
-    {
-        return getimagesize($filePath) !== false;
-    }
-
-    /**
-     * Checks if the file size is within the allowed limit.
-     *
-     * @param int $size
-     * @return bool
-     */
-    private static function isValidSize(int $size): bool
-    {
-        return $size <= self::MAX_FILE_SIZE;
-    }
-
-    /**
-     * Checks if the file extension is allowed.
-     *
-     * @param string $extension
-     * @return bool
-     */
-    private static function isValidExtension(string $extension): bool
-    {
-        return in_array($extension, self::ALLOWED_EXTENSIONS, true);
-    }
-
-    /**
-     * Moves the uploaded file to the target directory.
-     *
-     * @param string $tempPath
-     * @param string $targetPath
-     * @return bool
-     */
-    private static function moveFile(string $tempPath, string $targetPath): bool
-    {
-        return move_uploaded_file($tempPath, $targetPath);
-    }
-
-    /**
+   /**
      * Logs an error message. Replace with a proper logging system in production.
      *
      * @param string $message
      */
-    private static function logError(string $message): void
+    private static function logMessage(string $key, string $message): void
     {
-        echo $message;
+        $_SESSION['alert'] = [
+            'type' => $key,
+            'message' => $message
+        ];
     }
+
+    public static function logError(string $message): void
+    {
+        self::logMessage('danger', $message);
+    }
+    public static function logsuccess(string $message): void
+    {
+           self::logMessage('success', $message);
+    }
+
+    public static function logwarning(string $message): void
+    {
+        self::logMessage('warning', $message);
+    }
+
 }

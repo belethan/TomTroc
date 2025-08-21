@@ -13,14 +13,14 @@
     <section class="left-section">
             <div class="infouser">
                 <form action="index.php?action=saveuser" method="post" enctype="multipart/form-data">
-                <img id="visage" src=<?php echo JS_IMAGE.'user_picture/ProfilUserMan.png' ?> alt="Image Profil" class="profile-img">
+                <img id="visage" src=<?php echo JS_IMAGE.'user_picture/'.$userobjet->getPhotoUtilisateur() ?> alt="Image Profil" class="profile-img">
                 <input type="file" name="photo_profil" id="fileInput" accept="image/*" " >
                 <label for="fileInput" class="label-like-link">Modifier</label>
                 <div id="error-message"></div>
                 <div class="divider"></div>
                 <div class="labels">
                     <h3>nathalire</h3>
-                    <p class="label-Nom">membre depuis 1 ans</p>
+                    <p class="label-Nom"><?php echo $userobjet->anciennete(); ?></p>
                     <p class="biblio">Bibliothéque</p>
                     <p class="book-paragraph">
                         <img src="../../images/LivreTexte.svg" alt="Livres" class="book-icon">

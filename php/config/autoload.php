@@ -5,8 +5,8 @@
  * et chercher dans les divers dossiers (ici models, controllers, views, services) s'il trouve
  * un fichier avec le bon nom. Si c'est le cas, il l'inclut avec require_once.
  */
-error_reporting(E_ERROR);
-ini_set('display_errors', 0);
+//error_reporting(E_ERROR);
+//ini_set('display_errors', 0);
 
 spl_autoload_register(function($className) {
     // On va voir dans le dossier Service si la classe existe.
@@ -36,3 +36,4 @@ spl_autoload_register(function($className) {
 
 });
 session_start();
+

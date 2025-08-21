@@ -20,8 +20,7 @@ try {
        case 'login':
            $userController = new AdminController();
            $userController->loginUser();
-
-           die;
+           break;
         case 'disconnectUser':
             $adminController = new AdminController();
             $adminController->disconnectUser();
@@ -40,7 +39,7 @@ try {
             break;
         Case 'saveuser' :
             $adminController = new AdminController();
-            $adminController->updateUser();
+            $adminController->saveuser();
             break;
         default:
             throw new Exception("La page demandée n'existe pas.");

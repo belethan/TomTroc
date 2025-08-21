@@ -5,7 +5,7 @@ class Utilisateurs extends AbstractEntity
     private string $secret_key = 'Isidar!9729Ag';
     private string $iv_key = 'Ag=meYlan';
     private string $Pseudo_Utilisateur= '';
-    private string $Photo_Utilisateur ='';
+    private ?string $Photo_Utilisateur =Null;
     private string $Mail_Utilisateur = '';
     private string $Pwd_Utilisateur = '';
 
@@ -32,11 +32,17 @@ class Utilisateurs extends AbstractEntity
      */
     public function getPhotoUtilisateur(): string
     {
+        if (empty($this->Photo_Utilisateur)==true) {
+            $this->Photo_Utilisateur='ProfilUserMan.png';
+        }
         return $this->Photo_Utilisateur;
     }
 
-    public function setPhotoUtilisateur(string $photo_Utilisateur): void
+    public function setPhotoUtilisateur(string $photo_Utilisateur = ''): void
     {
+        if (empty($photo_Utilisateur)==true) {
+            $photo_Utilisateur='ProfilUserMan.png';
+        }
         $this->Photo_Utilisateur = $photo_Utilisateur;
     }
 
@@ -102,5 +108,28 @@ class Utilisateurs extends AbstractEntity
     return $output;
     }
 
+    public function anciennete():string
+    {
+//        var_dump($this);
+//        die;
+        $date = new DateTime("now");
+
+//        $dateActuelle = $date->format('Y-m-d');
+//        $dtbd = $this->getDteCreation()->format('Y-m-d');
+        $diff = $date->diff($this->getDteCreation());
+        if ($diff->y > 0) {
+            $annee = 'membre depuis '.$diff->y.' an(s)';
+        }
+        elseif ($diff->m > 0) {
+            $annee = 'membre depuis '.$diff->m.' mois';
+        }
+        elseif ($diff->d > 0) {
+            $annee = 'membre depuis '.$diff->d.' jour(s)';
+        }
+        else {
+            $annee = 'membre depuis '.$diff->h.' heure(s)';
+        }
+        return $annee;
+    }
 
 }

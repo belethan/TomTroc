@@ -2,11 +2,20 @@
 
 class UtilisateurManager extends AbstractEntityManager
 {
+    /**
+     * Adds a new user to the database.
+     *
+     * @param Utilisateurs $utilisateur The user object containing details such as pseudo, email, and password to be added to the database.
+     * @return PDOStatement The result of the SQL query execution.
+     */
     Public function AddUtilisateur(Utilisateurs $utilisateur):PDOStatement
     {
+
         $pseudo=$utilisateur->getPseudoUtilisateur();
         $mail=$utilisateur->getMailUtilisateur();
-        $pwd=$utilisateur->getMdpUtilisateur();
+        $passagepwd=$utilisateur->getPwdUtilisateur();
+        $pwd=$utilisateur->encrypt_decrypt('encrypt',$passagepwd);
+        $utilisateur->setPwdUtilisateur($pwd);
         $defaultImg='ProfilUserMan.png';
         $utilisateur->setPhotoUtilisateur($defaultImg);
         $sql="INSERT INTO Utilisateurs(Pseudo_Utilisateur,Mail_Utilisateur,Pwd_Utilisateur)  
@@ -17,10 +26,20 @@ class UtilisateurManager extends AbstractEntityManager
             'MailUtilisateur' => $mail,
             'MdpUtilisateur' => $pwd
         ]);
+        if($result->errorCode()=='00000'){
+            $_SESSION['user']=$utilisateur;
+        }
         return $result;
     }
 
-    Public function login($mail,$pwd):bool
+    /**
+     * Authenticates a user using the provided email and password.
+     *
+     * @param string $mail The email address of the user.
+     * @param string $pwd The password of the user.
+     * @return bool True if authentication is successful, false otherwise.
+     */
+    Public function login($mail, $pwd):bool
     {
         $useractif = new Utilisateurs();
         $password=$useractif->encrypt_decrypt('encrypt',$pwd);
@@ -32,7 +51,6 @@ class UtilisateurManager extends AbstractEntityManager
         $user=$result->fetch();
         if($user)
         {
-
             $useractif->hydrate($user);
             $_SESSION['user']=$useractif;
             return true;
@@ -57,6 +75,15 @@ class UtilisateurManager extends AbstractEntityManager
            'PseudoUtilisateur' => $pseudo,
            'MailUtilisateur' => $mailUser
        ]);
+        if($result->errorCode()=='00000'){
+            $_SESSION['user']->setMailUtilisateur($mailUser);
+            $_SESSION['user']->setPwdUtilisateur($pwdUser);
+            $_SESSION['user']->setPseudoUtilisateur($pseudo);
+            if ($_SESSION['user']->getPhotoUtilisateur() != $imguser) {
+                $_SESSION['user']->setPhotoUtilisateur($imguser);
+            }
+//            var_dump($_SESSION['user']);
+        }
        return $result;
     }
 }
