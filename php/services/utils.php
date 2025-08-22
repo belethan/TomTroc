@@ -6,6 +6,10 @@
  * Exemple : Utils::redirect('home');
  */
 class Utils {
+    private const MAX_FILE_SIZE = 500000; // File size limit in bytes (5 Mo)
+    private const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif'];
+    private const IMAGE_DIR = "../images/";
+
     /**
      * Convertit une date vers le format de type "Samedi 15 juillet 2023" en francais.
      * @param DateTime $date : la date à convertir.
@@ -87,57 +91,105 @@ class Utils {
         return $_REQUEST[$variableName] ?? $defaultValue;
     }
 
-    public static function GetImage(): mixed
+    Public static function UserMenu(string $nomstyle='navbar-link-right')
     {
-        $keyuser = $_SESSION['keyuser'];
-        $origine = $_SESSION['origine'];
-        $target_dir = "uploads/";
-        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-        $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        if ($nomstyle ==='navbar-link-right') {
+            echo '<li class="navbar-msg-left navbar-link-right"><a href="#" class="bulle">Messagerie <span class="badge">'.$_SESSION['msgcpt'].'</span> </a></li>';
+        }
+        else{
+               echo '<li class="navbar-link-burger"><a href="#">Messagerie</a></li>';
+        }
+        if (isset($_SESSION['user'])) {
+            echo '<li  class="'.$nomstyle.'"><a href="index.php?action=infouser">'.$_SESSION['user']->getPseudoUtilisateur().'</a></li>';
+            echo '<li  class="'.$nomstyle.'"><a href="index.php?action=disconnectUser">Déconnexion</a></li>';
+        }
+        else{
 
-        // Check if image file is a actual image or fake image
-        if(isset($_POST["submit"])) {
-            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-            if($check !== false) {
-                echo "File is an image - " . $check["mime"] . ".";
-                $uploadOk = 1;
+            echo '<li  class="'.$nomstyle.'"><a href="#">Compte</a></li>';
+            echo '<li  class="'.$nomstyle.'"><a href="index.php?action=connectUser">comnexion</a></li>';
+        }
+    }
+
+
+
+    public static function uploadImage(int $keyuser, string $valueinit): ?string
+    {
+        $destPath = $valueinit;
+        if (!isset($_FILES["photo_profil"])) {
+            return $valueinit;
+        }
+
+        if (isset($_FILES['photo_profil']) && $_FILES['photo_profil']['error'] === UPLOAD_ERR_OK) {
+            //var_dump($_FILES);
+            $fileTmpPath = $_FILES['photo_profil']['tmp_name'];
+            $fileName = $_FILES['photo_profil']['name'];
+            $fileSize = $_FILES['photo_profil']['size'];
+            // Extension
+            $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+
+            // Vérification extension
+            if (!in_array($fileExtension, $allowedExtensions)) {
+                self::logError("Extension non autorisée. Formats valides : " . implode(", ", $allowedExtensions));
+                return $valueinit;
+            }
+            // Vérification taille
+            if ($fileSize > self::MAX_FILE_SIZE) {
+                self::logwarning("Fichier trop volumineux. Taille max : 5 Mo");
+                return $valueinit;
+            }
+            // Vérification type de fichier
+            if (!exif_imagetype($fileTmpPath)) {
+                self::logError("Le fichier n'est pas une image.");
+                return $valueinit;
+            }
+
+            //changement de nom du fichier
+            // Date formatée MMAAAA
+            $dateFormat = date("mY");
+            $id = str_pad($keyuser, 7, "0", STR_PAD_LEFT);
+
+            $uploadDir = JS_IMAGE . "user_picture/";
+            // Nouveau nom : PRO-[id]-[MMAAAA].extension
+            $newFileName = "PROFIL-" . $id . "-" . $dateFormat . "." . $fileExtension;
+            // Chemin final
+            $destPath = $uploadDir . $newFileName;
+            // Déplacement
+            if (move_uploaded_file($fileTmpPath, $destPath)) {
+                self::logsuccess("Image uploadée avec succès ");
+                $destPath=$newFileName;
             } else {
-                echo "File is not an image.";
-                $uploadOk = 0;
+                self::logError("Erreur lors du déplacement du fichier.");
+                return $valueinit;
             }
         }
+      return $destPath;
+    }
+   /**
+     * Logs an error message. Replace with a proper logging system in production.
+     *
+     * @param string $message
+     */
+    private static function logMessage(string $key, string $message): void
+    {
+        $_SESSION['alert'] = [
+            'type' => $key,
+            'message' => $message
+        ];
+    }
 
-        // Check if file already exists
-        if (file_exists($target_file)) {
-            echo "Sorry, file already exists.";
-            $uploadOk = 0;
-        }
+    public static function logError(string $message): void
+    {
+        self::logMessage('danger', $message);
+    }
+    public static function logsuccess(string $message): void
+    {
+           self::logMessage('success', $message);
+    }
 
-        // Check file size
-        if ($_FILES["fileToUpload"]["size"] > 500000) {
-            echo "Sorry, your file is too large.";
-            $uploadOk = 0;
-        }
-
-        // Allow certain file formats
-        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif" ) {
-            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-            $uploadOk = 0;
-        }
-
-        // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            echo "Sorry, your file was not uploaded.";
-        // if everything is ok, try to upload file
-        } else {
-            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
-            } else {
-                echo "Sorry, there was an error uploading your file.";
-            }
-        }
+    public static function logwarning(string $message): void
+    {
+        self::logMessage('warning', $message);
     }
 
 }

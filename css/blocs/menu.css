@@ -111,7 +111,7 @@
 
 .navbar-link-right span{
     position: absolute;
-    top: -5px;
+    top: -14px;
     right: -26px;
     background-color: green;
     color: white;
@@ -127,9 +127,27 @@
 
 .bulle {
     content: "💬 "; /* Emoji bulle de dialogue */
-    font-size: 1.2em;
+    font-size: 1em;
     margin-right: 0.3em;
 }
 
+/* --- RESPONSIVE MODE EN CARDS --- */
+@media screen and (max-width: 1050px) {
+    .navbar-link-right span {
+        position: absolute;
+        top: -30px;
+        right: -30px;
+        background-color: green;
+        color: white;
+        border-radius: 50%;
+        width: 9px;
+        height: 19px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+    }
+}
 
 

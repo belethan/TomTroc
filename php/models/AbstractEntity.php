@@ -3,8 +3,8 @@ abstract class AbstractEntity
 {
     // Par défaut l'id vaut -1, ce qui permet de vérifier facilement si l'entité est nouvelle ou pas.
     protected int $id = -1;
-    private ?DateTime  $DteCreation = null; // la variable $DteCreation est définie ici pour les bases de données sans triiger
-    private ?DateTime  $DteModif = null;  // la variable $DteModif est définie ici pour les bases de données sans triiger
+    protected ?DateTime  $DteCreation = null; // la variable $DteCreation est définie ici pour les bases de données sans trigger
+    protected ?DateTime  $DteModif = null;  // la variable $DteModif est définie ici pour les bases de données sans trigger
 
     /*
      *La gestion des dates de création et de modification sont dans chaque table
@@ -21,9 +21,9 @@ abstract class AbstractEntity
      */
     public function __construct(array $data = [])
     {
-        if (!empty($data)) {
+          if (!empty($data)) {
             $this->hydrate($data);
-        }
+          }
     }
 
     /**
@@ -33,11 +33,11 @@ abstract class AbstractEntity
      * Les underscore sont transformés en camelCase (ex: date_creation devient setDateCreation).
      * @return void
      */
-    protected function hydrate(array $data) : void
+    public function hydrate(array $data) : void
     {
         foreach ($data as $key => $value) {
             $method = 'set' . str_replace('_', '', ucwords($key, '_'));
-            if (method_exists($this, $method)) {
+            if (method_exists($this, $method) AND (is_null($value)===false)) {
                 $this->$method($value);
             }
         }
@@ -48,7 +48,7 @@ abstract class AbstractEntity
      * @param int $id
      * @return void
      */
-    public function setId(int $id) : void
+    public function setID(int $id) : void
     {
         $this->id = $id;
     }
@@ -69,12 +69,12 @@ abstract class AbstractEntity
      * @param string $format : le format pour la convertion de la date si elle est une string.
      * Par défaut, c'est le format de date mysql qui est utilisé.
      */
-    public function setDateCreation(string|DateTime $DteCreation, string $format = 'Y-m-d H:i:s') : void
+    public function setDteCreation(string|DateTime $DteCreation, string $format = 'Y-m-d H:i:s') : void
     {
         if (is_string($DteCreation)) {
             $DteCreation = DateTime::createFromFormat($format, $DteCreation);
         }
-        $this->$DteCreation = $DteCreation;
+        $this->DteCreation = $DteCreation;
     }
 
     /**
@@ -92,7 +92,7 @@ abstract class AbstractEntity
      * @param string $format : le format pour la convertion de la date si elle est une string.
      * Par défaut, c'est le format de date mysql qui est utilisé. string|DateTime
      */
-    public function setDateUpdate($DteModif, string $format = 'Y-m-d H:i:s') : void
+    public function setDteModif($DteModif, string $format = 'Y-m-d H:i:s') : void
     {
         $this->DteModif = null;
         if (isset($DteModif)) {
@@ -103,6 +103,7 @@ abstract class AbstractEntity
         }
 
     }
+
 
     /**
      * Getter pour la date de modification du record.

@@ -1,50 +1,14 @@
 <?php
 
-class Utilisateurs
+class Utilisateurs extends AbstractEntity
 {
     private string $secret_key = 'Isidar!9729Ag';
-    private string $iv_length = '';
-    private string $iv = '';
-    private string $Nom_Utilisateur;
-    private string $Prenom_Utilisateur;
-    private string $pseudo_Utilisateur;
-    private string $photo_Utilisateur;
-    private string $mail_Utilisateur;
-    private string $mdp_Utilisateur;
+    private string $iv_key = 'Ag=meYlan';
+    private string $Pseudo_Utilisateur= '';
+    private ?string $Photo_Utilisateur =Null;
+    private string $Mail_Utilisateur = '';
+    private string $Pwd_Utilisateur = '';
 
-
-
-
-
-    /**
-     * Retrieves the last name of the user.
-     *
-     * @return string The last name of the user.
-     */
-    public function getNomUtilisateur(): string
-    {
-        return $this->Nom_Utilisateur;
-    }
-
-    public function setNomUtilisateur(string $Nom_Utilisateur): void
-    {
-        $this->Nom_Utilisateur = $Nom_Utilisateur;
-    }
-
-    /**
-     * Retrieves the first name of the user.
-     *
-     * @return string The first name of the user.
-     */
-    public function getPrenomUtilisateur(): string
-    {
-        return $this->Prenom_Utilisateur;
-    }
-
-    public function setPrenomUtilisateur(string $Prenom_Utilisateur): void
-    {
-        $this->Prenom_Utilisateur = $Prenom_Utilisateur;
-    }
 
     /**
      * Retrieves the pseudonym of the user.
@@ -53,12 +17,12 @@ class Utilisateurs
      */
     public function getPseudoUtilisateur(): string
     {
-        return $this->pseudo_Utilisateur;
+        return $this->Pseudo_Utilisateur;
     }
 
     public function setPseudoUtilisateur(string $pseudo_Utilisateur): void
     {
-        $this->pseudo_Utilisateur = $pseudo_Utilisateur;
+        $this->Pseudo_Utilisateur = htmlspecialchars($pseudo_Utilisateur);
     }
 
     /**
@@ -68,12 +32,18 @@ class Utilisateurs
      */
     public function getPhotoUtilisateur(): string
     {
-        return $this->photo_Utilisateur;
+        if (empty($this->Photo_Utilisateur)==true) {
+            $this->Photo_Utilisateur='ProfilUserMan.png';
+        }
+        return $this->Photo_Utilisateur;
     }
 
-    public function setPhotoUtilisateur(string $photo_Utilisateur): void
+    public function setPhotoUtilisateur(string $photo_Utilisateur = ''): void
     {
-        $this->photo_Utilisateur = $photo_Utilisateur;
+        if (empty($photo_Utilisateur)==true) {
+            $photo_Utilisateur='ProfilUserMan.png';
+        }
+        $this->Photo_Utilisateur = $photo_Utilisateur;
     }
 
     /**
@@ -83,12 +53,12 @@ class Utilisateurs
      */
     public function getMailUtilisateur(): string
     {
-        return $this->mail_Utilisateur;
+        return $this->Mail_Utilisateur;
     }
 
     public function setMailUtilisateur(string $mail_Utilisateur): void
     {
-        $this->mail_Utilisateur = $mail_Utilisateur;
+        $this->Mail_Utilisateur = htmlspecialchars($mail_Utilisateur);
     }
 
     /**
@@ -96,33 +66,68 @@ class Utilisateurs
      *
      * @return string The password of the user.
      */
-    public function getMdpUtilisateur(): string
+    public function getPwdUtilisateur(): string
     {
-        $mpddecode= $this->decrypter($this->mdp_Utilisateur, $this->secret_key);
-        return $mpddecode;
+        return $this->Pwd_Utilisateur;
     }
 
-    public function setMdpUtilisateur(string $mdp_Utilisateur): void
+    /**
+     * Sets the user password after sanitizing and encrypting it.
+     *
+     * @param string $PwdUtilisateur The plain text password provided by the user.
+     * @return void
+     */
+    public function setPwdUtilisateur(string $PwdUtilisateur): void
     {
-
-        $this->mdp_Utilisateur = $this->crypter($mdp_Utilisateur, $this->secret_key, $this->iv);
-
+        $PwdUser = htmlspecialchars($PwdUtilisateur);
+        $this->Pwd_Utilisateur = $PwdUser;
     }
 
-    protected function crypter($data, $key, $iv) {
-        $cipher = 'AES-256-CBC';
-        $crypted = openssl_encrypt($data, $cipher, $key, 0, $iv);
-        // Encode le résultat et l'IV pour les stocker ou transmettre facilement
-        return base64_encode($iv . $crypted);
+    /**
+     * Encrypts or decrypts a given string based on the specified action using the AES-256-CBC encryption method.
+     *
+     * @param string $action The action to perform. Accepts 'encrypt' for encryption or 'decrypt' for decryption.
+     * @param string $string The string to be encrypted or decrypted.
+     * @return string The encrypted or decrypted string based on the specified action.
+     */
+    public function encrypt_decrypt($action, $string):string
+    {
+    $output = false;
+    $encrypt_method = "AES-256-CBC";
+    // hash
+    $key = hash('sha256', $this->secret_key);
+    // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+    $iv = substr(hash('sha256', $this->iv_key), 0, 16);
+
+    if ( $action == 'encrypt' ) {
+        $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+        $output = base64_encode($output);
+    } else if( $action == 'decrypt' ) {
+        $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+    }
+    return $output;
     }
 
-    protected function decrypter($crypted_data, $key) {
-        $cipher = 'AES-256-CBC';
-        $data = base64_decode($crypted_data);
-        $iv_length = openssl_cipher_iv_length($cipher);
-        $iv = substr($data, 0, $iv_length);
-        $crypted = substr($data, $iv_length);
-        return openssl_decrypt($crypted, $cipher, $key, 0, $iv);
+    public function anciennete():string
+    {
+        $date = new DateTime("now");
+        $diff = $date->diff($this->getDteCreation());
+//        var_dump('cree le '.$this->getDteCreation()->format('Y-m-d'));
+//        var_dump($diff);
+//        die;
+        if ($diff->y > 0) {
+            $annee = 'membre depuis '.$diff->y.' an(s)';
+        }
+        elseif ($diff->m > 0) {
+            $annee = 'membre depuis '.$diff->m.' mois';
+        }
+        elseif ($diff->d > 0) {
+            $annee = 'membre depuis '.$diff->d.' jour(s)';
+        }
+        else {
+            $annee = 'membre depuis '.$diff->h.' heure(s)';
+        }
+        return $annee;
     }
 
 }

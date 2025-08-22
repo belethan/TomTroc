@@ -33,7 +33,7 @@ class View
         $content = $this->_renderViewFromTemplate($viewPath, $params);
         $title = $this->title;
         ob_start();
-        require(MAIN_VIEW_PATH); // ICI on utilise le remplace Principal avec la variable $content
+        require(TEMPLATE_PATH); // ICI on utilise le remplace Principal avec la variable $content
         echo ob_get_clean();
     }
 
@@ -61,8 +61,8 @@ class View
      * @param string $viewName : le nom de la vue demandée.
      * @return string : le chemin vers la vue demandée.
      */
-    private function buildTEMPLATE_VIEW_PATHViewPath(string $viewName) : string
+    private function buildViewPath(string $viewName) : string
     {
-        return $viewName.'.php';
+        return TEMPLATE_VIEW_PATH.$viewName.'.php';
     }
 }

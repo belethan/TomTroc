@@ -55,14 +55,18 @@ class DBManager
      * @param array|null $params : les paramètres de la requête SQL.
      * @return PDOStatement : le résultat de la requête SQL.
      */
-    public function query(string $sql, ?array $params = null): PDOStatement
+    public static function query(string $sql, ?array $params = null): PDOStatement
     {
+        // On récupère l'instance unique de DBManager
+        $pdo = self::getInstance()->getPDO();
+
         if ($params == null) {
-            $query = $this->db->query($sql);
+            $query = $pdo->query($sql); // Appel de la méthode query sur PDO
         } else {
-            $query = $this->db->prepare($sql);
+            $query = $pdo->prepare($sql);
             $query->execute($params);
         }
         return $query;
+
     }
 }
