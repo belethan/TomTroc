@@ -6,7 +6,7 @@
  * Exemple : Utils::redirect('home');
  */
 class Utils {
-    private const MAX_FILE_SIZE = 500000; // File size limit in bytes (5 Mo)
+    private const MAX_FILE_SIZE = 5000000; // File size limit in bytes (5 Mo)
     private const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif'];
     private const IMAGE_DIR = "../images/";
 
@@ -91,7 +91,7 @@ class Utils {
         return $_REQUEST[$variableName] ?? $defaultValue;
     }
 
-    Public static function UserMenu(string $nomstyle='navbar-link-right')
+    Public static function userMenu(string $nomstyle='navbar-link-right')
     {
         if ($nomstyle ==='navbar-link-right') {
             echo '<li class="navbar-msg-left navbar-link-right"><a href="#" class="bulle">Messagerie <span class="badge">'.$_SESSION['msgcpt'].'</span> </a></li>';
@@ -109,8 +109,6 @@ class Utils {
             echo '<li  class="'.$nomstyle.'"><a href="index.php?action=connectUser">comnexion</a></li>';
         }
     }
-
-
 
     public static function uploadImage(int $keyuser, string $valueinit): ?string
     {
@@ -177,7 +175,6 @@ class Utils {
             'message' => $message
         ];
     }
-
     public static function logError(string $message): void
     {
         self::logMessage('danger', $message);

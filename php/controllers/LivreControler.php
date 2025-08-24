@@ -9,4 +9,11 @@ class LivreControler
         $view = new View("Accueil");
         $view->render("home", ['livres' => $livres]);
     }
+
+    public function addNewLivre() : void
+    {
+        $keyiduser =utils::request('utilisateur');
+        $view = new View("Nouveau Livre");
+        $view->render("newUpdateLivreProfil", ['idkeyuser' => $keyiduser, 'titre'=>'Création de livre']);
+    }
 }

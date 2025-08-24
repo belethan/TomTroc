@@ -4,7 +4,7 @@ require_once '../config/autoload.php';
 
 // On récupère l'action demandée par l'utilisateur.
 // Si aucune action n'est demandée, on affiche la page d'accueil.
-$action = Utils::request('action', 'home');
+$action = Utils::request('action', 'newlivre');
 try {
     // Pour chaque action, on appelle le bon contrôleur et la bonne méthode.
     switch ($action) {
@@ -40,6 +40,10 @@ try {
         Case 'saveuser' :
             $adminController = new AdminController();
             $adminController->saveuser();
+            break;
+        Case 'newlivre' :
+            $LivreController = new LivreControler();
+            $LivreController->addNewLivre();
             break;
         default:
             throw new Exception("La page demandée n'existe pas.");

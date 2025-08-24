@@ -58,7 +58,10 @@
 <!--Bloc du bas Tableau-->
 <section class="full-width-section">
     <div class="btnAddContainer">
-        <button class="bouton-ajout">Ajouter un nouveau livre</button>
+        <form action=index.php?action=newlivre&utilisateur=<?php echo $userobjet->getid(); ?> method="get" enctype="multipart/form-data">
+            <button type="submit" class="bouton-ajout">Ajouter un nouveau livre</button>
+        </form>
+
     </div>
     <div class="table-wrapper">
         <table class="custom-table">
