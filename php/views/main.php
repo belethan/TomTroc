@@ -59,23 +59,12 @@ $_SESSION['msgcpt']=0;
         </div>
     </header>
     <?php if (!empty($_SESSION['alert'])): ?>
-
         <div id="alertMessage" class="alert alert-<?= $_SESSION['alert']['type']; ?> alert-dismissible fade show" role="alert">
-            <?= $_SESSION['alert']['message']; ?>
+           <?= $_SESSION['alert']['message']; ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
         </div>
         <?php unset($_SESSION['alert']); ?>
-<!--    script javascript pour la disparition automatique de l'alerte-->
-        <script>
-            // Disparition automatique au bout de 5 secondes
-            setTimeout(() => {
-                let alert = document.getElementById('alertMessage');
-                if (alert) {
-                    let bsAlert = new bootstrap.Alert(alert);
-                    bsAlert.close();
-                }
-            }, 5000);
-        </script>
+
     <?php endif; ?>
     <main>
         <?= $content /* Ici est affiché le contenu réel de la page. */ ?>
@@ -94,6 +83,16 @@ $_SESSION['msgcpt']=0;
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="../../js/menu.js"></script>
-
+    <!--    script javascript pour la disparition automatique de l'alerte-->
+    <script>
+        // Disparition automatique au bout de 5 secondes
+        setTimeout(() => {
+            let alert = document.getElementById('alertMessage');
+            if (alert) {
+                let bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            }
+        }, 5000);
+    </script>
 </body>
 </html>

@@ -8,7 +8,7 @@ class UtilisateurManager extends AbstractEntityManager
      * @param Utilisateurs $utilisateur The user object containing details such as pseudo, email, and password to be added to the database.
      * @return PDOStatement The result of the SQL query execution.
      */
-    Public function AddUtilisateur(Utilisateurs $utilisateur):PDOStatement
+    Public function addUtilisateur(Utilisateurs $utilisateur):PDOStatement
     {
 
         $pseudo=$utilisateur->getPseudoUtilisateur();
@@ -73,7 +73,7 @@ class UtilisateurManager extends AbstractEntityManager
      *
      * @return PDOStatement Returns the result of the SQL query executed for updating the user data.
      */
-    public function updateuser(): PDOStatement
+    public function updateUser(): PDOStatement
     {
       // Création d'un objet Utilisateurs'
        $useractif = new Utilisateurs();
@@ -111,7 +111,7 @@ class UtilisateurManager extends AbstractEntityManager
             if ($_SESSION['user']->getPhotoUtilisateur() != $imguser) {
                 $_SESSION['user']->setPhotoUtilisateur($imguser);
             }
-//            var_dump($_SESSION['user']);
+
         }
        return $result;
     }
