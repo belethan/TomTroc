@@ -75,7 +75,21 @@ a.retour {
     flex-direction: column;
 }
 
+.formulaire {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+}
+
+
 .form-sectionupd label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-sectionupd .form-label {
     margin-top: 10px;
     margin-bottom: 5px;
     font-weight: bold;
@@ -84,6 +98,18 @@ a.retour {
 .form-sectionupd input,
 .form-sectionupd select,
 .form-sectionupd textarea {
+    padding: 8px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: var(--Colorfondinput);
+}
+
+.form-sectionupd .form-input,
+.form-sectionupd .form-select,
+.form-sectionupd .form-textarea {
     padding: 8px;
     font-size: 16px;
     width: 100%;

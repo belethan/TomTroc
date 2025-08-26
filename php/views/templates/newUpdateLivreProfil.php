@@ -14,7 +14,7 @@
             <a href="#">Modifier la photo</a>
           </div>
 
-          <div class="form-sectionupd">
+          <div class="PersoData">
 
               <label for="titre">Titre</label>
               <input type="text" id="titre" name="titre">

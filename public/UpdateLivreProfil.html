@@ -53,31 +53,33 @@
       <h1>Modifier les informations</h1>
     </div>
     <main class="container-updLivre" role="main">
+      ≈
       <div class="imageUpd-section">
         <img src="https://picsum.photos/488/553"  class="imageupd-img" alt="Grande photo">
         <br>
-        <a href="#">Modifier la photo</a>
+<!--        <a href="#">Modifier la photo</a>-->
+          <input type="file" name="photo_profil" id="fileInput" accept="image/*" >
+          <label for="fileInput" class="label-like-link">Modifier</label>
       </div>
+        <div class="form-sectionupd">
+        <form class="formulaire" action="#" method="post">
+              <label for="titre">Titre</label>
+              <input class="form-input" type="text" id="titre" name="titre">
 
-      <div class="form-sectionupd">
-        <form action="#" method="post">
-          <label for="titre">Titre</label>
-          <input type="text" id="titre" name="titre">
+              <label for="auteur">Auteur</label>
+              <input class="form-input" type="text" id="auteur" name="auteur">
 
-          <label for="auteur">Auteur</label>
-          <input type="text" id="auteur" name="auteur">
-
-          <label for="commentaire">Commentaire</label>
-          <textarea id="commentaire" name="commentaire" style=""></textarea>
-          <label for="statut">Statut</label>
-          <select id="statut" name="statut">
-            <option value="disponible">Disponible</option>
-            <option value="indisponible">Indisponible</option>
-          </select>
-
-          <button type="submit">Valider</button>
+              <label for="commentaire">Commentaire</label>
+              <textarea class="form-textarea" id="commentaire" name="commentaire" style=""></textarea>
+              <label for="statut">Statut</label>
+              <select id="statut" name="statut">
+                <option value="disponible">Disponible</option>
+                <option value="indisponible">Indisponible</option>
+              </select>
+              <button type="submit">Valider</button>
         </form>
       </div>
+      </form>
     </main>
     </div>
   <footer class="footer container">
