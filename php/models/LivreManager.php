@@ -19,4 +19,47 @@ class LivreManager extends AbstractEntityManager
         }
         return $books; // Renvoie un tableau, même s'il est vide
     }
+
+    public function LivreSauvegarder(int $modework=1,livre $livre) : bool{
+        if ($modework === 1) {
+            // INSERT - Création d'un nouveau livre
+            $sql = "INSERT INTO livres (Titre_Livre, ID_Auteur, Photo_Livre, ID_Utilisateur, Statut_Livre, Commentaire)
+                    VALUES (:titre, :idAuteur, :photo, :idUtilisateur, :statut, :commentaire)";
+            $stmt = $this->db->prepare($sql);
+
+            $result = $stmt->execute([
+                ':titre'         => $livre->getTitreLivre(),
+                ':idAuteur'      => $livre->getIDAuteur(),
+                ':photo'         => $livre->getPhotoLivre(),
+                ':idUtilisateur' => $livre->getIDUtilisateur(),
+                ':statut'        => $livre->getStatutLivre(),
+                ':commentaire'   => $livre->getCommentaire(),
+            ]);
+        } else {
+            // UPDATE - Modification d'un livre existant
+            $sql = "UPDATE livres SET 
+                    Titre_Livre = :titre, 
+                    ID_Auteur = :idAuteur, 
+                    Photo_Livre = :photo, 
+                    ID_Utilisateur = :idUtilisateur, 
+                    Statut_Livre = :statut, 
+                    Commentaire = :commentaire
+                    WHERE ID_Livre = :idLivre";
+            $stmt = $this->db->prepare($sql);
+
+            $result = $stmt->execute([
+                ':titre'         => $livre->getTitreLivre(),
+                ':idAuteur'      => $livre->getIDAuteur(),
+                ':photo'         => $livre->getPhotoLivre(),
+                ':idUtilisateur' => $livre->getIDUtilisateur(),
+                ':statut'        => $livre->getStatutLivre(),
+                ':commentaire'   => $livre->getCommentaire(),
+                ':idLivre'       => $livre->getId(), // Nécessaire pour identifier le livre à modifier
+            ]);
+        }
+
+        return $result && $stmt->errorCode() === '00000';
+
+
+    }
 }

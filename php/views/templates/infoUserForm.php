@@ -13,7 +13,7 @@
     <section class="left-section">
             <div class="infouser">
                 <form action="index.php?action=saveuser" method="post" enctype="multipart/form-data">
-                <img id="visage" src=<?php echo JS_IMAGE.'user_picture/'.$userobjet->getPhotoUtilisateur() ?> alt="Image Profil" class="profile-img">
+                <img id="visage" src=<?php echo JS_IMAGE.'user_picture/'.$userobjet->getPhotoUtilisateur() ?> alt="Image Profil class="profile-img">
                 <input type="file" name="photo_profil" id="fileInput" accept="image/*" " >
                 <label for="fileInput" class="label-like-link">Modifier</label>
                 <div id="error-message"></div>
@@ -58,10 +58,11 @@
 <!--Bloc du bas Tableau-->
 <section class="full-width-section">
     <div class="btnAddContainer">
-        <form action=index.php?action=newlivre&utilisateur=<?php echo $userobjet->getid(); ?> method="get" enctype="multipart/form-data">
-            <button type="submit" class="bouton-ajout">Ajouter un nouveau livre</button>
-        </form>
-
+<!--        &utilisateur=--><?php //echo $userobjet->getid(); ?>
+<!--        <form action="index.php?action=newlivre" method="post" enctype="multipart/form-data">-->
+<!--            <button type="submit" class="bouton-ajout">Ajouter un nouveau livre</button>-->
+<!--        </form>-->
+        <a href="index.php?action=newlivre&mode=1&utilisateur=<?php echo $userobjet->getid(); ?>" class="bouton-ajout">Ajouter un nouveau Livre</a>
     </div>
     <div class="table-wrapper">
         <table class="custom-table">
