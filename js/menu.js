@@ -11,6 +11,7 @@
             link.addEventListener('click', (e) => {
                 navbar.classList.toggle('show-burger');
             });
-        })
+        });
     }
 toggleMenu();
+

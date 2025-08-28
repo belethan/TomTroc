@@ -58,7 +58,7 @@ class AdminController
     public function newUtilisateur(array $data) : void
     {
         $newUser= new Utilisateurs($data);
-        var_dump($newUser);
+//        var_dump($newUser);
         $adduser= new UtilisateurManager();
         unset($_SESSION['user']);;
         if($adduser->AddUtilisateur($newUser)->errorCode()==='00000'){

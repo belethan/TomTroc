@@ -52,9 +52,9 @@
       <a href="#" class="retour">&larr; Retour</a>
       <h1>Modifier les informations</h1>
     </div>
-    <main class="container-updLivre" role="main">
-      ≈
-      <div class="imageUpd-section">
+    <form class="container-updLivre" action="#" method="post" role="main">
+<!--       <form action="#" method="post">-->
+        <div class="imageUpd-section">
         <img src="https://picsum.photos/488/553"  class="imageupd-img" alt="Grande photo">
         <br>
 <!--        <a href="#">Modifier la photo</a>-->
@@ -62,7 +62,7 @@
           <label for="fileInput" class="label-like-link">Modifier</label>
       </div>
         <div class="form-sectionupd">
-        <form class="formulaire" action="#" method="post">
+        <div class="formulaire" >
               <label for="titre">Titre</label>
               <input class="form-input" type="text" id="titre" name="titre">
 
@@ -77,11 +77,11 @@
                 <option value="indisponible">Indisponible</option>
               </select>
               <button type="submit">Valider</button>
-        </form>
-      </div>
-      </form>
-    </main>
-    </div>
+        </div>
+
+<!--      </form>-->
+    </form>
+ </div>
   <footer class="footer container">
     <div class="footer-content">
       <ul class="footer-menu">

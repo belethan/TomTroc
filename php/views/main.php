@@ -93,6 +93,9 @@ $_SESSION['msgcpt']=0;
                 bsAlert.close();
             }
         }, 5000);
+        window.addEventListener("unload", function () {
+            navigator.sendBeacon("/logout.php", "");
+        });
     </script>
 </body>
 </html>

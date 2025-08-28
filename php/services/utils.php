@@ -88,7 +88,7 @@ class Utils {
      */
     public static function request(string $variableName, mixed $defaultValue = null) : mixed
     {
-        return $_REQUEST[$variableName] ?? $defaultValue;
+         return $_REQUEST[$variableName] ?? $defaultValue;
     }
 
     Public static function userMenu(string $nomstyle='navbar-link-right')
@@ -110,7 +110,7 @@ class Utils {
         }
     }
 
-    public static function uploadImage(int $keyuser, string $valueinit): ?string
+    public static function uploadImage(int $keyuser, string $valueinit, string $prefixefile = "PROFIL-"): ?string
     {
         $destPath = $valueinit;
         if (!isset($_FILES["photo_profil"])) {
@@ -146,10 +146,12 @@ class Utils {
             // Date formatée MMAAAA
             $dateFormat = date("mY");
             $id = str_pad($keyuser, 7, "0", STR_PAD_LEFT);
-
-            $uploadDir = JS_IMAGE . "user_picture/";
+            $uploadDir = JS_IMAGE ;
+            if ($prefixefile == "PROFIL-"){
+                $uploadDir = JS_IMAGE . "user_picture/";
+            }
             // Nouveau nom : PRO-[id]-[MMAAAA].extension
-            $newFileName = "PROFIL-" . $id . "-" . $dateFormat . "." . $fileExtension;
+            $newFileName = $prefixefile . $id . "-" . $dateFormat . "." . $fileExtension;
             // Chemin final
             $destPath = $uploadDir . $newFileName;
             // Déplacement

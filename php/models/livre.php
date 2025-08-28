@@ -3,78 +3,74 @@
 class livre extends AbstractEntity
 {
 
-    private string $Titre_Livre;
-    private int $ID_Auteur = -1;
-    private string $Photo_livre;
-    private int $ID_Utilisateur = -1;
-    private string $Memo_Livre;
-    private int $Statut_Livre = 1;
+    private string $titre_Livre;
+    private string $nom_Auteur ;
+    private string $photo_Livre;
+    private int $id_Utilisateur = -1;
+    private int $statut_Livre = 1;
+    private string $commentaire;
 
-    public function getTitreLivre(): string
+    public function gettitreLivre(): string
     {
-        return $this->Titre_Livre;
+        return $this->titre_Livre;
     }
 
-    public function getIDAuteur(): int
+    public function getnomAuteur(): int
     {
-        return $this->ID_Auteur;
+        return $this->nom_Auteur;
     }
 
-    public function getPhotoLivre(): string
+    public function getphotoLivre(): string
     {
-        return $this->Photo_livre;
+        return $this->photo_Livre;
     }
 
     public function getIDUtilisateur(): int
     {
-        return $this->ID_Utilisateur;
+        return $this->id_Utilisateur;
     }
 
-    public function getMemoLivre(): string
+    public function getstatutLivre(): int
     {
-        return $this->Memo_Livre;
+        return $this->statut_Livre;
     }
-
-    public function getStatutLivre(): int
-    {
-        return $this->Statut_Livre;
+    public function getCommentaire(): string{
+        return $this->commentaire;
     }
-
-    public function setTitreLivre(string $Titre_Livre): self
+    public function settitreLivre(string $Titre_Livre): self
     {
-        $this->Titre_Livre = $Titre_Livre;
+        $this->titre_Livre = $Titre_Livre;
         return $this;
     }
 
-    public function setIDAuteur(int $ID_Auteur): self
+    public function setnomAuteur(string $nom_Auteur): self
     {
-        $this->ID_Auteur = $ID_Auteur;
+        $this->nom_Auteur = $nom_Auteur;
         return $this;
     }
 
-    public function setPhotoLivre(string $Photo_livre): self
+    public function setphotoLivre(string $Photo_livre): self
     {
-        $this->Photo_livre = $Photo_livre;
+        $this->photo_Livre = $Photo_livre;
         return $this;
     }
 
-    public function setIDUtilisateur(int $ID_Utilisateur): self
+    public function setidUtilisateur(int $ID_Utilisateur): self
     {
-        $this->ID_Utilisateur = $ID_Utilisateur;
+        $this->id_Utilisateur = $ID_Utilisateur;
         return $this;
     }
 
 
-
-    public function setMemoLivre(string $Memo_Livre): self
+    public function setstatutLivre(int $Statut_Livre): self
     {
-        $this->Memo_Livre = $Memo_Livre;
+        $this->statut_Livre = $Statut_Livre;
         return $this;
     }
 
-    public function setStatutLivre(int $Statut_Livre): self
+    public function setCommentaire(string $commentaire): self
     {
-        $this->Statut_Livre = $Statut_Livre;
+        $this->commentaire = $commentaire;
         return $this;
     }
 }
