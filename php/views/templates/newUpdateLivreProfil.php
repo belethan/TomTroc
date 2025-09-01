@@ -1,5 +1,5 @@
 <?php
-    $titre = "Modifier le livre";
+
 ?>
 <div class="wrapper">
     <div class="infotitre">
@@ -12,8 +12,8 @@
         <div class="imageUpd-section">
             <img src="https://picsum.photos/488/553"  class="imageupd-img" alt="Grande photo">
             <br>
-            <input type="file" name="photo_livre" id="fileInput" accept="image/*" >
-            <label for="fileInput" class="label-like-link">Modifier</label>
+            <label for="img_profil" class="label-like-link">Modifier</label>
+            <input type="file" name="img_profil" id="img_profil" accept="image/* " >
         </div>
         <div class="form-sectionupd">
             <div class="formulaire" >
@@ -26,9 +26,9 @@
                 <label for="commentaire">Commentaire</label>
                 <textarea class="form-textarea" id="commentaire" name="commentaire" style=""></textarea>
                 <label for="statut_Livre">Statut</label>
-                <select id="statut_Livre" name="statut_Livre">
-                    <option value="disponible">Disponible</option>
-                    <option value="indisponible">Indisponible</option>
+                <select id="statut_Livre" name="statut_Livre" value="0">
+                    <option value="1">Disponible</option>
+                    <option value="0">Indisponible</option>
                 </select>
                 <button type="submit">Valider</button>
             </div>

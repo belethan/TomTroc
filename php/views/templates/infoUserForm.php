@@ -13,8 +13,10 @@
     <section class="left-section">
             <div class="infouser">
                 <form action="index.php?action=saveuser" method="post" enctype="multipart/form-data">
-                <img id="visage" src=<?php echo JS_IMAGE.'user_picture/'.$userobjet->getPhotoUtilisateur() ?> alt="Image Profil class="profile-img">
-                <input type="file" name="photo_profil" id="fileInput" accept="image/*" " >
+                <div class="visageimg">
+                    <img id="visage" src=<?php echo JS_IMAGE.'user_picture/'.$userobjet->getPhotoUtilisateur() ?> alt="Image Profil class="profile-img">
+                </div>
+                    <input type="file" name="img_profil" id="fileInput" accept="image/*" " >
                 <label for="fileInput" class="label-like-link">Modifier</label>
                 <div id="error-message"></div>
                 <div class="divider"></div>

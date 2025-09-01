@@ -1,4 +1,7 @@
-#fileInput, #photo_livre {
+#fileInput, #img_profil {
+    display: none;
+}
+#photo_livre{
     display: none;
 }
 
@@ -67,9 +70,12 @@
     margin-right: 33px;
 }
 
-.left-section img {
-    max-width: 100%;
-    height: auto;
+.visageimg img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin:auto;
 }
 
 .label {

@@ -46,6 +46,10 @@ try {
             $LivreController = new LivreControler();
             $LivreController->addNewLivre();
             break;
+        Case 'editlivre' :
+            $LivreController = new LivreControler();
+            $LivreController->editLivre();
+            break;
         Case 'livresave' :
             $LivreController = new LivreControler();
             $LivreController->saveLivre();
