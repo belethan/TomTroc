@@ -109,10 +109,10 @@ class LivreManager extends AbstractEntityManager
      * @return array Un tableau contenant les livres sous forme d'objets `livre`. Le tableau
      * peut être vide si aucun livre ne correspond aux critères.
      */
-    public function getLivreByAuteur(int $idAuteur) : array{
-        $sql = "SELECT * FROM livres WHERE Statut_Livre = 1 AND ID_Auteur = :idAuteur ORDER BY DteCreation DESC";
+    public function getLivreByAuteur(string $nomAuteur) : array{
+        $sql = "SELECT * FROM livres WHERE Statut_Livre = 1 AND nom_Auteur = :nomAuteur ORDER BY DteCreation DESC";
         $result = $this->db->query($sql,[
-            'idAuteur' => $idAuteur
+            'nomAuteur' => $nomAuteur
         ]);
         $books = [];
         while ($bookRow = $result->fetch()) {
