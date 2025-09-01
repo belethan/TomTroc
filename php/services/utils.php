@@ -113,15 +113,15 @@ class Utils {
     public static function uploadImage(int $keyuser, string $valueinit, string $prefixefile = "PROFIL-"): ?string
     {
         $destPath = $valueinit;
-        if (!isset($_FILES["photo_profil"])) {
+        if (!isset($_FILES["img_profil"])) {
             return $valueinit;
         }
 
-        if (isset($_FILES['photo_profil']) && $_FILES['photo_profil']['error'] === UPLOAD_ERR_OK) {
+        if (isset($_FILES['img_profil']) && $_FILES['img_profil']['error'] === UPLOAD_ERR_OK) {
             //var_dump($_FILES);
-            $fileTmpPath = $_FILES['photo_profil']['tmp_name'];
-            $fileName = $_FILES['photo_profil']['name'];
-            $fileSize = $_FILES['photo_profil']['size'];
+            $fileTmpPath = $_FILES['img_profil']['tmp_name'];
+            $fileName = $_FILES['img_profil']['name'];
+            $fileSize = $_FILES['img_profil']['size'];
             // Extension
             $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
             $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];

@@ -20,46 +20,104 @@ class LivreManager extends AbstractEntityManager
         return $books; // Renvoie un tableau, même s'il est vide
     }
 
-    public function LivreSauvegarder(int $modework=1,livre $livre) : bool{
+
+    /**
+     * Enregistre un objet livre dans la base de données. Selon le mode, la méthode crée
+     * un nouveau livre (opération d’insertion) ou met à jour un livre existant (opération de mise à jour).
+     *
+     * @param int $modework Le mode d’opération. Utiliser 1 pour créer un nouveau livre (insertion),
+     *                      ou toute autre valeur pour mettre à jour un livre existant.
+     * @param livre $livre L’objet livre à enregistrer, contenant toutes les données nécessaires.
+     * @return int L’ID du livre enregistré. Retourne -1 en cas d’erreur lors de l’opération de mise à jour.
+     */
+    public function LivreSauvegarder(int $modework=1, livre $livre):int
+{
+        $retourcle = null;
         if ($modework === 1) {
             // INSERT - Création d'un nouveau livre
-            $sql = "INSERT INTO livres (Titre_Livre, ID_Auteur, Photo_Livre, ID_Utilisateur, Statut_Livre, Commentaire)
-                    VALUES (:titre, :idAuteur, :photo, :idUtilisateur, :statut, :commentaire)";
+            $sql = "INSERT INTO livres (Titre_Livre, nom_Auteur, Photo_Livre, ID_Utilisateur, Statut_Livre, Commentaire)
+                    VALUES (:titre, :nomAuteur, :photo, :idUtilisateur, :statut, :commentaire)";
             $stmt = $this->db->prepare($sql);
 
             $result = $stmt->execute([
                 ':titre'         => $livre->getTitreLivre(),
-                ':idAuteur'      => $livre->getIDAuteur(),
+                ':nom_Auteur'      => $livre->getIDAuteur(),
                 ':photo'         => $livre->getPhotoLivre(),
                 ':idUtilisateur' => $livre->getIDUtilisateur(),
                 ':statut'        => $livre->getStatutLivre(),
                 ':commentaire'   => $livre->getCommentaire(),
             ]);
+            utils::logsuccess("Un nouveau livre a été enregistré");
+            if ($stmt->errorCode()!='00000') {
+                utils::logError("Erreur sur création du livre : erreur de sauvegarde SQL .". $stmt->errorInfo());
+            }
+
+
+            $retourcle = $stmt->lastInsertId();
         } else {
             // UPDATE - Modification d'un livre existant
-            $sql = "UPDATE livres SET 
+            $sql = "UPDATE Livres SET 
                     Titre_Livre = :titre, 
-                    ID_Auteur = :idAuteur, 
+                    nom_Auteur = :nomAuteur, 
                     Photo_Livre = :photo, 
                     ID_Utilisateur = :idUtilisateur, 
                     Statut_Livre = :statut, 
                     Commentaire = :commentaire
-                    WHERE ID_Livre = :idLivre";
+                    WHERE id = :idLivre";
             $stmt = $this->db->prepare($sql);
 
             $result = $stmt->execute([
                 ':titre'         => $livre->getTitreLivre(),
-                ':idAuteur'      => $livre->getIDAuteur(),
+                ':nomAuteur'    => $livre->getnomAuteur(),
                 ':photo'         => $livre->getPhotoLivre(),
                 ':idUtilisateur' => $livre->getIDUtilisateur(),
                 ':statut'        => $livre->getStatutLivre(),
                 ':commentaire'   => $livre->getCommentaire(),
-                ':idLivre'       => $livre->getId(), // Nécessaire pour identifier le livre à modifier
+                ':idLivre'            => $livre->getId(), // Nécessaire pour identifier le livre à modifier
             ]);
+            utils::logsuccess("les modifications sur les informations livre ont été enregistrées");
+            $retourcle = $livre->getId();
+            if ($stmt->errorCode()!='00000') {
+                utils::logError("Erreur sur la modification des données du livre : erreur de sauvegarde SQL .". $stmt->errorInfo());
+                $retourcle = -1;
+            }
+
         }
+        return $retourcle;
 
-        return $result && $stmt->errorCode() === '00000';
+    }
 
+    /**
+     * Retrieves a single livre object from the database using its ID.
+     *
+     * @param int $idLivre The ID of the livre to retrieve.
+     * @return livre The livre object corresponding to the given ID.
+     */
+    public function getLivreById(int $idLivre) : livre{
+        $sql = "SELECT * FROM livres WHERE Statut_Livre = 1 ORDER BY DteCreation DESC";
+        $result = $this->db->query($sql);
+        $result = $result->fetch();
+        return new livre($result);
+    }
 
+    /**
+     * Cette méthode permet de récupérer tous les livres actifs associés à un auteur spécifique,
+     * identifiés par l'identifiant de l'auteur donné. Les livres sont triés par date de création
+     * en ordre décroissant, puis retournés sous forme d'objets `livre`.
+     *
+     * @param int $idAuteur L'identifiant de l'auteur dont on souhaite récupérer les livres.
+     * @return array Un tableau contenant les livres sous forme d'objets `livre`. Le tableau
+     * peut être vide si aucun livre ne correspond aux critères.
+     */
+    public function getLivreByAuteur(int $idAuteur) : array{
+        $sql = "SELECT * FROM livres WHERE Statut_Livre = 1 AND ID_Auteur = :idAuteur ORDER BY DteCreation DESC";
+        $result = $this->db->query($sql,[
+            'idAuteur' => $idAuteur
+        ]);
+        $books = [];
+        while ($bookRow = $result->fetch()) {
+            $books[] = new livre($bookRow); // Ajoute chaque livre au tableau
+        }
+        return $books; // Renvoie un tableau, même s'il est vide
     }
 }
