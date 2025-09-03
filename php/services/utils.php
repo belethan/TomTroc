@@ -157,10 +157,9 @@ class Utils {
             // Déplacement
             if (move_uploaded_file($fileTmpPath, $destPath)) {
                 self::logsuccess("Image uploadée avec succès ");
-                $destPath=$newFileName;
             } else {
                 self::logError("Erreur lors du déplacement du fichier.");
-                return $valueinit;
+                $destPath = $valueinit;
             }
         }
       return $destPath;

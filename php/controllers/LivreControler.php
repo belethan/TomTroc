@@ -28,9 +28,6 @@ class LivreControler
     public function saveLivre() : void{
         $mode=utils::request('mode');
         $_POST['id_utilisateur']=$_SESSION['user']->getId();
-//        var_dump($_FILES);
-//        var_dump($_POST);
-//        var_dump($_REQUEST);
         $valueinit=JS_IMAGE."livre-neutre.png";
         if ($mode==2) {
             $valueinit=$_POST['photo_Livre'];
@@ -39,7 +36,10 @@ class LivreControler
         $_POST['photo_Livre']=$imglivre;
         $livredata = new livre($_POST);
         $livreManager = new livreManager;
-        $livreManager->LivreSauvegarder($livredata);
+        $livreManager->LivreSauvegarder($livredata,$mode);
+        /* affichage de la page profil utilisateur */
+        $view = new View("Profil Utilisateur");
+        $view->render("infoUserForm");;
 
     }
 

@@ -67,6 +67,11 @@ class DBManager
             $query->execute($params);
         }
         return $query;
+    }
 
+    public static function LastKeyInfo(): int
+    {
+        $pdo = self::getInstance()->getPDO();
+        return $pdo->lastInsertId();
     }
 }

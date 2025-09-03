@@ -15,7 +15,7 @@ class livre extends AbstractEntity
         return $this->titre_Livre;
     }
 
-    public function getnomAuteur(): int
+    public function getnomAuteur(): string
     {
         return $this->nom_Auteur;
     }
@@ -36,6 +36,14 @@ class livre extends AbstractEntity
     }
     public function getCommentaire(): string{
         return $this->commentaire;
+    }
+
+    public function getdispolabel():string{
+        $retour ="Indisponible";
+        if ($this->statut_Livre==1) {
+            $retour='Disponible';
+        }
+        return $retour;
     }
     public function settitreLivre(string $Titre_Livre): self
     {
