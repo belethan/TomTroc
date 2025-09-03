@@ -18,9 +18,9 @@ define('MAIN_SERVICES', MAIN_PATH . 'services/'); // Le chemin vers les services
 define('TEMPLATE_VIEW_PATH', MAIN_PATH.'views/templates/'); // Le chemin vers les templates de vues.
 define('TEMPLATE_PATH', MAIN_PATH.'views/main.php'); // Le chemin vers les templates de vues.
 // chemin ressources
-define('CSS_PATH', MAIN_RESSOURCE.'css/');
-define('JS_PATH', MAIN_RESSOURCE.'js/');
-define('JS_IMAGE', MAIN_RESSOURCE.'images/');
+define('CSS_PATH', MAIN_PATH.'css/');
+define('JS_PATH', MAIN_PATH.'js/');
+define('JS_IMAGE', MAIN_PATH.'images/');
 
 // Cpnnexion à la base de données login standard
 define('DB_HOST', 'localhost');

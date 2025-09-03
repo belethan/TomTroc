@@ -100,8 +100,10 @@ class AdminController
 
     public function profiluser() : void
     {
+        $livreUser=new livreManager();
+        $datalivre = $livreUser->getalluserLivre();
         $view = new View("Profil Utilisateur");
-        $view->render("infoUserForm");;
+        $view->render("infoUserForm",['livres'=>$datalivre]);;
     }
 
     public function saveuser() : void

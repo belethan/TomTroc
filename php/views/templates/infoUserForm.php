@@ -60,10 +60,6 @@
 <!--Bloc du bas Tableau-->
 <section class="full-width-section">
     <div class="btnAddContainer">
-<!--        &utilisateur=--><?php //echo $userobjet->getid(); ?>
-<!--        <form action="index.php?action=newlivre" method="post" enctype="multipart/form-data">-->
-<!--            <button type="submit" class="bouton-ajout">Ajouter un nouveau livre</button>-->
-<!--        </form>-->
         <a href="index.php?action=newlivre&mode=1&utilisateur=<?php echo $userobjet->getid(); ?>" class="bouton-ajout">Ajouter un nouveau Livre</a>
     </div>
     <div class="table-wrapper">
@@ -79,51 +75,32 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td data-label="Photo"><img src="https://picsum.photos/50" alt="Miniature"></td>
-                <td data-label="Titre">Produit A</td>
-                <td data-label="Auteur">Électronique</td>
-                <td data-label="Description">Un petit appareil utile</td>
-                <td data-label="disponibilité">22/05/2025</td>
-                <td class="actions" data-label="Actions">
-                    <a href="#" class="edit">Éditer</a>
-                    <a href="#" class="delete">Supprimer</a>
-                </td>
-            </tr>
-
-            <tr>
-                <td data-label="Photo"><img src="https://picsum.photos/50" alt="Miniature"></td>
-                <td data-label="Titre">Produit B</td>
-                <td data-label="Auteur">Maison</td>
-                <td data-label="Description">Objet décoratif</td>
-                <td data-label="Date">15/04/2025</td>
-                <td class="actions" data-label="Actions">
-                    <a href="#" class="edit">Éditer</a>
-                    <a href="#" class="delete">Supprimer</a>
-                </td>
-            </tr>
-            <tr>
-                <td data-label="Photo"><img src="https://picsum.photos/50" alt="Miniature"></td>
-                <td data-label="Titre">Produit B</td>
-                <td data-label="Auteur">Maison</td>
-                <td data-label="Description">Objet décoratif</td>
-                <td data-label="Date">15/04/2025</td>
-                <td class="actions" data-label="Actions">
-                    <a href="#" class="edit">Éditer</a>
-                    <a href="#" class="delete">Supprimer</a>
-                </td>
-            </tr>
-            <tr>
-                <td data-label="Photo"><img src="https://picsum.photos/50" alt="Miniature"></td>
-                <td data-label="Titre">Produit B</td>
-                <td data-label="Auteur">Maison</td>
-                <td data-label="Description">Objet décoratif</td>
-                <td data-label="Date">15/04/2025</td>
-                <td class="actions" data-label="Actions">
-                    <a href="#" class="edit">Éditer</a>
-                    <a href="#" class="delete">Supprimer</a>
-                </td>
-            </tr>
+            <?php if (!empty($livres)): ?>
+                <?php foreach ($livres as $livre): ?>
+                    <tr>
+                        <td data-label="Photo">
+<!--                            ?? 'https://picsum.photos/50'-->
+                            <img src="<?= htmlspecialchars($livre->getphotoLivre()) ?>"alt="Miniature" width="50">
+                        </td>
+                        <td data-label="Titre"><?= htmlspecialchars($livre->gettitreLivre()) ?></td>
+                        <td data-label="Auteur"><?= htmlspecialchars($livre->getnomAuteur()) ?></td>
+                        <td data-label="Description"><?= htmlspecialchars($livre->getCommentaire()) ?></td>
+                        <td data-label="Disponibilité">
+                            <?= $livre->getdispolabel()?>
+                        </td>
+                        <td class="actions" data-label="Actions">
+<!--                            <a href="edit.php?id=--><?php //= urlencode($livre->id) ?><!--" class="edit">Éditer</a>-->
+<!--                            <a href="delete.php?id=--><?php //= urlencode($livre->id) ?><!--" class="delete">Supprimer</a>-->
+                            <a href="#" class="edit">Éditer</a>
+                            <a href="#" class="delete">Supprimer</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="6">Aucun livre trouvé</td>
+                </tr>
+            <?php endif; ?>
             </tbody>
         </table>
     </div>

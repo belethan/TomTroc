@@ -20,6 +20,16 @@ class LivreManager extends AbstractEntityManager
         return $books; // Renvoie un tableau, même s'il est vide
     }
 
+    public function getalluserLivre() : array{
+        $sql = "SELECT * FROM livres WHERE id_Utilisateur=:keyutilisateur ORDER BY DteCreation DESC";
+        $result = $this->db->query($sql,['keyutilisateur'=>4]);
+        //$_SESSION['user']->getIdUtilisateur()
+        $books = [];
+        while ($bookRow = $result->fetch()) {
+            $books[] = new livre($bookRow); // Ajoute chaque livre au tableau
+        }
+        return $books; // Renvoie un tableau, même s'il est vide
+    }
 
     /**
      * Enregistre un objet livre dans la base de données. Selon le mode, la méthode crée
@@ -30,30 +40,29 @@ class LivreManager extends AbstractEntityManager
      * @param livre $livre L’objet livre à enregistrer, contenant toutes les données nécessaires.
      * @return int L’ID du livre enregistré. Retourne -1 en cas d’erreur lors de l’opération de mise à jour.
      */
-    public function LivreSauvegarder(int $modework=1, livre $livre):int
+    public function LivreSauvegarder(livre $livre,int $modework=1 ):int
 {
         $retourcle = null;
         if ($modework === 1) {
             // INSERT - Création d'un nouveau livre
             $sql = "INSERT INTO livres (Titre_Livre, nom_Auteur, Photo_Livre, ID_Utilisateur, Statut_Livre, Commentaire)
                     VALUES (:titre, :nomAuteur, :photo, :idUtilisateur, :statut, :commentaire)";
-            $stmt = $this->db->prepare($sql);
-
-            $result = $stmt->execute([
+            $stmt = $this->db->query($sql,[
                 ':titre'         => $livre->getTitreLivre(),
-                ':nom_Auteur'      => $livre->getIDAuteur(),
+                ':nomAuteur'      => $livre->getnomAuteur(),
                 ':photo'         => $livre->getPhotoLivre(),
                 ':idUtilisateur' => $livre->getIDUtilisateur(),
-                ':statut'        => $livre->getStatutLivre(),
+                ':statut'        => $livre->getstatutLivre(),
                 ':commentaire'   => $livre->getCommentaire(),
             ]);
+
             utils::logsuccess("Un nouveau livre a été enregistré");
-            if ($stmt->errorCode()!='00000') {
-                utils::logError("Erreur sur création du livre : erreur de sauvegarde SQL .". $stmt->errorInfo());
+            if ($stmt->errorCode() != '00000') {
+                utils::logError("Erreur sur création du livre : erreur de sauvegarde SQL . " . implode(", ", $stmt->errorInfo()));
+                $retourcle = -1;
+            } else {
+                $retourcle = $this->db->LastKeyInfo();
             }
-
-
-            $retourcle = $stmt->lastInsertId();
         } else {
             // UPDATE - Modification d'un livre existant
             $sql = "UPDATE Livres SET 
@@ -94,8 +103,8 @@ class LivreManager extends AbstractEntityManager
      * @return livre The livre object corresponding to the given ID.
      */
     public function getLivreById(int $idLivre) : livre{
-        $sql = "SELECT * FROM livres WHERE Statut_Livre = 1 ORDER BY DteCreation DESC";
-        $result = $this->db->query($sql);
+        $sql = "SELECT * FROM livres WHERE id = :keylivre ORDER BY DteCreation DESC";
+        $result = $this->db->query($sql,['keylivre' => $idLivre]);
         $result = $result->fetch();
         return new livre($result);
     }
