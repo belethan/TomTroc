@@ -14,7 +14,7 @@
             <div class="infouser">
                 <form action="index.php?action=saveuser" method="post" enctype="multipart/form-data">
                 <div class="visageimg">
-                    <img id="visage" src=<?php echo JS_IMAGE.'user_picture/'.$userobjet->getPhotoUtilisateur() ?> alt="Image Profil class="profile-img">
+                    <img id="visage" src=<?php echo $userobjet->getPhotoUtilisateur() ?> alt="Image Profil class="profile-img">
                 </div>
                     <input type="file" name="img_tomtroc" id="img_tomtroc" accept="image/*" " >
                 <label for="img_tomtroc" class="label-like-link">Modifier</label>
