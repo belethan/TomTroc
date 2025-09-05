@@ -1,0 +1,283 @@
+/* --- TABLEAU PAR DÉFAUT --- */
+.table-wrapper {
+    display: block;
+}
+.card-view {
+    display: none;
+}
+
+
+td.statut-cell {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.badge-indispo,
+.badge-dispo {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px; /* Bords arrondis */
+    font-weight: bold;
+    color: white;
+    min-width: 80px;     /* Largeur minimale pour l’uniformité */
+    text-align: center;
+}
+
+.badge-indispo {
+    background-color: red;
+}
+
+.badge-dispo {
+    background-color: darkgreen;
+}
+
+.table-wrapper {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 10px;
+}
+.custom-table {
+    width: 93%;
+    background-color: white;
+    border-collapse: separate;
+    /*border-spacing: 0 8px;  80px d'espacement entre les colonnes */
+    margin-left: 3%;
+    margin-top: 32px;
+    border-radius: 10px;
+}
+
+.custom-table thead tr{
+    height: 45px;
+    vertical-align: middle;
+    padding: 0 25px; /* Moitié de 50px */
+    text-align: center;
+    background-color: white;
+}
+
+.custom-table th,
+.custom-table td {
+    height: 60px;
+    vertical-align: middle;
+    padding: 0 10px; /* Moitié de 50px */
+    text-align: left;
+    width:100px;
+}
+
+.custom-table td{
+    text-align: center;
+}
+.custom-table th {
+    height: 55px;
+    background-color: white;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #EDF2F6;
+}
+
+td:nth-child(1), th:nth-child(1) {
+    width: 55px; /* plus petite */
+}
+
+
+
+.custom-table th:nth-child(1),
+.custom-table td:nth-child(1) {
+    text-align: center;
+}
+.custom-table img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+td:nth-child(6), th:nth-child(6) {
+    width: 170px; /* plus large */
+}
+
+td:nth-child(4), th:nth-child(4) {
+    width: 180px; /* plus large */
+}
+
+.actions a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: blue;
+}
+
+.actions a:hover {
+    text-decoration: underline;
+}
+
+.actions a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.edit {
+    background-color: #007bff;
+}
+
+.delete {
+    background-color: #dc3545;
+}
+
+.actions a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+
+
+/* --- RESPONSIVE MODE EN CARDS --- */
+@media screen and (max-width: 1050px) {
+
+    .full-width-section {
+        display: flex ;
+        align-content: center;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    .table-wrapper {
+        display: none;
+    }
+    .card-view {
+        display: block;
+        max-width: 1140px;
+        margin: 0px 155px;
+        padding: 10px;
+    }
+    .card {
+        width: 333px;
+        height: 337px;
+        background-color: white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        padding: 0;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+        margin-bottom: 15px;
+    }
+
+    .top-section {
+        display: flex;
+        margin-top: 33px;
+        margin-left: 33px;
+        align-items: flex-start;
+    }
+
+    .top-section img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+
+    .info {
+        margin-left: 15px;
+        margin-right: 18px;
+        flex: 1;
+    }
+
+    .info h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .info p {
+        margin: 4px 0 0 0;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .badge {
+        background-color: green;
+        top: -28px;
+        right: -26px;
+        color: white;
+        border-radius: 10%;
+        text-align: center;
+        width: auto;
+        height: 15px;
+        padding: 4px 10px;
+        font-size: 12px;
+        margin: 10px auto 0 33px;
+        margin-left: 0px;
+        margin-top: 15px;
+    }
+
+    .text-zone {
+        width: 90%;
+        margin: 15px auto 0 auto;
+        font-size: 14px;
+        color: #333;
+        line-height: 1.4;
+        margin-left: 30px;
+        margin-right: 20px;
+        margin-top: 25px;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin: 15px 33px;
+    }
+
+    .button-group button {
+        background: none;
+        border: none;
+        font-size: 14px;
+        color:var(--colorGrisTexte);
+        font-weight: normal;
+        cursor: pointer;
+    }
+
+    .button-group .delbtn{
+        color: red;
+    }
+    .button-group a:hover {
+        text-decoration: underline;
+    }
+
+    td.statut-indispo {
+        background-color: red;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    td.statut-dispo {
+        background-color: darkgreen;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .edit {
+        background-color: unset;
+        color:#007bff;
+    }
+
+    .delete {
+        background-color: unset;
+        color:#dc3545;
+    }
+
+    .actions a:hover {
+        opacity: 0.8;
+        text-decoration: underline;
+    }
+}

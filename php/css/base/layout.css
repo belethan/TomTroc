@@ -1,0 +1,42 @@
+.container{
+    max-width: 1480px;
+    margin-inline: auto;
+    padding-inline: 20px;
+}
+h1{
+    font-size:1.875rem ;
+    font-weight: 400;
+    margin-bottom:1.75rem ;
+    font-family: 'Playfair Display',verdana, "Arial Nova", sans-serif;
+}
+.container-main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1480px;
+    margin-inline: auto;
+    padding-inline: 20px;
+    margin-top: 80px;
+}
+
+.container-top-read{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1480px;
+    margin-inline: auto;
+    padding-inline: 20px;
+    margin-top: 80px;
+}
+
+.container-useit > *{
+    max-width: min(1480px, calc(100% - 2rem));
+    margin-inline: auto;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+#error-message { color: red; margin-top: 5px; }
