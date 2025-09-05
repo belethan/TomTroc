@@ -10,10 +10,10 @@
     <form  action="index.php?action=livresave&mode=1" method="post" enctype="multipart/form-data" class="container-updLivre">
         <!--       <form action="#" method="post">-->
         <div class="imageUpd-section">
-            <img src="https://picsum.photos/488/553"  class="imageupd-img" alt="Grande photo">
+            <img src="../images/livre-neutre.png" class="imageupd-img" alt="Grande photo">
             <br>
-            <label for="img_profil" class="label-like-link">Modifier</label>
-            <input type="file" name="img_profil" id="img_profil" accept="image/* " >
+            <label for="img_tomtroc" class="label-like-link">Modifier</label>
+            <input type="file" name="img_tomtroc" id="img_tomtroc" accept="image/* " >
         </div>
         <div class="form-sectionupd">
             <div class="formulaire" >

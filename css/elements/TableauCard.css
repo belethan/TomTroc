@@ -106,11 +106,25 @@ td:nth-child(4), th:nth-child(4) {
     opacity: 0.8;
 }
 
+.statut-indispo {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.statut-dispo {
+    background-color: darkgreen;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
 /* --- RESPONSIVE MODE EN CARDS --- */
 @media screen and (max-width: 1050px) {
 
     .full-width-section {
-        display: flex ;
+        display: flex;
         align-content: center;
         flex-wrap: wrap;
         flex-direction: column;
@@ -121,17 +135,19 @@ td:nth-child(4), th:nth-child(4) {
     .table-wrapper {
         display: none;
     }
+
     .card-view {
         display: block;
         max-width: 1140px;
         margin: 0px 155px;
         padding: 10px;
     }
+
     .card {
         width: 333px;
         height: 337px;
         background-color: white;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
         padding: 0;
         box-sizing: border-box;
@@ -211,15 +227,30 @@ td:nth-child(4), th:nth-child(4) {
         background: none;
         border: none;
         font-size: 14px;
-        color:var(--colorGrisTexte);
+        color: var(--colorGrisTexte);
         font-weight: normal;
         cursor: pointer;
     }
 
-    .button-group .delbtn{
+    .button-group .delbtn {
         color: red;
     }
+
     .button-group button:hover {
         text-decoration: underline;
+    }
+
+    td.statut-indispo {
+        background-color: red;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    td.statut-dispo {
+        background-color: darkgreen;
+        color: white;
+        font-weight: bold;
+        text-align: center;
     }
 }

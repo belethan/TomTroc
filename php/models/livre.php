@@ -5,7 +5,7 @@ class livre extends AbstractEntity
 
     private string $titre_Livre;
     private string $nom_Auteur ;
-    private string $photo_Livre;
+    private string $photo_Livre = '';
     private int $id_Utilisateur = -1;
     private int $statut_Livre = 1;
     private string $commentaire;
@@ -80,5 +80,13 @@ class livre extends AbstractEntity
     {
         $this->commentaire = $commentaire;
         return $this;
+    }
+
+    public function getCourtCommentaire():string{
+        $retour = $this->commentaire;
+        if (strlen($this->commentaire)>53) {
+            $retour = substr($this->commentaire,0,53).'...';
+        }
+        return $retour;
     }
 }

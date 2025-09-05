@@ -110,45 +110,34 @@ class Utils {
         }
     }
 
-    public static function uploadImage(int $keyuser, string $valueinit, string $prefixefile = "PROFIL-"): ?string
+    public static function uploadImage(int $keyrecord, string $valueinit, string $prefixefile = "PROFIL-", ): ?string
     {
         $destPath = $valueinit;
-        if (!isset($_FILES["img_profil"])) {
+        if (!isset($_FILES["img_tomtroc"])) {
             return $valueinit;
         }
-
-        if (isset($_FILES['img_profil']) && $_FILES['img_profil']['error'] === UPLOAD_ERR_OK) {
+        //extraction du fichier image et analyse du document
+        if (isset($_FILES['img_tomtroc']) && $_FILES['img_tomtroc']['error'] === UPLOAD_ERR_OK) {
             //var_dump($_FILES);
-            $fileTmpPath = $_FILES['img_profil']['tmp_name'];
-            $fileName = $_FILES['img_profil']['name'];
-            $fileSize = $_FILES['img_profil']['size'];
+            $fileTmpPath = $_FILES['img_tomtroc']['tmp_name'];
+            $fileName = $_FILES['img_tomtroc']['name'];
+            $fileSize = $_FILES['img_tomtroc']['size'];
             // Extension
             $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
             $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+            //Vérificatio du Fichier Image récupérer
+            $result =self::validateFile($fileExtension,$allowedExtensions,$fileSize,$fileTmpPath,$valueinit);
 
-            // Vérification extension
-            if (!in_array($fileExtension, $allowedExtensions)) {
-                self::logError("Extension non autorisée. Formats valides : " . implode(", ", $allowedExtensions));
-                return $valueinit;
+            if ($result !== true) {
+                return $result;
             }
-            // Vérification taille
-            if ($fileSize > self::MAX_FILE_SIZE) {
-                self::logwarning("Fichier trop volumineux. Taille max : 5 Mo");
-                return $valueinit;
-            }
-            // Vérification type de fichier
-            if (!exif_imagetype($fileTmpPath)) {
-                self::logError("Le fichier n'est pas une image.");
-                return $valueinit;
-            }
-
-            //changement de nom du fichier
+            //initialisation du chemin
+            $uploadDir = JS_IMAGE ;
             // Date formatée MMAAAA
             $dateFormat = date("mY");
-            $id = str_pad($keyuser, 7, "0", STR_PAD_LEFT);
-            $uploadDir = JS_IMAGE ;
+            $id = str_pad($keyrecord, 5, "0", STR_PAD_LEFT);
             if ($prefixefile == "PROFIL-"){
-                $uploadDir = JS_IMAGE . "user_picture/";
+               $uploadDir = JS_IMAGE . "user_picture/";
             }
             // Nouveau nom : PRO-[id]-[MMAAAA].extension
             $newFileName = $prefixefile . $id . "-" . $dateFormat . "." . $fileExtension;
@@ -188,6 +177,59 @@ class Utils {
     public static function logwarning(string $message): void
     {
         self::logMessage('warning', $message);
+    }
+
+    public  static function checkExtension(string $fileExtension, array $allowedExtensions, $valueinit)
+    {
+        if (!in_array($fileExtension, $allowedExtensions)) {
+            self::logError("Extension non autorisée. Formats valides : " . implode(", ", $allowedExtensions));
+            return $valueinit;
+        }
+        return true;
+    }
+
+    /**
+     * Vérifie que la taille du fichier ne dépasse pas la limite
+     */
+    public static function checkFileSize(int $fileSize, $valueinit)
+    {
+        if ($fileSize > self::MAX_FILE_SIZE) {
+            self::logWarning("Fichier trop volumineux. Taille max : 5 Mo");
+            return $valueinit;
+        }
+        return true;
+    }
+
+    /**
+     * Vérifie que le fichier est bien une image
+     */
+    public static function checkFileType(string $fileTmpPath, $valueinit)
+    {
+        if (!exif_imagetype($fileTmpPath)) {
+            self::logError("Le fichier n'est pas une image.");
+            return $valueinit;
+        }
+        return true;
+    }
+
+    /**
+     * Fonction centrale qui appelle toutes les vérifications
+     */
+    public static function validateFile(string $fileExtension, array $allowedExtensions, int $fileSize, string $fileTmpPath, $valueinit)
+    {
+        if (self::checkExtension($fileExtension, $allowedExtensions, $valueinit) !== true) {
+            return $valueinit;
+        }
+
+        if (self::checkFileSize($fileSize, $valueinit) !== true) {
+            return $valueinit;
+        }
+
+        if (self::checkFileType($fileTmpPath, $valueinit) !== true) {
+            return $valueinit;
+        }
+
+        return true; // Tout est OK
     }
 
 }

@@ -22,25 +22,47 @@ class LivreControler
         $keyiduser =utils::request('utilisateur');
         $mode=utils::request('mode');
         $view = new View("Nouveau Livre");
-        $view->render("newUpdateLivreProfil", ['idkeyuser' => $keyiduser, 'titre'=>"Création d'un livre"]);
+        $view->render("newLivreProfil", ['idkeyuser' => $keyiduser, 'titre'=>"Création d'un livre"]);
+    }
+
+    public function editLivre() : void{
+        $livreManager = new livreManager;
+        $mode = utils::request('mode');
+        $keydata = utils::request('keyinfo');
+        $livrework=$livreManager->getLivreById($keydata);
+        $view = new View("Editer le livre");
+        $view->render("editUpdatelivre", ['livredata' => $livrework, 'titre'=>"Editer le livre", 'mode'=>$mode]);
     }
 
     public function saveLivre() : void{
         $mode=utils::request('mode');
-        $_POST['id_utilisateur']=$_SESSION['user']->getId();
-        $valueinit=JS_IMAGE."livre-neutre.png";
-        if ($mode==2) {
-            $valueinit=$_POST['photo_Livre'];
-        }
-        $imglivre=utils::uploadImage($_POST['id_utilisateur'], $valueinit, "LIVRE-");
-        $_POST['photo_Livre']=$imglivre;
+        $idkey=utils::request('keylivre');
         $livredata = new livre($_POST);
         $livreManager = new livreManager;
-        $livreManager->LivreSauvegarder($livredata,$mode);
+        if ($mode==1) {
+            $valueinit="../images/livre-neutre.png";
+            $livredata->setphotoLivre($valueinit);
+            $livreManager->LivreSauvegarder($livredata,$mode,$idkey);
+        }
+        if ($mode==2) {
+            $livreOrigine = $livreManager->getLivreById($idkey);
+            $valueinit = $livreOrigine->getphotoLivre();
+            $imglivre = utils::uploadImage($idkey, $valueinit, "LIVRE-");
+            $livredata->setphotoLivre($imglivre);
+            $livredata->setIdUtilisateur($_SESSION['keyIdUser']);
+            $livreManager->LivreSauvegarder($livredata,$mode,$idkey);
+        }
+
         /* affichage de la page profil utilisateur */
-        $view = new View("Profil Utilisateur");
-        $view->render("infoUserForm");;
+        header("Location: index.php?action=infouser");
 
     }
 
+    public function livredelete() : void
+    {
+        $livreManager = new livreManager;
+        $keydata = utils::request('keylivre');
+        $livreManager->DelLivreByid($keydata);
+        header("Location: index.php?action=infouser");
+    }
 }

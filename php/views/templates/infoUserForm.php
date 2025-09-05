@@ -16,8 +16,8 @@
                 <div class="visageimg">
                     <img id="visage" src=<?php echo JS_IMAGE.'user_picture/'.$userobjet->getPhotoUtilisateur() ?> alt="Image Profil class="profile-img">
                 </div>
-                    <input type="file" name="img_profil" id="fileInput" accept="image/*" " >
-                <label for="fileInput" class="label-like-link">Modifier</label>
+                    <input type="file" name="img_tomtroc" id="img_tomtroc" accept="image/*" " >
+                <label for="img_tomtroc" class="label-like-link">Modifier</label>
                 <div id="error-message"></div>
                 <div class="divider"></div>
                 <div class="labels">
@@ -84,15 +84,24 @@
                         </td>
                         <td data-label="Titre"><?= htmlspecialchars($livre->gettitreLivre()) ?></td>
                         <td data-label="Auteur"><?= htmlspecialchars($livre->getnomAuteur()) ?></td>
-                        <td data-label="Description"><?= htmlspecialchars($livre->getCommentaire()) ?></td>
-                        <td data-label="Disponibilité">
-                            <?= $livre->getdispolabel()?>
+                        <td data-label="Description"><?= htmlspecialchars($livre->getCourtCommentaire()) ?></td>
+                        <td data-label="Disponibilite" class="statut-cell">
+                            <span class="<?= ($livre->getstatutLivre() ===1) ? 'badge-dispo' : 'badge-indispo'; ?>">
+                                <?= $livre->getdispolabel()?>
+                            </span>
                         </td>
                         <td class="actions" data-label="Actions">
 <!--                            <a href="edit.php?id=--><?php //= urlencode($livre->id) ?><!--" class="edit">Éditer</a>-->
 <!--                            <a href="delete.php?id=--><?php //= urlencode($livre->id) ?><!--" class="delete">Supprimer</a>-->
-                            <a href="#" class="edit">Éditer</a>
-                            <a href="#" class="delete">Supprimer</a>
+                            <a href="index.php?action=editlivre&mode=2&utilisateur=<?= urlencode($userobjet->getId()); ?>&keyinfo=<?= urlencode($livre->getId()); ?>" class="edit">Éditer</a>
+                            <a href="#" class="delete"
+                                data-bs-toggle="modal"
+                                data-bs-target="#confirmDellivreModal"
+                                data-id="<?= $livre->getId() ?>"
+                                data-titre="<?= htmlspecialchars($livre->gettitreLivre()) ?>"
+                                data-auteur="<?= htmlspecialchars($livre->getnomAuteur()) ?>">
+                                Supprimer
+                            </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -104,90 +113,56 @@
             </tbody>
         </table>
     </div>
+    <!-- Modal de confirmation -->
+    <div class="modal fade" id="confirmDellivreModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="index.php?action=livredelete&keylivre=<?=urlencode($livre->getId());?>" method="POST">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirmation suppression</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modal-message"></p>
+                        <input type="hidden" name="delete_id" id="delete-id">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="card-view">
-        <div class="card">
-            <div>
-                <div class="top-section">
-                    <img src="https://picsum.photos/80" alt="Image">
-                    <div class="info">
-                        <h3>The Kinkfolk Table</h3>
-                        <p>Nathan Williams</p>
-                        <div class="badge">disponible</div>
+        <?php if (!empty($livres)): ?>
+            <?php foreach ($livres as $livre): ?>
+                <div class="card">
+                    <div>
+                        <div class="top-section">
+                            <img src="<?= htmlspecialchars($livre->getphotoLivre()) ?>" alt="Image">
+                            <div class="info">
+                                <h3><?= htmlspecialchars($livre->gettitreLivre()) ?></h3>
+                                <p><?= htmlspecialchars($livre->getnomAuteur()) ?></p>
+                                <div class="<?= ($livre->getstatutLivre() ===1) ? 'badge-dispo' : 'badge-indispo'; ?>">
+                                    <?= $livre->getdispolabel()?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-zone">
+                            <?= htmlspecialchars($livre->getCourtCommentaire()) ?>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <a href="index.php?action=editlivre&mode=2&utilisateur=<?= urlencode($userobjet->getId()); ?>&keyinfo=<?= urlencode($livre->getId()); ?>" class="edit">Éditer</a>
+                        <a href="#" class="delete">Supprimer</a>
                     </div>
                 </div>
-                <div class="text-zone">
-                    J'ai récemment plongé dans les pages de 'The Kinfolk Table' et j'ai été enchanté par cette œuvre
-                    le savoir de tous est bizarre et je ne sais pas quoi écrire en plus pour faire un max de ligne et
-                    voir si cela déborde.
-                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="card">
+                <span>Aucun livre trouvé</span>
             </div>
-            <div class="button-group">
-                <button>Éditer</button>
-                <button class="delbtn">Supprimer</button>
-            </div>
-        </div>
-        <div class="card">
-            <div>
-                <div class="top-section">
-                    <img src="https://picsum.photos/80" alt="Image">
-                    <div class="info">
-                        <h3>The Kinkfolk Table</h3>
-                        <p>Nathan Williams</p>
-                        <div class="badge">disponible</div>
-                    </div>
-                </div>
-                <div class="text-zone">
-                    J'ai récemment plongé dans les pages de 'The Kinfolk Table' et j'ai été enchanté par cette œuvre
-                    le savoir de tous est bizarre et je ne sais pas quoi écrire en plus pour faire un max de ligne et
-                    voir si cela déborde.
-                </div>
-            </div>
-            <div class="button-group">
-                <button>Supprimer</button>
-                <button>Éditer</button>
-            </div>
-        </div>
-        <div class="card">
-            <div>
-                <div class="top-section">
-                    <img src="https://picsum.photos/80" alt="Image">
-                    <div class="info">
-                        <h3>The Kinkfolk Table</h3>
-                        <p>Nathan Williams</p>
-                        <div class="badge">disponible</div>
-                    </div>
-                </div>
-                <div class="text-zone">
-                    J'ai récemment plongé dans les pages de 'The Kinfolk Table' et j'ai été enchanté par cette œuvre
-                    le savoir de tous est bizarre et je ne sais pas quoi écrire en plus pour faire un max de ligne et
-                    voir si cela déborde.
-                </div>
-            </div>
-            <div class="button-group">
-                <button>Supprimer</button>
-                <button>Éditer</button>
-            </div>
-        </div>
-        <div class="card">
-            <div>
-                <div class="top-section">
-                    <img src="https://picsum.photos/80" alt="Image">
-                    <div class="info">
-                        <h3>The Kinkfolk Table</h3>
-                        <p>Nathan Williams</p>
-                        <div class="badge">disponible</div>
-                    </div>
-                </div>
-                <div class="text-zone">
-                    J'ai récemment plongé dans les pages de 'The Kinfolk Table' et j'ai été enchanté par cette œuvre
-                    le savoir de tous est bizarre et je ne sais pas quoi écrire en plus pour faire un max de ligne et
-                    voir si cela déborde.
-                </div>
-            </div>
-            <div class="button-group">
-                <button>Supprimer</button>
-                <button>Éditer</button>
-            </div>
-        </div>
+        <?php endif; ?>
     </div>
 </section>

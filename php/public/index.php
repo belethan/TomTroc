@@ -54,6 +54,10 @@ try {
             $LivreController = new LivreControler();
             $LivreController->saveLivre();
             break;
+        Case 'livredelete' :
+            $LivreController = new LivreControler();
+            $LivreController->livredelete();
+            break;
         default:
             throw new Exception("La page demandée n'existe pas.");
     }
