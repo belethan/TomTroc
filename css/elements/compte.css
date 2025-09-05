@@ -1,4 +1,4 @@
-#fileInput, #img_profil {
+#fileInput, #img_tomtroc {
     display: none;
 }
 #photo_livre{
@@ -31,8 +31,8 @@
     justify-content: center;
     margin-top: 48px;
     margin-bottom: 93px;
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-left: 30px;
+    padding-right: 50px;
 }
 
 .carduser{
@@ -52,7 +52,7 @@
     border-radius: 8px;
     cursor: pointer;
     margin-top: 32px;
-    margin-left: 40px;
+    margin-left: 10px;
 }
 
 .left-section, .right-aside {
@@ -175,9 +175,9 @@
 form > div {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
     border-left-width: 15px;
-    margin: 15px 40px 5px;
+    margin: 15px 5px 5px;
 }
 
 .PersoData{
@@ -185,7 +185,7 @@ form > div {
     flex-direction: column;
     gap: 10px;
     border-left-width: 15px;
-    margin: 15px 40px 5px;
+    margin: 15px 40px 5px 30px;
 }
 
 label {

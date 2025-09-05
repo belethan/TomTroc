@@ -113,8 +113,8 @@ class AdminController
         if ($UpdateData->UpdateUser()->errorCode()!='00000') {
               utils::logError("erreur de sauvegarde SQL .". $UpdateData->UpdateUser()->errorInfo());
         }
-        $view = new View("Profil Utilisateur");
-        $view->render("infoUserForm");;
+        header("Location: index.php?action=infouser");
+
     }
 
 }

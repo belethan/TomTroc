@@ -40,9 +40,9 @@ class LivreManager extends AbstractEntityManager
      * @param livre $livre L’objet livre à enregistrer, contenant toutes les données nécessaires.
      * @return int L’ID du livre enregistré. Retourne -1 en cas d’erreur lors de l’opération de mise à jour.
      */
-    public function LivreSauvegarder(livre $livre,int $modework=1 ):int
+    public function LivreSauvegarder(livre $livre,int $modework=1,int $idlivre=-1 ):int
 {
-        $retourcle = null;
+        $retourcle = -1;
         if ($modework === 1) {
             // INSERT - Création d'un nouveau livre
             $sql = "INSERT INTO livres (Titre_Livre, nom_Auteur, Photo_Livre, ID_Utilisateur, Statut_Livre, Commentaire)
@@ -62,7 +62,9 @@ class LivreManager extends AbstractEntityManager
                 $retourcle = -1;
             } else {
                 $retourcle = $this->db->LastKeyInfo();
+                $imglivre = utils::uploadImage($retourcle, $valueinit, "LIVRE-", 1);
             }
+
         } else {
             // UPDATE - Modification d'un livre existant
             $sql = "UPDATE Livres SET 
@@ -73,16 +75,14 @@ class LivreManager extends AbstractEntityManager
                     Statut_Livre = :statut, 
                     Commentaire = :commentaire
                     WHERE id = :idLivre";
-            $stmt = $this->db->prepare($sql);
-
-            $result = $stmt->execute([
+            $stmt = $this->db->query($sql,[
                 ':titre'         => $livre->getTitreLivre(),
                 ':nomAuteur'    => $livre->getnomAuteur(),
                 ':photo'         => $livre->getPhotoLivre(),
                 ':idUtilisateur' => $livre->getIDUtilisateur(),
                 ':statut'        => $livre->getStatutLivre(),
                 ':commentaire'   => $livre->getCommentaire(),
-                ':idLivre'            => $livre->getId(), // Nécessaire pour identifier le livre à modifier
+                ':idLivre'       => $idlivre, // Nécessaire pour identifier le livre à modifier $livre->getId()
             ]);
             utils::logsuccess("les modifications sur les informations livre ont été enregistrées");
             $retourcle = $livre->getId();
@@ -90,7 +90,6 @@ class LivreManager extends AbstractEntityManager
                 utils::logError("Erreur sur la modification des données du livre : erreur de sauvegarde SQL .". $stmt->errorInfo());
                 $retourcle = -1;
             }
-
         }
         return $retourcle;
 
@@ -128,5 +127,16 @@ class LivreManager extends AbstractEntityManager
             $books[] = new livre($bookRow); // Ajoute chaque livre au tableau
         }
         return $books; // Renvoie un tableau, même s'il est vide
+    }
+
+    public function DelLivreByid(int $keylivre) : PDOStatement
+    {
+        $sql = "DELETE FROM livres WHERE id = :keylivre";
+        $result = $this->db->query($sql,['keylivre' => $keylivre]);
+        utils::logsuccess("la suppression du livre a été réalisée avec succès");
+        if ($result->errorCode()!='00000') {
+            utils::logError("Erreur sur la suppressions du livre : erreur de sauvegarde SQL .". $result->errorInfo());
+        }
+        return $result;
     }
 }
