@@ -1,0 +1,245 @@
+#fileInput, #img_tomtroc {
+    display: none;
+}
+#photo_livre{
+    display: none;
+}
+
+.compte {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.header-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.titre{
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 100%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.infouser{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 48px;
+    margin-bottom: 93px;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.carduser{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-bottom: 100px;
+}
+
+.carduser button{
+    background-color: var(--colorGrisClair);
+    color: var(--colorVertPrincipal);
+    padding: 0.75rem;
+    font-size: 1rem;
+    gap: 0.625rem;
+    border: 2px solid var(--colorVertPrincipal);
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 32px;
+    margin-left: 10px;
+}
+
+.left-section, .right-aside {
+    /*width: 45%;*/
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 10px;
+    width: 508px;
+    height: 555px;
+}
+
+.left-section {
+    text-align: center;
+    background-color: white;
+    margin-right: 33px;
+}
+
+.visageimg img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin:auto;
+}
+
+.label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.right-aside {
+    background-color: white;
+    border-left-width: 15px;
+}
+
+.right-aside h2 {
+   margin-left: 40px;
+    margin-top: 36px;
+    margin-bottom: 26px;
+    font-size: 1.125rem;
+}
+
+.profile-img {
+    width: 135px;
+    height: 157px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+.lien-photo{
+    color: gray;           /* Couleur gris clair */
+    text-decoration: underline; /* Soulignement */
+    font-size: 0.875rem;
+    cursor: pointer;
+    padding-top: 10px;
+    border: none;
+    background: none;
+}
+
+.lien-photo:hover{
+    color: gray; /* Couleur plus foncée au survol, optionnel */
+}
+
+.divider {
+    width: 70%;
+    height: 1px;
+    background-color: #ccc;
+    margin: 30px auto;
+}
+.labels {
+    text-align: center;
+}
+
+.labels h3 {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.label-normal {
+    margin: 5px 0;
+    font-weight: normal;
+    color: #706e6e;
+ }
+
+.label-Nom {
+    margin: 5px 0;
+    font-weight: normal;
+    color: lightgrey;
+    padding-top: 11px;
+    padding-bottom: 21px;
+}
+
+.biblio{
+    font-size: 0.625rem;
+}
+
+.book-paragraph {
+    font-family: "inter", sans-serif;
+    font-size: 0.813rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-icon {
+    width: 0.938rem;
+    margin-right: 6px;
+}
+
+.book-count {
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+
+form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-left-width: 15px;
+    margin: 15px 5px 5px;
+}
+
+.PersoData{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-left-width: 15px;
+    margin: 15px 30px 5px;
+}
+
+label {
+    font-weight: 200;
+    margin-bottom: 5px;
+    color: grey;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: var(--Colorfondinput);
+    height: 1.863rem;
+}
+
+/**************************************************************/
+/*********** Gestion des Card en Mode Tablette ou mobile ******/
+/**************************************************************/
+
+
+
+
+/******************************/
+/******* Gestion Tablette *****/
+/******************************/
+@media (max-width: 1085px) {
+    .left-section {
+        margin-right: 0;
+        margin-bottom: 32px;
+    }
+    .titre{
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+}
+/******************************/
+/******* Gestion Mobile *******/
+/******************************/
+
+@media (max-width: 768px) {
+    .compte {
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .left-section, .right-aside {
+        width: 75%;
+    }
+    .titre{
+      margin-left: 14%;
+      margin-right: 14%;
+    }
+}

@@ -1,0 +1,65 @@
+.search-box {
+    position: relative;
+    width: 300px;
+}
+
+.search-box input[type="text"] {
+    width: 100%;
+    padding: 10px 10px 10px 35px; /* padding gauche pour l’icône */
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.search-box .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    pointer-events: none; /* pour que l'icône ne gêne pas le clic dans l'input */
+}
+
+.label-like-link {
+    /* Apparence type lien */
+    color: grey;                 /* bleu lien */
+    text-decoration: underline;
+    cursor: pointer;                /* main au survol */
+    display: inline-block;          /* pour le transform propre */
+    transition: transform 140ms ease, color 140ms ease, text-decoration-color 140ms ease;
+    text-underline-offset: 2px;
+}
+
+/* Survol souris + navigation clavier */
+.label-like-link:hover,
+.label-like-link:focus-visible {
+    /* Grossissement sans reflow : évite de décaler la mise en page */
+    transform: scale(1.06);
+    color: #084298;
+    text-decoration-color: currentColor;
+    outline: none;
+}
+
+.btnAddContainer {
+    display: flex;
+    justify-content: space-around; /* pousse le bouton à droite */
+    margin-left:3%;
+    margin-top: 22px;
+}
+
+.bouton-ajout{
+    background-color: #007bff;
+    color: white;
+    border-radius:10px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border: none;
+}
+.bouton-ajout:hover{
+    background-color: #0056b3;
+}
