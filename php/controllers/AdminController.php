@@ -118,4 +118,9 @@ class AdminController
 
     }
 
+    public function showDialogUser() : void{
+        $view = new View("Dialogue Utilisateur");
+        $view->render("dialogue_user");;
+    }
+
 }

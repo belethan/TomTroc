@@ -58,6 +58,18 @@ try {
             $LivreController = new LivreControler();
             $LivreController->livredelete();
             break;
+        Case 'livreAllshow' :
+                $LivreController = new LivreControler();
+                $LivreController->showAllLivre();
+            break;
+        Case 'showLivreReadOnly' :
+            $LivreController = new LivreControler();
+            $LivreController->showLivreReadOnly();
+            break;
+        Case 'dialoguser' :
+            $adminController = new AdminController();
+            $adminController->showDialogUser();
+            break;
         default:
             throw new Exception("La page demandée n'existe pas.");
     }

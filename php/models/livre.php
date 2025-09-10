@@ -12,6 +12,7 @@ class livre extends AbstractEntity
 
     // Data de jointure non sauvegardée
     private string $Pseudo_Utilisateur= '';
+    private string $Photo_Utilisateur ="";
 
 
     public function getPseudoUtilisateur(): string{
@@ -21,6 +22,14 @@ class livre extends AbstractEntity
     public function setPseudoUtilisateur(string $pseudo_Utilisateur): void
     {
         $this->Pseudo_Utilisateur = htmlspecialchars($pseudo_Utilisateur);
+    }
+
+    public function getPhotoUtilisateur(): string{
+        return $this->Photo_Utilisateur;
+    }
+    public function setPhotoUtilisateur(string $Photo_Utilisateur): void
+    {
+        $this->Photo_Utilisateur = htmlspecialchars($Photo_Utilisateur);
     }
 
     public function gettitreLivre(): string

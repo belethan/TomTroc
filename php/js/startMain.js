@@ -15,4 +15,16 @@ $(document).ready(function () {
                }
            });
        });
+
+    // petit délai pour éviter d’appeler le serveur à chaque frappe
+    let timer;
+    $('#searchbook').on('input', function () {
+        clearTimeout(timer);
+        let query = $(this).val();
+        timer = setTimeout(() => {
+            $.get("recherche.php", { q: query }, function (data) {
+                $('#results').html(data);
+            });
+        }, 400); // 400ms après fin de saisie
+    });
 });

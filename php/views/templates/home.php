@@ -9,7 +9,7 @@
             <p>
                 Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux de la lecture. Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres.
             </p>
-            <button> Découvrir</button>
+            <button onclick="location.href='#section2'"> Découvrir</button>
         </div>
     </div>
     <div class="right-block">
@@ -43,9 +43,9 @@
                 <span>Aucun livre trouvé</span>
         <?php endif; ?>
      </div>
-    <button>Voir tous les livres</button>
+    <button onclick="window.location.href='index.php?action=livreAllshow'">Voir tous les livres</button>
 </section>
-<section class="container-useit">
+<section class="container-useit" id="section2">
     <h2>Comment ça marche ?</h2>
     <p class="description">Échanger des livres avec TomTroc c’est simple et amusant ! Suivez ces étapes pour commencer :</p>
     <div class="boxes">
@@ -55,7 +55,7 @@
         <div class="box">Parcourez les livres disponibles chez d'autres membres.</div>
         <div class="box">Proposez un échange et discutez avec d'autres passionnés de lecture.</div>
     </div>
-    <button>Voir tous les livres</button>
+    <button onclick="window.location.href='index.php?action=livreAllshow'">Voir tous les livres</button>
 </section>
 <section class="bandeau">
     <img  src="<?= JS_IMAGE.'BandeauMilieuMain.png'?>" alt="Bandeau" >
