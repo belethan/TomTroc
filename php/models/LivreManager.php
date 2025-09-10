@@ -51,7 +51,8 @@ class LivreManager extends AbstractEntityManager
         $retourcle = -1;
         if ($modework === 1) {
             // INSERT - Création d'un nouveau livre
-            $imglivre = utils::uploadImage($retourcle, $livre->getphotoLivre(), "LIVRE-", 1);
+
+            $imglivre =$livre->getphotoLivre();
             $sql = "INSERT INTO livres (Titre_Livre, nom_Auteur, Photo_Livre, ID_Utilisateur, Statut_Livre, Commentaire)
                     VALUES (:titre, :nomAuteur, :photo, :idUtilisateur, :statut, :commentaire)";
             $stmt = $this->db->query($sql,[
@@ -67,8 +68,20 @@ class LivreManager extends AbstractEntityManager
             if ($stmt->errorCode() != '00000') {
                 utils::logError("Erreur sur création du livre : erreur de sauvegarde SQL . " . implode(", ", $stmt->errorInfo()));
                 $retourcle = -1;
-            } else {
+            }else{
                 $retourcle = $this->db->LastKeyInfo();
+                $imglivre = utils::uploadImage($retourcle, $livre->getphotoLivre(), "LIVRE-");
+                $sql = "UPDATE Livres 
+                    SET Photo_Livre = :photo
+                    WHERE id = :idLivre";
+                $rqtupd = $this->db->query($sql,[
+                    ':photo'         => $imglivre,
+                    ':idLivre'       => $retourcle,
+                ]);
+                if ($rqtupd->errorCode() != '00000') {
+                    utils::logError("Erreur sur création du livre : erreur mise à jour photo . " . implode(", ", $rqtupd->errorInfo()));
+                    $retourcle = -1;
+                }
             }
         } else {
             // UPDATE - Modification d'un livre existant
@@ -107,7 +120,13 @@ class LivreManager extends AbstractEntityManager
      * @return livre The livre object corresponding to the given ID.
      */
     public function getLivreById(int $idLivre) : livre{
-        $sql = "SELECT * FROM livres WHERE id = :keylivre ORDER BY DteCreation DESC";
+        $sql ="SELECT A.id, A.titre_Livre, A.nom_Auteur, A.photo_Livre, 
+               A.id_Utilisateur, A.DteCreation, A.DteModif, A.statut_Livre, A.commentaire,
+               B.Pseudo_Utilisateur,B.Photo_Utilisateur
+               FROM livres A
+               INNER JOIN Utilisateurs B ON (A.ID_Utilisateur = B.id)
+               WHERE A.id = :keylivre 
+               ORDER BY A.DteCreation DESC";
         $result = $this->db->query($sql,['keylivre' => $idLivre]);
         $result = $result->fetch();
         return new livre($result);
@@ -143,5 +162,20 @@ class LivreManager extends AbstractEntityManager
             utils::logError("Erreur sur la suppressions du livre : erreur de sauvegarde SQL .". $result->errorInfo());
         }
         return $result;
+    }
+
+    public function getAllLivre() : array{
+        $sql = "SELECT A.id, A.titre_Livre, A.nom_Auteur, A.photo_Livre, 
+               A.id_Utilisateur, A.DteCreation, A.DteModif, A.statut_Livre, A.commentaire,
+               B.Pseudo_Utilisateur,B.Photo_Utilisateur
+               FROM livres A
+               INNER JOIN Utilisateurs B ON (A.ID_Utilisateur = B.id)
+               ORDER BY DteCreation DESC";
+        $result = $this->db->query($sql);
+        $books = [];
+        while ($bookRow = $result->fetch()) {
+            $books[] = new livre($bookRow); // Ajoute chaque livre au tableau
+        }
+        return $books; // Renvoie un tableau, même s'il est vide
     }
 }

@@ -17,6 +17,14 @@ class LivreControler
         $view->render("newUpdateLivreProfil", ['livrework' => $livrework, 'titre'=>"Editer le livre"]);
     }
 
+    public function showLivreReadOnly() : void{
+        $livreManager = new livreManager;
+        $livrework=$livreManager->getLivreById($_GET['keybook']);
+        $view = new View("Détails d'un livre");
+        $view->render("pagelivre", ['livre' => $livrework]);
+    }
+
+
     public function addNewLivre() : void
     {
         $keyiduser =utils::request('utilisateur');
@@ -65,5 +73,12 @@ class LivreControler
         $keydata = utils::request('keylivre');
         $livreManager->DelLivreByid($keydata);
         header("Location: index.php?action=infouser");
+    }
+
+    public function showAllLivre() : void{
+        $livreManager = new livreManager;
+        $livres = $livreManager->getAllLivre();
+        $view = new View("Nos livres");;
+        $view->render("echangeBook", ['livredata' => $livres]);
     }
 }

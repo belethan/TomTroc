@@ -30,7 +30,7 @@
 
 .Card-livre_img{
     width: 100%;
-    aspect-ratio: 161/160;
+    aspect-ratio: 140/160;
     height: auto;
     object-fit: cover;
 }

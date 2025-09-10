@@ -37,7 +37,7 @@ $_SESSION['msgcpt']=0;
             <div class="navbar-left">
                 <ul class="navbar-links-left">
                     <li class="navbar-link-left"><a href="index.php?action=home">Accueil</a></li>
-                    <li class="navbar-link-left"><a href="#">Nos livres à l'échange</a></li>
+                    <li class="navbar-link-left"><a href="index.php?action=livreAllshow">Nos livres à l'échange</a></li>
                 </ul>
             </div>
             <div class="navbar-right">
@@ -49,7 +49,7 @@ $_SESSION['msgcpt']=0;
         <div class="burger"> <!--show-burger-->
             <ul class="navbar-links-burger">
                 <li class="navbar-link-burger"><a href="index.php?action=home">Accueil</a></li>
-                <li class="navbar-link-burger"><a href="#">Nos livres à l'échange</a></li>
+                <li class="navbar-link-burger"><a href="index.php?action=livreAllshow">Nos livres à l'échange</a></li>
                 <?php  utils::UserMenu('navbar-link-burger'); ?>
             </ul>
             <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
@@ -95,6 +95,16 @@ $_SESSION['msgcpt']=0;
         }, 5000);
         window.addEventListener("unload", function () {
             navigator.sendBeacon("/logout.php", "");
+        });
+        let timer;
+        $('#searchbook').on('input', function () {
+            clearTimeout(timer);
+            let query = $(this).val();
+            timer = setTimeout(() => {
+                $.get("recherche.php", { q: query }, function (data) {
+                    $('#results').html(data);
+                });
+            }, 400); // 400ms après fin de saisie
         });
     </script>
 </body>
