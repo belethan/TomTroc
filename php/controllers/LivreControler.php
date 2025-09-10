@@ -36,15 +36,16 @@ class LivreControler
 
     public function saveLivre() : void{
         $mode=utils::request('mode');
-        $idkey=utils::request('keylivre');
         $livredata = new livre($_POST);
         $livreManager = new livreManager;
         if ($mode==1) {
+            $livredata->setIdUtilisateur($_SESSION['keyIdUser']);
             $valueinit="../images/livre-neutre.png";
             $livredata->setphotoLivre($valueinit);
-            $livreManager->LivreSauvegarder($livredata,$mode,$idkey);
+            $livreManager->LivreSauvegarder($livredata,$mode,-1);
         }
         if ($mode==2) {
+            $idkey=utils::request('keylivre');
             $livreOrigine = $livreManager->getLivreById($idkey);
             $valueinit = $livreOrigine->getphotoLivre();
             $imglivre = utils::uploadImage($idkey, $valueinit, "LIVRE-");

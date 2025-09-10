@@ -66,3 +66,4 @@ try {
     $errorView = new View('Erreur');
     $errorView->render('errorMessage', ['errorMessage' => $e->getMessage()]);
 }
+

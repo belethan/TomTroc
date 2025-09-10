@@ -9,7 +9,12 @@ class LivreManager extends AbstractEntityManager
      */
     public function getFourPicture() : array
     {
-        $sql = "SELECT * FROM livres WHERE Statut_Livre = 1 ORDER BY DteCreation DESC LIMIT 4";
+        $sql ="SELECT A.id, A.titre_Livre, A.nom_Auteur, A.photo_Livre, 
+               A.id_Utilisateur, A.DteCreation, A.DteModif, A.statut_Livre, A.commentaire,
+               B.Pseudo_Utilisateur
+               FROM livres A
+               INNER JOIN Utilisateurs B ON (A.ID_Utilisateur = B.id)
+               ORDER BY DteCreation DESC LIMIT 4";
         $result = $this->db->query($sql);
 
         $books = []; // Initialise le tableau pour les livres
@@ -21,9 +26,10 @@ class LivreManager extends AbstractEntityManager
     }
 
     public function getalluserLivre() : array{
+        $keyiduser = $_SESSION['keyIdUser'];
         $sql = "SELECT * FROM livres WHERE id_Utilisateur=:keyutilisateur ORDER BY DteCreation DESC";
-        $result = $this->db->query($sql,['keyutilisateur'=>4]);
-        //$_SESSION['user']->getIdUtilisateur()
+        $result = $this->db->query($sql,['keyutilisateur'=>$keyiduser]);
+
         $books = [];
         while ($bookRow = $result->fetch()) {
             $books[] = new livre($bookRow); // Ajoute chaque livre au tableau
@@ -45,12 +51,13 @@ class LivreManager extends AbstractEntityManager
         $retourcle = -1;
         if ($modework === 1) {
             // INSERT - Création d'un nouveau livre
+            $imglivre = utils::uploadImage($retourcle, $livre->getphotoLivre(), "LIVRE-", 1);
             $sql = "INSERT INTO livres (Titre_Livre, nom_Auteur, Photo_Livre, ID_Utilisateur, Statut_Livre, Commentaire)
                     VALUES (:titre, :nomAuteur, :photo, :idUtilisateur, :statut, :commentaire)";
             $stmt = $this->db->query($sql,[
                 ':titre'         => $livre->getTitreLivre(),
                 ':nomAuteur'      => $livre->getnomAuteur(),
-                ':photo'         => $livre->getPhotoLivre(),
+                ':photo'         => $imglivre,
                 ':idUtilisateur' => $livre->getIDUtilisateur(),
                 ':statut'        => $livre->getstatutLivre(),
                 ':commentaire'   => $livre->getCommentaire(),
@@ -62,9 +69,7 @@ class LivreManager extends AbstractEntityManager
                 $retourcle = -1;
             } else {
                 $retourcle = $this->db->LastKeyInfo();
-                $imglivre = utils::uploadImage($retourcle, $valueinit, "LIVRE-", 1);
             }
-
         } else {
             // UPDATE - Modification d'un livre existant
             $sql = "UPDATE Livres SET 

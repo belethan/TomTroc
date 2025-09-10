@@ -10,24 +10,27 @@ class UtilisateurManager extends AbstractEntityManager
      */
     Public function addUtilisateur(Utilisateurs $utilisateur):PDOStatement
     {
-
         $pseudo=$utilisateur->getPseudoUtilisateur();
         $mail=$utilisateur->getMailUtilisateur();
         $passagepwd=$utilisateur->getPwdUtilisateur();
         $pwd=$utilisateur->encrypt_decrypt('encrypt',$passagepwd);
         $utilisateur->setPwdUtilisateur($pwd);
-        $defaultImg='ProfilUserMan.png';
+        $defaultImg='../images/user_picture/ProfilUserMan.png';
         $utilisateur->setPhotoUtilisateur($defaultImg);
-        $sql="INSERT INTO Utilisateurs(Pseudo_Utilisateur,Mail_Utilisateur,Pwd_Utilisateur)  
-        VALUES (:PseudoUtilisateur,:MailUtilisateur,:MdpUtilisateur)";
+        $sql="INSERT INTO Utilisateurs(Pseudo_Utilisateur,Mail_Utilisateur,Pwd_Utilisateur,photo_Utilisateur)  
+        VALUES (:PseudoUtilisateur,:MailUtilisateur,:MdpUtilisateur,:photouser)";
 
         $result=$this->db->query($sql,[
             'PseudoUtilisateur' => $pseudo,
             'MailUtilisateur' => $mail,
-            'MdpUtilisateur' => $pwd
+            'MdpUtilisateur' => $pwd,
+            'photouser' => $defaultImg,
         ]);
         if($result->errorCode()=='00000'){
+            $_SESSION['keyIdUser']= $this->db->LastKeyInfo();
+            $utilisateur=$this->getUtilisateurById($_SESSION['keyIdUser']);
             $_SESSION['user']=$utilisateur;
+            Utils::redirect("home");
         }
         return $result;
     }
@@ -114,5 +117,24 @@ class UtilisateurManager extends AbstractEntityManager
 
         }
        return $result;
+    }
+
+    Public function getUtilisateurById($id):Utilisateurs{
+        $sql="SELECT * FROM Utilisateurs WHERE id=:id";
+        $result=$this->db->query($sql,[
+            'id' => $id
+        ]);
+        $user=$result->fetch();
+        $useractif = new Utilisateurs($user);
+        return $useractif;
+    }
+
+    PUBLIC FUNCTION GetNblivre($id):int{
+    $sql="SELECT COUNT(*) as nblivre FROM livres WHERE id_Utilisateur=:id";
+    $result=$this->db->query($sql,[
+        'id' => $id
+    ]);
+    $user=$result->fetch();
+    return $user['nblivre'];
     }
 }
