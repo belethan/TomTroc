@@ -102,8 +102,9 @@ class AdminController
     {
         $livreUser=new livreManager();
         $datalivre = $livreUser->getalluserLivre();
+        $Nblivre = count($datalivre);
         $view = new View("Profil Utilisateur");
-        $view->render("infoUserForm",['livres'=>$datalivre]);;
+        $view->render("infoUserForm",['livres'=>$datalivre,'nblivre'=>$Nblivre]);;
     }
 
     public function saveuser() : void

@@ -13,69 +13,36 @@
         </div>
     </div>
     <div class="right-block">
-        <img src=<?= JS_IMAGE."hamza.png" ?> alt=""  class="Card-livre_img">
+        <img src="<?= JS_IMAGE."hamza.png" ?>" alt="livredefaut"  class="Card-livre_img">
     </div>
 </section>
 <section class="container-top-read section-livres">
     <h2>Les derniers livres ajoutés</h2>
     <div class="livre-grid">
-        <article class="Card-livre">
-            <img src="https://picsum.photos/160/160" alt=""  class="Card-livre_img">
-            <!--                           <div class="Card-livre_titre">-->
-            <a href="#" class="Card-livre_titre">
-                Titre du livre
-            </a>
-            <!--                           </div>-->
-            <div class="Card-livre_Auteur">
-                Nom auteur
-            </div>
-            <div class="Card-livre_VenduPar">
-                vendu par
-            </div>
-            <div class="card-livre_statut_indispo">
-                Non Dispo.
-            </div>
-        </article>
-        <article class="Card-livre">
-            <img src="https://picsum.photos/160/160" alt="" width="160" height="160" class="Card-livre_img">
-            <a href="#" class="Card-livre_titre">
-                Titre du livre
-            </a>
-            <div class="Card-livre_Auteur">
-                Nom auteur
-            </div>
-            <div class="Card-livre_VenduPar">
-                vendu par
-            </div>
-            <div class="card-livre_statut_dispo">
-                Disponible
-            </div>
-        </article>
-        <article class="Card-livre">
-            <img src="https://picsum.photos/160/160" alt="" width="160" height="160" class="Card-livre_img">
-            <div class="Card-livre_titre">
-                Titre du livre
-            </div>
-            <div class="Card-livre_Auteur">
-                Nom auteur
-            </div>
-            <div class="Card-livre_VenduPar">
-                vendu par
-            </div>
-        </article>
-        <article class="Card-livre">
-            <img src="https://picsum.photos/160/160" alt="" width="160" height="160" class="Card-livre_img">
-            <div class="Card-livre_titre">
-                Titre du livre
-            </div>
-            <div class="Card-livre_Auteur">
-                Nom auteur
-            </div>
-            <div class="Card-livre_VenduPar">
-                vendu par
-            </div>
-        </article>
-    </div>
+        <?php if (!empty($livres)): ?>
+            <?php foreach ($livres as $livre): ?>
+                <article class="Card-livre">
+                    <img src="<?= htmlspecialchars($livre->getphotoLivre()) ?>" alt="livre image"  class="Card-livre_img">
+                    <!--                           <div class="Card-livre_titre">-->
+                    <a href="#" class="Card-livre_titre">
+                        <?= htmlspecialchars($livre->gettitreLivre()) ?>
+                    </a>
+                    <!--                           </div>-->
+                    <div class="Card-livre_Auteur">
+                        <?= htmlspecialchars($livre->getnomAuteur()) ?>
+                    </div>
+                    <div class="Card-livre_VenduPar">
+                        vendu par :<?= htmlspecialchars($livre->getPseudoUtilisateur()) ?>
+                    </div>
+                    <div class="<?= ($livre->getstatutLivre() ===1) ? "card-livre_statut_dispo":"card-livre_statut_indispo" ?>">
+                        <?= ($livre->getstatutLivre() ===1) ? 'Disponible' : 'Non Dispo.'; ?>
+                    </div>
+                </article>
+            <?php endforeach; ?>
+        <?php else: ?>
+                <span>Aucun livre trouvé</span>
+        <?php endif; ?>
+     </div>
     <button>Voir tous les livres</button>
 </section>
 <section class="container-useit">

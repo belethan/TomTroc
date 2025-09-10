@@ -10,6 +10,19 @@ class livre extends AbstractEntity
     private int $statut_Livre = 1;
     private string $commentaire;
 
+    // Data de jointure non sauvegardée
+    private string $Pseudo_Utilisateur= '';
+
+
+    public function getPseudoUtilisateur(): string{
+        return $this->Pseudo_Utilisateur;
+    }
+
+    public function setPseudoUtilisateur(string $pseudo_Utilisateur): void
+    {
+        $this->Pseudo_Utilisateur = htmlspecialchars($pseudo_Utilisateur);
+    }
+
     public function gettitreLivre(): string
     {
         return $this->titre_Livre;
@@ -82,10 +95,10 @@ class livre extends AbstractEntity
         return $this;
     }
 
-    public function getCourtCommentaire():string{
+    public function getCourtCommentaire(int $taille=53):string{
         $retour = $this->commentaire;
-        if (strlen($this->commentaire)>53) {
-            $retour = substr($this->commentaire,0,53).'...';
+        if (strlen($this->commentaire)>$taille) {
+            $retour = substr($this->commentaire,0,$taille).'...';
         }
         return $retour;
     }

@@ -9,24 +9,23 @@
 </div>
 <div class="compte">
     <!--1er bloc à gauche-->
-
     <section class="left-section">
             <div class="infouser">
                 <form action="index.php?action=saveuser" method="post" enctype="multipart/form-data">
                 <div class="visageimg">
-                    <img id="visage" src=<?php echo $userobjet->getPhotoUtilisateur() ?> alt="Image Profil class="profile-img">
+                    <img id="visage" src=<?php echo $userobjet->getPhotoUtilisateur(); ?> alt="Image Profil class="profile-img">
                 </div>
                     <input type="file" name="img_tomtroc" id="img_tomtroc" accept="image/*" " >
                 <label for="img_tomtroc" class="label-like-link">Modifier</label>
                 <div id="error-message"></div>
                 <div class="divider"></div>
                 <div class="labels">
-                    <h3>nathalire</h3>
+                    <h3><?=$userobjet->getPseudoUtilisateur();?></h3>
                     <p class="label-Nom"><?php echo $userobjet->anciennete(); ?></p>
                     <p class="biblio">Bibliothéque</p>
                     <p class="book-paragraph">
                         <img src="../../images/LivreTexte.svg" alt="Livres" class="book-icon">
-                        <span class="book-count">4 </span>
+                        <span class="book-count"><?=$nblivre;?></span>
                         livres
                     </p>
                 </div>
@@ -84,7 +83,7 @@
                         </td>
                         <td data-label="Titre"><?= htmlspecialchars($livre->gettitreLivre()) ?></td>
                         <td data-label="Auteur"><?= htmlspecialchars($livre->getnomAuteur()) ?></td>
-                        <td data-label="Description"><?= htmlspecialchars($livre->getCourtCommentaire()) ?></td>
+                        <td data-label="Description"><?= htmlspecialchars($livre->getCourtCommentaire(50)) ?></td>
                         <td data-label="Disponibilite" class="statut-cell">
                             <span class="<?= ($livre->getstatutLivre() ===1) ? 'badge-dispo' : 'badge-indispo'; ?>">
                                 <?= $livre->getdispolabel()?>
@@ -114,26 +113,28 @@
         </table>
     </div>
     <!-- Modal de confirmation -->
-    <div class="modal fade" id="confirmDellivreModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <form action="index.php?action=livredelete&keylivre=<?=urlencode($livre->getId());?>" method="POST">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Confirmation suppression</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+    <?php if (!empty($livres)): ?>
+        <div class="modal fade" id="confirmDellivreModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <form action="index.php?action=livredelete&keylivre=<?=urlencode($livre->getId());?>" method="POST">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Confirmation suppression</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="modal-message"></p>
+                            <input type="hidden" name="delete_id" id="delete-id">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <p id="modal-message"></p>
-                        <input type="hidden" name="delete_id" id="delete-id">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-danger">Supprimer</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
     <div class="card-view">
         <?php if (!empty($livres)): ?>
             <?php foreach ($livres as $livre): ?>
@@ -150,7 +151,7 @@
                             </div>
                         </div>
                         <div class="text-zone">
-                            <?= htmlspecialchars($livre->getCourtCommentaire()) ?>
+                            <?= htmlspecialchars($livre->getCourtCommentaire(280)) ?>
                         </div>
                     </div>
                     <div class="button-group">
