@@ -100,27 +100,18 @@ class AdminController
 
     public function profiluser() : void
     {
-        $livreUser=new livreManager();
-        $datalivre = $livreUser->getalluserLivre();
-        $Nblivre = count($datalivre);
         $view = new View("Profil Utilisateur");
-        $view->render("infoUserForm",['livres'=>$datalivre,'nblivre'=>$Nblivre]);;
+        $view->render("infoUserForm");;
     }
 
     public function saveuser() : void
     {
         $UpdateData=new UtilisateurManager();
-        utils::logsuccess("Vos modifications ont été enregistrées");
-        if ($UpdateData->UpdateUser()->errorCode()!='00000') {
-              utils::logError("erreur de sauvegarde SQL .". $UpdateData->UpdateUser()->errorInfo());
+        if ($UpdateData->UpdateUser()->errorCode()=='00000') {
+            utils::logsuccess("Vos modifications ont été enregistrées");
         }
-        header("Location: index.php?action=infouser");
-
-    }
-
-    public function showDialogUser() : void{
-        $view = new View("Dialogue Utilisateur");
-        $view->render("dialogue_user");;
+        $view = new View("Profil Utilisateur");
+        $view->render("infoUserForm");;
     }
 
 }

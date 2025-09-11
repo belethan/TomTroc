@@ -25,7 +25,7 @@
                     <p class="biblio">Bibliothéque</p>
                     <p class="book-paragraph">
                         <img src="../../images/LivreTexte.svg" alt="Livres" class="book-icon">
-                        <span class="book-count"><?=$nblivre;?></span>
+                        <span class="book-count">4 </span>
                         livres
                     </p>
                 </div>
@@ -59,7 +59,7 @@
 <!--Bloc du bas Tableau-->
 <section class="full-width-section">
     <div class="btnAddContainer">
-        <a href="index.php?action=newlivre&mode=1&utilisateur=<?php echo $userobjet->getid(); ?>" class="bouton-ajout">Ajouter un nouveau Livre</a>
+        <button class="bouton-ajout">Ajouter un nouveau livre</button>
     </div>
     <div class="table-wrapper">
         <table class="custom-table">
@@ -74,96 +74,138 @@
             </tr>
             </thead>
             <tbody>
-            <?php if (!empty($livres)): ?>
-                <?php foreach ($livres as $livre): ?>
-                    <tr>
-                        <td data-label="Photo">
-<!--                            ?? 'https://picsum.photos/50'-->
-                            <img src="<?= htmlspecialchars($livre->getphotoLivre()) ?>"alt="Miniature" width="50">
-                        </td>
-                        <td data-label="Titre"><?= htmlspecialchars($livre->gettitreLivre()) ?></td>
-                        <td data-label="Auteur"><?= htmlspecialchars($livre->getnomAuteur()) ?></td>
-                        <td data-label="Description"><?= htmlspecialchars($livre->getCourtCommentaire(50)) ?></td>
-                        <td data-label="Disponibilite" class="statut-cell">
-                            <span class="<?= ($livre->getstatutLivre() ===1) ? 'badge-dispo' : 'badge-indispo'; ?>">
-                                <?= $livre->getdispolabel()?>
-                            </span>
-                        </td>
-                        <td class="actions" data-label="Actions">
-<!--                            <a href="edit.php?id=--><?php //= urlencode($livre->id) ?><!--" class="edit">Éditer</a>-->
-<!--                            <a href="delete.php?id=--><?php //= urlencode($livre->id) ?><!--" class="delete">Supprimer</a>-->
-                            <a href="index.php?action=editlivre&mode=2&utilisateur=<?= urlencode($userobjet->getId()); ?>&keyinfo=<?= urlencode($livre->getId()); ?>" class="edit">Éditer</a>
-                            <a href="#" class="delete"
-                                data-bs-toggle="modal"
-                                data-bs-target="#confirmDellivreModal"
-                                data-id="<?= $livre->getId() ?>"
-                                data-titre="<?= htmlspecialchars($livre->gettitreLivre()) ?>"
-                                data-auteur="<?= htmlspecialchars($livre->getnomAuteur()) ?>">
-                                Supprimer
-                            </a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="6">Aucun livre trouvé</td>
-                </tr>
-            <?php endif; ?>
+            <tr>
+                <td data-label="Photo"><img src="https://picsum.photos/50" alt="Miniature"></td>
+                <td data-label="Titre">Produit A</td>
+                <td data-label="Auteur">Électronique</td>
+                <td data-label="Description">Un petit appareil utile</td>
+                <td data-label="disponibilité">22/05/2025</td>
+                <td class="actions" data-label="Actions">
+                    <a href="#" class="edit">Éditer</a>
+                    <a href="#" class="delete">Supprimer</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td data-label="Photo"><img src="https://picsum.photos/50" alt="Miniature"></td>
+                <td data-label="Titre">Produit B</td>
+                <td data-label="Auteur">Maison</td>
+                <td data-label="Description">Objet décoratif</td>
+                <td data-label="Date">15/04/2025</td>
+                <td class="actions" data-label="Actions">
+                    <a href="#" class="edit">Éditer</a>
+                    <a href="#" class="delete">Supprimer</a>
+                </td>
+            </tr>
+            <tr>
+                <td data-label="Photo"><img src="https://picsum.photos/50" alt="Miniature"></td>
+                <td data-label="Titre">Produit B</td>
+                <td data-label="Auteur">Maison</td>
+                <td data-label="Description">Objet décoratif</td>
+                <td data-label="Date">15/04/2025</td>
+                <td class="actions" data-label="Actions">
+                    <a href="#" class="edit">Éditer</a>
+                    <a href="#" class="delete">Supprimer</a>
+                </td>
+            </tr>
+            <tr>
+                <td data-label="Photo"><img src="https://picsum.photos/50" alt="Miniature"></td>
+                <td data-label="Titre">Produit B</td>
+                <td data-label="Auteur">Maison</td>
+                <td data-label="Description">Objet décoratif</td>
+                <td data-label="Date">15/04/2025</td>
+                <td class="actions" data-label="Actions">
+                    <a href="#" class="edit">Éditer</a>
+                    <a href="#" class="delete">Supprimer</a>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
-    <!-- Modal de confirmation -->
-    <?php if (!empty($livres)): ?>
-        <div class="modal fade" id="confirmDellivreModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog">
-                <form action="index.php?action=livredelete&keylivre=<?=urlencode($livre->getId());?>" method="POST">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Confirmation suppression</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p id="modal-message"></p>
-                            <input type="hidden" name="delete_id" id="delete-id">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn btn-danger">Supprimer</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    <?php endif; ?>
     <div class="card-view">
-        <?php if (!empty($livres)): ?>
-            <?php foreach ($livres as $livre): ?>
-                <div class="card">
-                    <div>
-                        <div class="top-section">
-                            <img src="<?= htmlspecialchars($livre->getphotoLivre()) ?>" alt="Image">
-                            <div class="info">
-                                <h3><?= htmlspecialchars($livre->gettitreLivre()) ?></h3>
-                                <p><?= htmlspecialchars($livre->getnomAuteur()) ?></p>
-                                <div class="<?= ($livre->getstatutLivre() ===1) ? 'badge-dispo' : 'badge-indispo'; ?>">
-                                    <?= $livre->getdispolabel()?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-zone">
-                            <?= htmlspecialchars($livre->getCourtCommentaire(280)) ?>
-                        </div>
-                    </div>
-                    <div class="button-group">
-                        <a href="index.php?action=editlivre&mode=2&utilisateur=<?= urlencode($userobjet->getId()); ?>&keyinfo=<?= urlencode($livre->getId()); ?>" class="edit">Éditer</a>
-                        <a href="#" class="delete">Supprimer</a>
+        <div class="card">
+            <div>
+                <div class="top-section">
+                    <img src="https://picsum.photos/80" alt="Image">
+                    <div class="info">
+                        <h3>The Kinkfolk Table</h3>
+                        <p>Nathan Williams</p>
+                        <div class="badge">disponible</div>
                     </div>
                 </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <div class="card">
-                <span>Aucun livre trouvé</span>
+                <div class="text-zone">
+                    J'ai récemment plongé dans les pages de 'The Kinfolk Table' et j'ai été enchanté par cette œuvre
+                    le savoir de tous est bizarre et je ne sais pas quoi écrire en plus pour faire un max de ligne et
+                    voir si cela déborde.
+                </div>
             </div>
-        <?php endif; ?>
+            <div class="button-group">
+                <button>Éditer</button>
+                <button class="delbtn">Supprimer</button>
+            </div>
+        </div>
+        <div class="card">
+            <div>
+                <div class="top-section">
+                    <img src="https://picsum.photos/80" alt="Image">
+                    <div class="info">
+                        <h3>The Kinkfolk Table</h3>
+                        <p>Nathan Williams</p>
+                        <div class="badge">disponible</div>
+                    </div>
+                </div>
+                <div class="text-zone">
+                    J'ai récemment plongé dans les pages de 'The Kinfolk Table' et j'ai été enchanté par cette œuvre
+                    le savoir de tous est bizarre et je ne sais pas quoi écrire en plus pour faire un max de ligne et
+                    voir si cela déborde.
+                </div>
+            </div>
+            <div class="button-group">
+                <button>Supprimer</button>
+                <button>Éditer</button>
+            </div>
+        </div>
+        <div class="card">
+            <div>
+                <div class="top-section">
+                    <img src="https://picsum.photos/80" alt="Image">
+                    <div class="info">
+                        <h3>The Kinkfolk Table</h3>
+                        <p>Nathan Williams</p>
+                        <div class="badge">disponible</div>
+                    </div>
+                </div>
+                <div class="text-zone">
+                    J'ai récemment plongé dans les pages de 'The Kinfolk Table' et j'ai été enchanté par cette œuvre
+                    le savoir de tous est bizarre et je ne sais pas quoi écrire en plus pour faire un max de ligne et
+                    voir si cela déborde.
+                </div>
+            </div>
+            <div class="button-group">
+                <button>Supprimer</button>
+                <button>Éditer</button>
+            </div>
+        </div>
+        <div class="card">
+            <div>
+                <div class="top-section">
+                    <img src="https://picsum.photos/80" alt="Image">
+                    <div class="info">
+                        <h3>The Kinkfolk Table</h3>
+                        <p>Nathan Williams</p>
+                        <div class="badge">disponible</div>
+                    </div>
+                </div>
+                <div class="text-zone">
+                    J'ai récemment plongé dans les pages de 'The Kinfolk Table' et j'ai été enchanté par cette œuvre
+                    le savoir de tous est bizarre et je ne sais pas quoi écrire en plus pour faire un max de ligne et
+                    voir si cela déborde.
+                </div>
+            </div>
+            <div class="button-group">
+                <button>Supprimer</button>
+                <button>Éditer</button>
+            </div>
+        </div>
     </div>
 </section>

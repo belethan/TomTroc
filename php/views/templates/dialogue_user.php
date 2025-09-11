@@ -81,5 +81,11 @@
         <div class="message right">
             Oui, la livraison express est disponible.
         </div>
+
+        <div class="input-area">
+            <input type="text" placeholder="Tapez votre message ici ...">
+            <button>Envoyer</button>
+        </div>
+
     </div>
 </div>
