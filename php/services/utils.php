@@ -105,8 +105,8 @@ class Utils {
         }
         else{
 
-            echo '<li  class="'.$nomstyle.'"><a href="#">Compte</a></li>';
-            echo '<li  class="'.$nomstyle.'"><a href="index.php?action=connectUser">comnexion</a></li>';
+            echo '<li  class="'.$nomstyle.'"><a href="#">Mon Compte</a></li>';
+            echo '<li  class="'.$nomstyle.'"><a href="index.php?action=connectUser">Comnexion</a></li>';
         }
     }
 
