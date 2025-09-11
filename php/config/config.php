@@ -22,8 +22,4 @@ define('CSS_PATH', MAIN_PATH.'css/');
 define('JS_PATH', MAIN_PATH.'js/');
 define('JS_IMAGE', MAIN_PATH.'images/');
 
-// Cpnnexion à la base de données login standard
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'TOMTROC');
-define('DB_USER', 'root');
-define('DB_PASS', 'root');
+
