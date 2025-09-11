@@ -19,7 +19,7 @@ if (isset($_SESSION['user'])) {
                             <img src="../images/LivreTexte.svg" alt="Livres" class="book-icon">
                             <span class="book-count"><?=$nblivre;?></span>
                             livres
-                        </p>
+                        </p>cd
                 </div>
                 <button class="comptebutton" onclick="window.location.href='index.php?action=dialoguser'">Ecrire un message</button>
             </div>
