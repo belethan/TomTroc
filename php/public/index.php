@@ -75,11 +75,11 @@ try {
             $adminController->showDialogUser();
             break;
         default:
-            throw new Exception("La page demandée n'existe pas.");
+            throw new Exception("La page demandée n'existe pas.",404);
     }
 } catch (Exception $e) {
     // En cas d'erreur, on affiche la page d'erreur.
     $errorView = new View('Erreur');
-    $errorView->render('errorMessage', ['errorMessage' => $e->getMessage()]);
+    $errorView->render('erreurPage', ['errorinfo' => $e]);
 }
 

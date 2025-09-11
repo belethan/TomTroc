@@ -120,12 +120,14 @@ td:nth-child(4), th:nth-child(4) {
     font-size: 0.9em;
 }
 
-.edit {
-    background-color: #007bff;
+.actions a.edit {
+    /*background-color: #007bff;*/
+    color: blue;
 }
 
-.delete {
-    background-color: #dc3545;
+.actions a.delete {
+    /*background-color: #dc3545;*/
+    color: #dc3545;
 }
 
 .actions a:hover {
