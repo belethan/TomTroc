@@ -23,3 +23,4 @@ define('JS_PATH', MAIN_PATH.'js/');
 define('JS_IMAGE', MAIN_PATH.'images/');
 
 
+
