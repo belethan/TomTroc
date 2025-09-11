@@ -23,7 +23,7 @@
                         <?= htmlspecialchars($livre->getnomAuteur()) ?>
                     </div>
                     <div class="Card-livre_VenduPar">
-                        vendu par : <?= htmlspecialchars($livre->getPseudoUtilisateur()) ?>
+                        vendu par :  <?= htmlspecialchars($livre->getPseudoUtilisateur()) ?>
                     </div>
                     <div class="<?= ($livre->getstatutLivre() ===1) ? "card-livre_statut_dispo":"card-livre_statut_indispo" ?>">
                         <?= ($livre->getstatutLivre() ===1) ? 'Disponible' : 'Non Dispo.'; ?>

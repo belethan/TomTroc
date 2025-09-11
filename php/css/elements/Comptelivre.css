@@ -107,7 +107,7 @@
 }
 
 .compte-table{
-    width: 93%;
+    width: 118%;
     background-color: white;
     border-collapse: separate;
     margin-left: 3%;
@@ -133,6 +133,13 @@
 }
 .compte-table td:nth-child(1) {
     text-align: center;
+}
+
+.compte-table td[data-label="Photo"] img {
+    width: 100%;          /* occupe toute la largeur de la cellule */
+    height: 100%;         /* occupe toute la hauteur de la cellule */
+    object-fit: cover;    /* recadre l’image sans déformation */
+    display: block;       /* supprime les espaces blancs */
 }
 
 .compte-table td:nth-child(4) {

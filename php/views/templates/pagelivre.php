@@ -16,7 +16,11 @@
         <h4>Propriétaire</h4>
         <div class="owner">
             <img src="<?= htmlspecialchars($livre->getPhotoUtilisateur()) ?>" alt="Propriétaire">
-            <span> <?= htmlspecialchars($livre->getPseudoUtilisateur()) ?></span>
+            <span>
+                <a href="index.php?action=userlivre&keyIdUser=<?= $livre->getIdUtilisateur() ?>">
+                    <?= htmlspecialchars($livre->getPseudoUtilisateur()) ?>
+                </a>
+            </span>
         </div>
         <button class="message-button"  onclick="window.location.href='index.php?action=dialoguser'">Envoyer un message</button>
     </div>

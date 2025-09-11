@@ -38,6 +38,10 @@ try {
             $adminController = new AdminController();
             $adminController->profiluser();
             break;
+        Case 'userlivre' :
+            $adminController = new AdminController();
+            $adminController->profiluser("comptelivre");
+            break;
         Case 'saveuser' :
             $adminController = new AdminController();
             $adminController->saveuser();

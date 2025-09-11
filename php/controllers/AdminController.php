@@ -98,13 +98,19 @@ class AdminController
         Utils::redirect("home");
     }
 
-    public function profiluser() : void
+    public function profiluser(string $modevisu = "infoUserForm" ) : void
     {
         $livreUser=new livreManager();
-        $datalivre = $livreUser->getalluserLivre();
+        if ($modevisu=="infoUserForm") {
+            $keyiduser = $_SESSION['keyIdUser'];
+        }
+        else{
+            $keyiduser = $_REQUEST['keyIdUser'];
+        }
+        $datalivre = $livreUser->getalluserLivre($keyiduser);
         $Nblivre = count($datalivre);
         $view = new View("Profil Utilisateur");
-        $view->render("infoUserForm",['livres'=>$datalivre,'nblivre'=>$Nblivre]);;
+        $view->render($modevisu,['livres'=>$datalivre,'nblivre'=>$Nblivre]);;
     }
 
     public function saveuser() : void

@@ -11,6 +11,14 @@
     margin: 0 auto;
     padding: 10px;
 }
+
+.full-width-section {
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+}
 .custom-table {
     width: 93%;
     background-color: white;

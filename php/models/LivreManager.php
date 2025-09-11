@@ -25,8 +25,8 @@ class LivreManager extends AbstractEntityManager
         return $books; // Renvoie un tableau, même s'il est vide
     }
 
-    public function getalluserLivre() : array{
-        $keyiduser = $_SESSION['keyIdUser'];
+    public function getalluserLivre(int $idUserKey) : array{
+        $keyiduser = $idUserKey;
         $sql = "SELECT * FROM livres WHERE id_Utilisateur=:keyutilisateur ORDER BY DteCreation DESC";
         $result = $this->db->query($sql,['keyutilisateur'=>$keyiduser]);
 

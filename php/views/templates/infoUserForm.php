@@ -24,7 +24,7 @@
                     <p class="label-Nom"><?php echo $userobjet->anciennete(); ?></p>
                     <p class="biblio">Bibliothéque</p>
                     <p class="book-paragraph">
-                        <img src="../../images/LivreTexte.svg" alt="Livres" class="book-icon">
+                        <img src="../images/LivreTexte.svg" alt="Livres" class="book-icon">
                         <span class="book-count"><?=$nblivre;?></span>
                         livres
                     </p>
