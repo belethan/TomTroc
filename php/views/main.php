@@ -77,7 +77,7 @@ $_SESSION['msgcpt']=0;
             <li><a href="#">Tom Troc©</a></li>
             <li><a href="#"><img src="../../images/logott.svg" alt="Logo Tom Troc"></a></li>
         </ul>
-        </div>
+<!--        </div>-->
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -100,8 +100,17 @@ $_SESSION['msgcpt']=0;
         $('#searchbooks').on('keypress', function (e)  {
             if (e.which === 13) { // touche Entrée
                 e.preventDefault(); // empêche l'envoi du formulaire si c'est dans un <form>
-                let query = $(this).val();
-                window.location.href = "index.php?action=livreAllshow&filtre=" + encodeURIComponent(query);
+                let query = $(this).val().trim();
+                if (query.length < 2) {
+                    if (query !== "" ) {
+                        alert("⚠️ Veuillez entrer au moins 2 caractères pour lancer la recherche.");
+                    }
+                    // Si query est vide -> redirection différente
+                    window.location.href = "index.php?action=livreAllshow";
+                } else {
+                    // Si query n'est pas vide -> redirection avec le filtre
+                    window.location.href = "index.php?action=livreAllshow&filtre=" + encodeURIComponent(query);
+                }
             }
         });
     </script>
