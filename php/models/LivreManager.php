@@ -164,14 +164,32 @@ class LivreManager extends AbstractEntityManager
         return $result;
     }
 
-    public function getAllLivre() : array{
-        $sql = "SELECT A.id, A.titre_Livre, A.nom_Auteur, A.photo_Livre, 
+    public function getAllLivre(string $datafiltre='') : array
+    {
+        if($datafiltre != ''){
+            $sql = "SELECT A.id, A.titre_Livre, A.nom_Auteur, A.photo_Livre, 
+               A.id_Utilisateur, A.DteCreation, A.DteModif, A.statut_Livre, A.commentaire,
+               B.Pseudo_Utilisateur,B.Photo_Utilisateur
+               FROM livres A
+               INNER JOIN Utilisateurs B ON (A.ID_Utilisateur = B.id)
+               WHERE ((A.titre_Livre LIKE :keyfiltre) OR (A.nom_Auteur LIKE :keyfiltre))
+               ORDER BY DteCreation DESC";
+               $_SESSION['datafiltre']=$datafiltre;
+               $datafiltre = "%".$datafiltre."%";
+               $result = $this->db->query($sql,['keyfiltre' => $datafiltre]);;
+
+        }
+        else
+        {
+            $sql = "SELECT A.id, A.titre_Livre, A.nom_Auteur, A.photo_Livre, 
                A.id_Utilisateur, A.DteCreation, A.DteModif, A.statut_Livre, A.commentaire,
                B.Pseudo_Utilisateur,B.Photo_Utilisateur
                FROM livres A
                INNER JOIN Utilisateurs B ON (A.ID_Utilisateur = B.id)
                ORDER BY DteCreation DESC";
-        $result = $this->db->query($sql);
+           $result = $this->db->query($sql);
+           $_SESSION['datafiltre']='';
+        }
         $books = [];
         while ($bookRow = $result->fetch()) {
             $books[] = new livre($bookRow); // Ajoute chaque livre au tableau

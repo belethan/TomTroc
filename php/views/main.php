@@ -96,15 +96,13 @@ $_SESSION['msgcpt']=0;
         window.addEventListener("unload", function () {
             navigator.sendBeacon("/logout.php", "");
         });
-        let timer;
-        $('#searchbook').on('input', function () {
-            clearTimeout(timer);
-            let query = $(this).val();
-            timer = setTimeout(() => {
-                $.get("recherche.php", { q: query }, function (data) {
-                    $('#results').html(data);
-                });
-            }, 400); // 400ms après fin de saisie
+
+        $('#searchbooks').on('keypress', function (e)  {
+            if (e.which === 13) { // touche Entrée
+                e.preventDefault(); // empêche l'envoi du formulaire si c'est dans un <form>
+                let query = $(this).val();
+                window.location.href = "index.php?action=livreAllshow&filtre=" + encodeURIComponent(query);
+            }
         });
     </script>
 </body>

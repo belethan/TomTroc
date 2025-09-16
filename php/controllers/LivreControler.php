@@ -77,7 +77,8 @@ class LivreControler
 
     public function showAllLivre() : void{
         $livreManager = new livreManager;
-        $livres = $livreManager->getAllLivre();
+        $filtre= utils::request('filtre') ?? '';
+        $livres = $livreManager->getAllLivre($filtre);
         $view = new View("Nos livres");;
         $view->render("echangeBook", ['livredata' => $livres]);
     }
