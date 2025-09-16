@@ -1,5 +1,5 @@
 <?php
-
+    $filtreData=$_SESSION['datafiltre'] ?? '';
 ?>
 <section class="container" role="main">
     <Div class="section-exchange">
@@ -7,7 +7,7 @@
         <div class="search-box">
             <i class="fas fa-search search-icon"></i>
             <label>
-                <input type="text" id="searchbooks" placeholder="Rechercher un livre">
+                <input type="text" id="searchbooks" placeholder="Rechercher un livre" value="<?= $filtreData ?>">
             </label>
         </div>
     </Div>
