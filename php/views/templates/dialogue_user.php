@@ -65,9 +65,9 @@
             <div class="message left">
                 Bonjour, j'aimerais avoir des informations sur votre produit.
             </div>
-        </div>
-        <div class="message right">
-            Bien sûr, que souhaitez-vous savoir ?
+            <div class="message right">
+                Bien sûr, que souhaitez-vous savoir ?
+            </div>
         </div>
         <div class="message-block">
             <div class="message-meta">
@@ -77,15 +77,14 @@
             <div class="message left">
                 Est-il possible de le recevoir avant la fin de la semaine ?
             </div>
-        </div>
-        <div class="message right">
-            Oui, la livraison express est disponible.
-        </div>
+            <div class="message right">
+                Oui, la livraison express est disponible.
+            </div>
 
+        </div>
         <div class="input-area">
             <input type="text" placeholder="Tapez votre message ici ...">
             <button>Envoyer</button>
         </div>
-
     </div>
 </div>
