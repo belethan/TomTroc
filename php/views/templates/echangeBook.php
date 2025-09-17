@@ -7,7 +7,7 @@
         <div class="search-box">
             <i class="fas fa-search search-icon"></i>
             <label>
-                <input type="text" id="searchbooks" placeholder="Rechercher un livre" value="<?= $filtreData ?>">
+                <input type="text" id="searchbooks" placeholder="Rechercher un livre" title="Appuyez sur la touche Entrée pour lancer la recherche " value="<?= $filtreData ?>">
             </label>
         </div>
     </Div>
