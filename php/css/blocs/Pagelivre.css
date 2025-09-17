@@ -17,6 +17,8 @@
     width: 100%;
     height: auto;
     display: block;
+    aspect-ratio: 720/863;
+    object-fit: cover;
 }
 
 .container-livre .right-column {
@@ -69,6 +71,7 @@
 
 .message-button {
     margin-top: auto;
+    text-align: center;
     width: 100%;
     padding: 15px;
     border-radius: 10px;

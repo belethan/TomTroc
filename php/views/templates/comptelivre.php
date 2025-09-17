@@ -1,7 +1,8 @@
 <?php
-if (isset($_SESSION['user'])) {
-    $userobjet = $_SESSION['user'];
-}
+    $dialogAuthorise = "Vous devez vous identifier pour envoyer un message" ;
+    if (isset($_SESSION['user'])) {
+        $dialogAuthorise= $_SESSION['user']['id'] !== $userobjet->getIdUtilisateur() ? "" : "Vous ne pouvez pas vous envoyer un message !";
+    }
 ?>
 <div class="container" role="main">
     <div class="compteLivre">
@@ -19,9 +20,17 @@ if (isset($_SESSION['user'])) {
                             <img src="../images/LivreTexte.svg" alt="Livres" class="book-icon">
                             <span class="book-count"><?=$nblivre;?></span>
                             livres
-                        </p>cd
+                        </p>
                 </div>
-                <button class="comptebutton" onclick="window.location.href='index.php?action=dialoguser'">Ecrire un message</button>
+<!--                <button id="btnMessage" class="comptebutton" onclick="window.location.href='index.php?action=dialoguser'">Ecrire un message</button>-->
+                <a href="index.php?action=dialoguser&keyIdUser=<?= $userobjet->getIdUtilisateur() ?>" id="btnMessage" class="comptebutton">
+                    <?php if (isset($dialogAuthorise) && !empty($dialogAuthorise)): ?>
+                        data-bs-toggle="popover"
+                        data-bs-trigger="focus"
+                        data-bs-content="<?= htmlspecialchars($dialogAuthorise) ?>"
+                    <?php endif; ?>
+                    Ecrire un message
+                </a>
             </div>
         </section>
         <section class="full-width-section">

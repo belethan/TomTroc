@@ -103,14 +103,18 @@ class AdminController
         $livreUser=new livreManager();
         if ($modevisu=="infoUserForm") {
             $keyiduser = $_SESSION['keyIdUser'];
+            $userobjet = $_SESSION['user'];
+
         }
         else{
             $keyiduser = $_REQUEST['keyIdUser'];
+            $useraskView = new UtilisateurManager();
+            $userobjet=$useraskView->getUtilisateurById($keyiduser);
         }
         $datalivre = $livreUser->getalluserLivre($keyiduser);
         $Nblivre = count($datalivre);
         $view = new View("Profil Utilisateur");
-        $view->render($modevisu,['livres'=>$datalivre,'nblivre'=>$Nblivre]);;
+        $view->render($modevisu,['livres'=>$datalivre,'nblivre'=>$Nblivre,'userobjet'=>$userobjet]);;
     }
 
     public function saveuser() : void

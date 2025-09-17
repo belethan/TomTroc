@@ -7,6 +7,11 @@
     background-color: var(--ColorBackGround);
 }
 
+.popover-custom {
+    background-color: orange;
+    color: white;
+}
+
 .alerte {
     color: red;
     font-weight: bold;
