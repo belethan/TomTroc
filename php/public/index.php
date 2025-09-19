@@ -71,9 +71,13 @@ try {
             $LivreController->showLivreReadOnly();
             break;
         Case 'dialoguser' :
-            $adminController = new AdminController();
-            $adminController->showDialogUser();
+            $dialController = new DialogueController();
+            $dialController->listUserMessages();
             break;
+//        Case 'sendmessage' :
+//            $dialController = new DialogueController();
+//            $dialController->sendMessage();
+//            break;
         default:
             throw new Exception("La page demandée n'existe pas.",404);
     }

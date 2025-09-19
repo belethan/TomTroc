@@ -113,6 +113,21 @@ $_SESSION['msgcpt']=0;
                 }
             }
         });
+
+        $(".user-card, .user-card-select").on("click", function () {
+            // Supprimer l'état actif sur toutes les cartes
+            $(".user-card, .user-card-select").removeClass("active");
+
+            // Ajouter l'état actif à la carte cliquée
+            $(this).addClass("active");
+            var selectedId = $(this).data("id");
+            window.location.href = "index.php?action=dialoguser&keyIdUser=" + encodeURIComponent(selectedId);
+            // Exemple : appel d'une URL (rediriger ou Ajax)
+            //var userName = $(this).find(".user-memo").text().trim();
+            //if (userName) {
+            //    window.location.href = "message.php?user=" + encodeURIComponent(userName);
+            //}
+        });
     </script>
 </body>
 </html>

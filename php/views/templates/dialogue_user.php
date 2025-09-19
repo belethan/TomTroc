@@ -1,90 +1,53 @@
 <?php
-
+ //Initialisation du gestionnaire d'utilisateurs
+    if (isset($_SESSION['user'])) {
+        $userobjet = $_SESSION['user'];
+    }
 ?>
 <div class="main-dialogue">
     <div class="sidebar">
         <div class="infotitre">
             <h1>Messagerie</h1>
         </div>
-        <div class="user-card-select">
-            <img src="https://picsum.photos/50" alt="Photo utilisateur">
+        <?php foreach ($msgUser as $msg): ?>
+            <div class="user-card-select" data-id="<?= $msg->getDeMessagerie() ?>">
+            <img src="<?= $msg->getPhotoUtilisateur() ?>">
             <div class="user-info">
                 <div class="user-header">
-                    <span class="user-memo">Jean Dupont</span>
-                    <span class="user-memo">14:30</span>
+                    <span class="user-memo"><?= $msg->getPseudoUtilisateur() ?></span>
+                    <span class="user-memo"><?= $msg->getheureMsg() ?></span>
                 </div>
                 <div class="user-text">
-                    Bonjour, j'aimerais vous parler de la commande, suite à des différence entre me devis et la facture
+                    <?= $msg->getMsgMessagerie() ?>
                 </div>
             </div>
         </div>
-
-        <div class="user-card">
-            <img src="https://picsum.photos/50" alt="Photo utilisateur">
-            <div class="user-info">
-                <div class="user-header">
-                    <span class="user-memo">Marie Curie</span>
-                    <span class="user-memo">13:15</span>
-                </div>
-                <div class="user-text">
-                    Merci pour votre réponse rapide...
-                </div>
-            </div>
-        </div>
-        <div class="user-card">
-            <img src="https://picsum.photos/50" alt="Photo utilisateur">
-            <div class="user-info">
-                <div class="user-header">
-                    <span class="user-memo">Paul lorrain</span>
-                    <span class="user-memo">16:35</span>
-                </div>
-                <div class="user-text">
-                    Merci pour votre réponse rapide...
-                </div>
-            </div>
-        </div>
-        <div class="user-card">
-            <img src="https://picsum.photos/50" alt="Photo utilisateur">
-            <div class="user-info">
-                <div class="user-header">
-                    <span class="user-memo">Olivier bar</span>
-                    <span class="user-memo">09:45</span>
-                </div>
-                <div class="user-text">
-                    Merci pour votre réponse rapide...
-                </div>
-            </div>
-        </div>
+        <?php endforeach; ?>
     </div>
-    <div class="chat-area">
-        <div class="message-block">
-            <div class="message-meta">
-                <img src="https://picsum.photos/20" alt="Photo">
-                <span>05/06/2025 14:25</span>
-            </div>
-            <div class="message left">
-                Bonjour, j'aimerais avoir des informations sur votre produit.
-            </div>
-            <div class="message right">
-                Bien sûr, que souhaitez-vous savoir ?
-            </div>
+    <div class="chat-area" id="chat-area">
+        <div class="user-info">
+            <img class="logo-chat" src="<?= $useraskView->getPhotoUtilisateur() ?>">
+            <span class="user-memo"><?= $useraskView->getPseudoUtilisateur() ?></span>
         </div>
-        <div class="message-block">
-            <div class="message-meta">
-                <img src="https://picsum.photos/20" alt="Photo">
-                <span>05/06/2025 14:25</span>
+        <?php foreach ($dialogues as $msg): ?>
+            <div class="message-block">
+                <div class="message-meta<?php if ($msg->getDeMessagerie() == $userobjet->getId()) echo '-right'; else echo ''; ?>">
+                    <img class="photo-carree" src="<?= $msg->getPhotoUtilisateur() ?>" alt="Photo">
+                    <span><?=$msg->getheureComplet() ?></span>
+                </div>
+                <div class="message <?php if ($msg->getDeMessagerie() == $userobjet->getId()) echo 'right'; else echo 'left'; ?>">
+                    <?= htmlspecialchars($msg->getMsgMessagerie()) ?>
+                </div>
             </div>
-            <div class="message left">
-                Est-il possible de le recevoir avant la fin de la semaine ?
-            </div>
-            <div class="message right">
-                Oui, la livraison express est disponible.
-            </div>
-
-        </div>
+        <?php endforeach; ?>
         <div class="input-area">
-            <input type="text" placeholder="Tapez votre message ici ...">
-            <button>Envoyer</button>
+            <form class="input-area" action="#" method="POST">
+                <input type="text" name="message" placeholder="Tapez votre message ici ...">
+                <!-- Champs cachés initialisés en PHP -->
+<!--                <input type="hidden" name="demsg" value="--><?php //= $userObjet->getId(); ?><!--">-->
+<!--                <input type="hidden" name="destinataire" value="--><?php //= $useraskView->getPourMessagerie(); ?><!--">-->
+                <button type="submit">Envoyer</button>
+            </form>
         </div>
     </div>
 </div>

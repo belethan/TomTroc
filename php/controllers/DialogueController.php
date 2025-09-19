@@ -22,12 +22,11 @@ class DialogueController
      */
     public function sendMessage(): void
     {
-        $this->checkIfUserIsConnected();
-
         $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
-        $recipientId = filter_input(INPUT_POST, 'recipient_id', FILTER_SANITIZE_NUMBER_INT);
+        $msgDe = filter_input(INPUT_POST, 'demsg', FILTER_SANITIZE_NUMBER_INT);
+        $msgpour = filter_input(INPUT_POST, 'destinataire', FILTER_SANITIZE_NUMBER_INT);
 
-        if (!$message || !$recipientId) {
+        if (!$message) {
             Utils::logError("Message ou destinataire manquant");
             return;
         }
@@ -41,19 +40,21 @@ class DialogueController
     }
 
     /**
-     * Lists all messages for the current user
+     * Lists all user for the current user with the last message
      *
      * @return void
      */
-    public function listMessages(): void
+    public function listUserMessages(): void
     {
         $this->checkIfUserIsConnected();
-
         $messageManager = new DialogueManager();
-        $messages = $messageManager->getUserMessages($_SESSION['user']['id']);
-
-        $view = new View("Messages");
-        $view->render("messageList", ['messages' => $messages]);
+        $usercnx =$_SESSION['keyIdUser'];
+        $messages=$messageManager->getUserMessages($usercnx);
+        $Dekeyuser = $_GET['keyIdUser'];
+        $dialogues=$messageManager->getDialogue($Dekeyuser, $usercnx);
+        $useraskView = $messages[$messageManager->findIndexByPourMessagerie($messages,$Dekeyuser)]; //retourne indice dans le tableau
+        $view = new View("Messagerie");
+        $view->render("dialogue_user", ['msgUser' => $messages , 'dialogues'=>$dialogues, 'useraskView'=>$useraskView]);
     }
 }
 
