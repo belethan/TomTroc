@@ -2,6 +2,8 @@
  //Initialisation du gestionnaire d'utilisateurs
     if (isset($_SESSION['user'])) {
         $userobjet = $_SESSION['user'];
+        $userCnx = $_SESSION['keyIdUser'];
+        $userDestinataire = $_REQUEST['keyidUser'];
     }
 ?>
 <div class="main-dialogue">
@@ -44,8 +46,8 @@
             <form class="input-area" action="#" method="POST">
                 <input type="text" name="message" placeholder="Tapez votre message ici ...">
                 <!-- Champs cachés initialisés en PHP -->
-<!--                <input type="hidden" name="demsg" value="--><?php //= $userObjet->getId(); ?><!--">-->
-<!--                <input type="hidden" name="destinataire" value="--><?php //= $useraskView->getPourMessagerie(); ?><!--">-->
+                <input type="hidden" name="demsg" value="<?=$userCnx; ?>">
+                <input type="hidden" name="destinataire" value="<?= $userDestinataire ?>">
                 <button type="submit">Envoyer</button>
             </form>
         </div>

@@ -50,8 +50,9 @@ class DialogueController
         $messageManager = new DialogueManager();
         $usercnx =$_SESSION['keyIdUser'];
         $messages=$messageManager->getUserMessages($usercnx);
-        $Dekeyuser = $_GET['keyIdUser'];
-        $dialogues=$messageManager->getDialogue($Dekeyuser, $usercnx);
+        $pourkeyuser = $_GET['keyIdUser'];    //Message pour l' utilisateur avec KeyIdUser
+        $Dekeyuser = $_SESSION['keyIdUser'];    // KeyUser pour la personne actuellement connecté au Site
+        $dialogues=$messageManager->getDialogue($pourkeyuser, $usercnx); //Message POUR iduser de la personne connecté DE
         $useraskView = $messages[$messageManager->findIndexByPourMessagerie($messages,$Dekeyuser)]; //retourne indice dans le tableau
         $view = new View("Messagerie");
         $view->render("dialogue_user", ['msgUser' => $messages , 'dialogues'=>$dialogues, 'useraskView'=>$useraskView]);
