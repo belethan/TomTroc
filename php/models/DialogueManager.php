@@ -2,8 +2,14 @@
 
 class DialogueManager extends AbstractEntityManager
 {
-    public function addMessage(int $keyuser){
+    public function addMessage(int $delapart, int $pourlapersonne,string $message):bool
+    {
 
+        $sql = "INSERT INTO Messagerie (De_Messagerie, Pour_Messagerie, Msg_Messagerie) VALUES (:delapart, :pourlapersonne,:message)";
+        $result = $this->db->query($sql,['delapart' => $delapart,
+                 'pourlapersonne' => $pourlapersonne,
+                 'message' => $message]);
+        return $result->errorCode()==='00000';
     }
 
     Public function getUserMessages(int $keyuser){
@@ -50,13 +56,20 @@ class DialogueManager extends AbstractEntityManager
         return $messages; // Renvoie un tableau, même s'il est vide
     }
 
-    function findIndexByPourMessagerie(array $messages, int $valeurRecherchee) {
+    public function findIndexByPourMessagerie(array $messages, int $valeurRecherchee) {
         foreach ($messages as $index => $msg) {
             $key = $msg->getDeMessagerie();
             if ($key === $valeurRecherchee) {
                 return $index; // Retourne l’indice trouvé
             }
         }
-        return -1; // Si rien trouvé
+        return 0; // Si rien trouvé
+    }
+
+    public function countMessages(int $keyuser):int{
+        $sql = "select count(*) as nbmsg from Messagerie where Pour_Messagerie = :keyuser";
+        $result = $this->db->query($sql,['keyuser' => $keyuser]);
+        $msgRow = $result->fetch();
+        return $msgRow['nbmsg'];
     }
 }

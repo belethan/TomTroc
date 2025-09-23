@@ -3,7 +3,7 @@
     if (isset($_SESSION['user'])) {
         $userobjet = $_SESSION['user'];
         $userCnx = $_SESSION['keyIdUser'];
-        $userDestinataire = $_REQUEST['keyidUser'];
+//        $userDestinataire = $_REQUEST['keyidUser'];
     }
 ?>
 <div class="main-dialogue">
@@ -43,11 +43,11 @@
             </div>
         <?php endforeach; ?>
         <div class="input-area">
-            <form class="input-area" action="#" method="POST">
+            <form class="input-area" action="index.php?action=sendmessage" method="POST">
                 <input type="text" name="message" placeholder="Tapez votre message ici ...">
                 <!-- Champs cachés initialisés en PHP -->
                 <input type="hidden" name="demsg" value="<?=$userCnx; ?>">
-                <input type="hidden" name="destinataire" value="<?= $userDestinataire ?>">
+                <input type="hidden" name="destinataire" value="<?=$useraskView->getDeMessagerie(); ?>">
                 <button type="submit">Envoyer</button>
             </form>
         </div>

@@ -57,8 +57,6 @@ class UtilisateurManager extends AbstractEntityManager
             $useractif->hydrate($user);
             $_SESSION['user']=$useractif;
             $_SESSION['keyIdUser']=$useractif->getId();
-//            var_dump($useractif);
-//            die;
             return true;
         }
         else

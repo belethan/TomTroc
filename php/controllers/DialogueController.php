@@ -22,21 +22,23 @@ class DialogueController
      */
     public function sendMessage(): void
     {
-        $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
+        $this->checkIfUserIsConnected();
+        //$message = filter_input(INPUT_POST, 'message',  FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
+        $message =htmlspecialchars($_POST['message'] ?? '', ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+        if (trim($message) === '' || preg_replace('/\s+/', '', $message) === '') {
+            Utils::logError("Vous ne pouvez pas envoyer un message vide.");
+            return;
+        }
         $msgDe = filter_input(INPUT_POST, 'demsg', FILTER_SANITIZE_NUMBER_INT);
         $msgpour = filter_input(INPUT_POST, 'destinataire', FILTER_SANITIZE_NUMBER_INT);
 
-        if (!$message) {
-            Utils::logError("Message ou destinataire manquant");
-            return;
-        }
-
         $messageManager = new DialogueManager();
-        if ($messageManager->addMessage($_SESSION['user']['id'], $recipientId, $message)) {
+        if ($messageManager->addMessage($msgDe,$msgpour,$message)) {
             Utils::logSuccess("Message envoyé avec succès");
         } else {
             Utils::logError("Erreur lors de l'envoi du message");
         }
+        utils::redirect("dialoguser",['keyIdUser'=>$msgpour]);
     }
 
     /**
@@ -53,7 +55,8 @@ class DialogueController
         $pourkeyuser = $_GET['keyIdUser'];    //Message pour l' utilisateur avec KeyIdUser
         $Dekeyuser = $_SESSION['keyIdUser'];    // KeyUser pour la personne actuellement connecté au Site
         $dialogues=$messageManager->getDialogue($pourkeyuser, $usercnx); //Message POUR iduser de la personne connecté DE
-        $useraskView = $messages[$messageManager->findIndexByPourMessagerie($messages,$Dekeyuser)]; //retourne indice dans le tableau
+        $indice = $messageManager->findIndexByPourMessagerie($messages,$pourkeyuser); //recherche indice dans le tableau
+        $useraskView = $messages[$indice]; //retourne le 1er dialogue avec l'utilisateur Pour .
         $view = new View("Messagerie");
         $view->render("dialogue_user", ['msgUser' => $messages , 'dialogues'=>$dialogues, 'useraskView'=>$useraskView]);
     }
