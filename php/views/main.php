@@ -8,7 +8,12 @@
  */
 // conteneur de messages non lu via chat
 $_SESSION['msgcpt']=0;
-
+if (isset($_SESSION['user'])) {
+    // Initialisation du gestionnaire d'utilisateurs
+    $userController = new UtilisateurManager();
+//    $_SESSION['msgcpt']=$userController->GetNblivre($_SESSION['keyIdUser']);
+    $_SESSION['msgcpt']=$userController->getNbMessage($_SESSION['keyIdUser']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -121,12 +126,16 @@ $_SESSION['msgcpt']=0;
             // Ajouter l'état actif à la carte cliquée
             $(this).addClass("active");
             var selectedId = $(this).data("id");
-            window.location.href = "index.php?action=dialoguser&keyIdUser=" + encodeURIComponent(selectedId);
-            // Exemple : appel d'une URL (rediriger ou Ajax)
-            //var userName = $(this).find(".user-memo").text().trim();
-            //if (userName) {
-            //    window.location.href = "message.php?user=" + encodeURIComponent(userName);
-            //}
+
+            // URL par défaut
+            var url = "index.php?action=dialoguser&mobile=0&keyIdUser=" + encodeURIComponent(selectedId);
+
+            // gestion Page Mobile
+            if (window.innerWidth < 768) {
+                // Créer URL dynamique pour mobile
+                url = "index.php?action=dialoguser&mobile=1&keyIdUser=" + encodeURIComponent(selectedId);
+            }
+            window.location.href = url;
         });
     </script>
 </body>

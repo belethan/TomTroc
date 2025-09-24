@@ -72,7 +72,8 @@ try {
             break;
         Case 'dialoguser' :
             $dialController = new DialogueController();
-            $dialController->listUserMessages();
+//            $dialController->listUserMessages();
+            $dialController->showDialogUser();
             break;
         Case 'sendmessage' :
             $dialController = new DialogueController();

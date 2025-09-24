@@ -94,10 +94,10 @@ class Utils {
     Public static function userMenu(string $nomstyle='navbar-link-right')
     {
         if ($nomstyle ==='navbar-link-right') {
-            echo '<li class="navbar-msg-left navbar-link-right"><a href="#" class="bulle">Messagerie <span class="badge">'.$_SESSION['msgcpt'].'</span> </a></li>';
+            echo '<li class="navbar-msg-left navbar-link-right"><a href="index.php?action=dialoguser&keyIdUser=0" class="bulle">Messagerie <span class="badge">'.$_SESSION['msgcpt'].'</span> </a></li>';
         }
         else{
-               echo '<li class="navbar-link-burger"><a href="#">Messagerie</a></li>';
+               echo '<li class="navbar-link-burger"><a href="index.php?action=dialoguser&keyIdUser=0">Messagerie</a></li>';
         }
         if (isset($_SESSION['user'])) {
             echo '<li  class="'.$nomstyle.'"><a href="index.php?action=infouser">'.$_SESSION['user']->getPseudoUtilisateur().'</a></li>';
@@ -105,7 +105,7 @@ class Utils {
         }
         else{
 
-            echo '<li  class="'.$nomstyle.'"><a href="#">Mon Compte</a></li>';
+            echo '<li  class="'.$nomstyle.'"><a href="index.php?action=connectUser">Mon Compte</a></li>';
             echo '<li  class="'.$nomstyle.'"><a href="index.php?action=connectUser">Comnexion</a></li>';
         }
     }
