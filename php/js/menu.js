@@ -39,6 +39,24 @@
             }
         });
     }
+
+    function msgErrDialogue() {
+        var $popoverTrigger = $('#btnMessage');
+
+        if ($popoverTrigger.length && $popoverTrigger.attr('data-bs-toggle')) {
+            var popover = new bootstrap.Popover($popoverTrigger[0], {
+                container: 'body',
+                customClass: 'popover-custom',
+                trigger: 'focus'
+            });
+
+            // Empêche la redirection si non connecté
+            $popoverTrigger.on('click', function (e) {
+                e.preventDefault();
+            });
+        }
+    }
 toggleMenu();
 initConfirmDeleteModal();
+msgErrDialogue()
 

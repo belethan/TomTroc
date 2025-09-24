@@ -8,7 +8,12 @@
  */
 // conteneur de messages non lu via chat
 $_SESSION['msgcpt']=0;
-
+if (isset($_SESSION['user'])) {
+    // Initialisation du gestionnaire d'utilisateurs
+    $userController = new UtilisateurManager();
+//    $_SESSION['msgcpt']=$userController->GetNblivre($_SESSION['keyIdUser']);
+    $_SESSION['msgcpt']=$userController->getNbMessage($_SESSION['keyIdUser']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -112,6 +117,25 @@ $_SESSION['msgcpt']=0;
                     window.location.href = "index.php?action=livreAllshow&filtre=" + encodeURIComponent(query);
                 }
             }
+        });
+
+        $(".user-card, .user-card-select").on("click", function () {
+            // Supprimer l'état actif sur toutes les cartes
+            $(".user-card, .user-card-select").removeClass("active");
+
+            // Ajouter l'état actif à la carte cliquée
+            $(this).addClass("active");
+            var selectedId = $(this).data("id");
+
+            // URL par défaut
+            var url = "index.php?action=dialoguser&mobile=0&keyIdUser=" + encodeURIComponent(selectedId);
+
+            // gestion Page Mobile
+            if (window.innerWidth < 768) {
+                // Créer URL dynamique pour mobile
+                url = "index.php?action=dialoguser&mobile=1&keyIdUser=" + encodeURIComponent(selectedId);
+            }
+            window.location.href = url;
         });
     </script>
 </body>

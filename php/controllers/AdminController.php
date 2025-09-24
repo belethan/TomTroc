@@ -100,8 +100,21 @@ class AdminController
 
     public function profiluser() : void
     {
+        $livreUser=new livreManager();
+        if ($modevisu=="infoUserForm") {
+            $keyiduser = $_SESSION['keyIdUser'];
+            $userobjet = $_SESSION['user'];
+
+        }
+        else{
+            $keyiduser = $_REQUEST['keyIdUser'];
+            $useraskView = new UtilisateurManager();
+            $userobjet=$useraskView->getUtilisateurById($keyiduser);
+        }
+        $datalivre = $livreUser->getalluserLivre($keyiduser);
+        $Nblivre = count($datalivre);
         $view = new View("Profil Utilisateur");
-        $view->render("infoUserForm");;
+        $view->render($modevisu,['livres'=>$datalivre,'nblivre'=>$Nblivre,'userobjet'=>$userobjet]);;
     }
 
     public function saveuser() : void
@@ -110,8 +123,13 @@ class AdminController
         if ($UpdateData->UpdateUser()->errorCode()=='00000') {
             utils::logsuccess("Vos modifications ont été enregistrées");
         }
-        $view = new View("Profil Utilisateur");
-        $view->render("infoUserForm");;
+        header("Location: index.php?action=infouser");
+
+    }
+
+    public function showDialogVide() : void{
+        $view = new View("Dialogue Utilisateur");
+        $view->render("erreurMessageAbs");
     }
 
 }

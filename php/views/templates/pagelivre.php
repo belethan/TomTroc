@@ -22,7 +22,16 @@
                 </a>
             </span>
         </div>
-        <button class="message-button"  onclick="window.location.href='index.php?action=dialoguser'">Envoyer un message</button>
+
+        <a href="index.php?action=dialoguser&keyIdUser=<?= $livre->getIdUtilisateur() ?>"
+           id="btnMessage"
+           class="message-button"
+            <?php if (isset($msgdial) && !empty($msgdial)): ?>
+                data-bs-toggle='popover'
+                data-bs-trigger='focus'
+                data-bs-content='<?= htmlspecialchars($msgdial) ?>'
+            <?php endif; ?>
+            >Envoyer un message</a>
     </div>
 
 </div>

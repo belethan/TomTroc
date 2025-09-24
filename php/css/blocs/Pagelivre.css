@@ -1,6 +1,9 @@
 .container-livre {
-    display: flex;
-    flex-wrap: wrap;
+   /* display: flex;
+    flex-wrap: wrap;*/
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* deux colonnes */
+    gap: 10px;
 }
 
 .container-livre .left-column, .right-column {
@@ -34,8 +37,7 @@
 
 .container-livre h4 {
     margin-bottom: 1.875rem;
-    /*margin-top: 1.875rem;*/
-    margin-top: auto;
+    margin-top: 1.875rem;
 
 }
 .container-livre p {
@@ -68,7 +70,7 @@
 }
 
 .message-button {
-    margin-top: auto;
+    margin-top: 20px;
     width: 100%;
     padding: 15px;
     border-radius: 10px;
@@ -77,10 +79,12 @@
     color: white;
     border: none;
     cursor: pointer;
+    text-align: center;
 }
 
 @media (max-width: 768px) {
     .container-livre {
-        flex-direction: column;
+        /*flex-direction: column;*/
+        grid-template-columns: 1fr; /* une colonne en mobile */
     }
 }

@@ -1,8 +1,8 @@
 <?php
 // Initialisation du gestionnaire d'utilisateurs
-    if (isset($_SESSION['user'])) {
-        $userobjet = $_SESSION['user'];
-    }
+//    if (isset($_SESSION['user'])) {
+//        $userobjet = $_SESSION['user'];
+//    }
 ?>
 <div class="titre">
     <h1 >Mon Compte</h1>

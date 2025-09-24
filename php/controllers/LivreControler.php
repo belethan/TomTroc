@@ -20,8 +20,12 @@ class LivreControler
     public function showLivreReadOnly() : void{
         $livreManager = new livreManager;
         $livrework=$livreManager->getLivreById($_GET['keybook']);
+        $dialogAuthorise = "Vous devez vous identifier pour envoyer un message" ;
+        if (isset($_SESSION['user'])){
+            $dialogAuthorise= $_SESSION['keyIdUser'] != $livrework->getIdUtilisateur() ? "" : "Vous ne pouvez pas vous envoyer un message !";
+        }
         $view = new View("Détails d'un livre");
-        $view->render("pagelivre", ['livre' => $livrework]);
+        $view->render("pagelivre", ['livre' => $livrework,'msgdial'=>$dialogAuthorise]);
     }
 
 
