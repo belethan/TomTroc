@@ -128,11 +128,9 @@ class AdminController
 
     }
 
-//    public function showDialogUser() : void{
-//        $PourUser = $_REQUEST['keyIdUser'];
-//        $DeUser = $_SESSION['keyIdUser'];
-//        $view = new View("Dialogue Utilisateur");
-//        $view->render("dialogue_user",['pouruser'=>$PourUser]);
-//    }
+    public function showDialogVide() : void{
+        $view = new View("Dialogue Utilisateur");
+        $view->render("erreurMessageAbs");
+    }
 
 }

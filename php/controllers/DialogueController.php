@@ -11,10 +11,16 @@ class DialogueController
     {
         // On vérifie que l'utilisateur est connecté.
         if (!isset($_SESSION['user'])) {
-            Utils::redirect("connectionForm");
+            Utils::redirect("connectUser");
         }
     }
 
+    private function checkIfUserAsMessage(int $EcrireA): void
+    {
+        if (($_SESSION['msgcpt']===0) && ($EcrireA ===0)) {
+            Utils::redirect("showDialogVide");
+        }
+    }
     /**
      * Sends a message from one user to another
      *
@@ -73,15 +79,17 @@ class DialogueController
 
     public function showDialogUser(): void
     {
+        $this->checkIfUserIsConnected();
         /* Ecrire un Message */
         $EcrireA = $_GET['keyIdUser'];      // clé Utilisateur à envoyer le message
         $DelaPart = $_SESSION['keyIdUser'];     //Clé Utilisateur connecté et Identifié
+        $this->checkIfUserAsMessage($EcrireA);
             /* Afficher les dialogues de l'utilisateur DeLaPart Celui qui est connecté*/
         $messageManager = new DialogueManager();
         $messages = $messageManager->getUserMessages($DelaPart);
         /* Définir l'utilisateur a qui on envoie le message */
         $utilisateurAquiOnEcrite = new UtilisateurManager();
-        if ($EcrireA === "0") {
+        if (($EcrireA === "0") && (count($messages) > 0)) {
             $EcrireA = $messages[0]->getDeMessagerie();
         }
         $useraskView=$utilisateurAquiOnEcrite->getUtilisateurById($EcrireA);

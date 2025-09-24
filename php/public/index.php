@@ -18,6 +18,10 @@ try {
             $adminController = new AdminController();
             $adminController->displayConnectionForm();
             break;
+        case 'showDialogVide':
+            $userController = new AdminController();
+            $userController->showDialogVide();
+            break;
        case 'login':
            $userController = new AdminController();
            $userController->loginUser();
@@ -72,7 +76,6 @@ try {
             break;
         Case 'dialoguser' :
             $dialController = new DialogueController();
-//            $dialController->listUserMessages();
             $dialController->showDialogUser();
             break;
         Case 'sendmessage' :

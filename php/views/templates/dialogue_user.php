@@ -6,11 +6,11 @@
     }
 ?>
 <div class="main-dialogue">
-    <div class="sidebar">
-        <div class="infotitre">
-            <h1>Messagerie</h1>
-        </div>
-        <?php foreach ($msgUser as $msg): ?>
+      <div class="sidebar">
+            <div class="infotitre">
+                <h1>Messagerie</h1>
+            </div>
+            <?php foreach ($msgUser as $msg): ?>
             <div class="user-card-select <?= ($msg->getDeMessagerie() === $useraskView->getid()) ? 'active' : '' ?>" data-id="<?= $msg->getDeMessagerie() ?>">
             <img src="<?= $msg->getPhotoUtilisateur() ?>">
             <div class="user-info">
@@ -24,8 +24,8 @@
             </div>
         </div>
         <?php endforeach; ?>
-    </div>
-    <div class="chat-area" id="chat-area">
+      </div>
+      <div class="chat-area" id="chat-area">
         <div class="user-info">
             <img class="logo-chat" src="<?= $useraskView->getPhotoUtilisateur() ?>">
             <span class="user-memo"><?= $useraskView->getPseudoUtilisateur() ?></span>

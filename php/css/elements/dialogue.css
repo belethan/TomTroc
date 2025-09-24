@@ -7,6 +7,17 @@
     color: red;
     font-weight: bold;
 }
+
+.info-message {
+    background-color: #ffe5b4; /* orange clair */
+    color: #000;              /* texte noir */
+    font-size: 16px;          /* taille de police */
+    padding: 12px 16px;       /* espace intérieur */
+    border-radius: 6px;       /* coins arrondis */
+    border: 1px solid #f0a500; /* bordure orange plus soutenu */
+    margin: 10px 0;           /* espace autour */
+}
+
 .sidebar h2 {
     margin-bottom: 15px;
 }
