@@ -33,7 +33,7 @@
             }
 
             // Mettre l'ID dans le champ hidden
-            const hiddenInput = document.getElementById('delete-id');
+            const hiddenInput = document.getElementById('delete_id');
             if (hiddenInput) {
                 hiddenInput.value = id;
             }
