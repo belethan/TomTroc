@@ -6,6 +6,9 @@
 >Vous trouverez ci-dessous les instructions pour installer le projet sur votre serveur.
 ne pas oublier de modifier le fichier de configuration.
 
+### Github TomTroc
+Vous pouvez consulter le projet sur github à l'adresse suivante : https://github.com/belethan/TomTroc
+
 Pour commencer nous allons installer la base de données MYSQL Version 8.4.4.
 L' utilisateur principal pour MYSQL est root avec root en mot de passe, il est conseillé de modifier.
 Attention, il faut aussi modifier dans le fichier **config.php** dans le dossier __*php/config*__ pour la connexion à la base de données.

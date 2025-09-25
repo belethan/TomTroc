@@ -17,9 +17,7 @@
         <div class="owner">
             <img src="<?= htmlspecialchars($livre->getPhotoUtilisateur()) ?>" alt="Propriétaire">
             <span>
-                <a href="index.php?action=userlivre&keyIdUser=<?= $livre->getIdUtilisateur() ?>">
-                    <?= htmlspecialchars($livre->getPseudoUtilisateur()) ?>
-                </a>
+                <?= htmlspecialchars($livre->getPseudoUtilisateur()) ?>
             </span>
         </div>
 
