@@ -74,7 +74,7 @@ class LivreControler
     public function livredelete() : void
     {
         $livreManager = new livreManager;
-        $keydata = utils::request('keylivre');
+        $keydata = $_POST['delete_id'];
         $livreManager->DelLivreByid($keydata);
         header("Location: index.php?action=infouser");
     }

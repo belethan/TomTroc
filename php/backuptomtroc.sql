@@ -133,14 +133,14 @@ DELIMITER ;
 --
 
 CREATE TABLE `Utilisateurs` (
-  `ID` bigint NOT NULL,
+  `ID` bigint NOT NULL ,
   `Pseudo_Utilisateur` varchar(50) NOT NULL,
   `Photo_Utilisateur` varchar(255) DEFAULT NULL,
   `Mail_Utilisateur` varchar(255) NOT NULL,
   `Pwd_Utilisateur` varchar(120) NOT NULL,
   `DteCreation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `DteModif` timestamp NOT NULL DEFAULT (now())
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ;
 
 --
 -- Déchargement des données de la table `Utilisateurs`
