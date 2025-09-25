@@ -98,7 +98,7 @@ class AdminController
         Utils::redirect("home");
     }
 
-    public function profiluser() : void
+    public function profiluser(string $modevisu = "infoUserForm") : void
     {
         $livreUser=new livreManager();
         if ($modevisu=="infoUserForm") {
