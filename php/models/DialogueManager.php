@@ -53,6 +53,9 @@ class DialogueManager extends AbstractEntityManager
         while ($msgRow = $result->fetch()) {
             $messages[] = new Messagerie($msgRow); // Ajoute chaque message au tableau
         }
+        if ((isset($messages)) && (count($messages)>0)) {
+            $this->UpdMsgNonLu($keyuserA,$keyuserPour);
+        }
         return $messages; // Renvoie un tableau, même s'il est vide
     }
 
@@ -66,10 +69,11 @@ class DialogueManager extends AbstractEntityManager
         return 0; // Si rien trouvé
     }
 
-    public function countMessages(int $keyuser):int{
-        $sql = "select count(*) as nbmsg from Messagerie where Pour_Messagerie = :keyuser";
-        $result = $this->db->query($sql,['keyuser' => $keyuser]);
-        $msgRow = $result->fetch();
-        return $msgRow['nbmsg'];
+    private function UpdMsgNonLu(int $keyuser,int $dekeyuser):bool{
+        $sql = "update Messagerie
+                set Message_new=0
+                where ((Pour_Messagerie=:keyuser) and (De_Messagerie=:dekeyuser) and (Message_new=1))";
+        $result = $this->db->query($sql,['keyuser' => $keyuser,'dekeyuser'=>$dekeyuser]);
+        return $result->errorCode()===0;
     }
 }

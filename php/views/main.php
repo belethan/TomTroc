@@ -8,11 +8,13 @@
  */
 // conteneur de messages non lu via chat
 $_SESSION['msgcpt']=0;
+$_SESSION['msgnonlu']=0;
 if (isset($_SESSION['user'])) {
     // Initialisation du gestionnaire d'utilisateurs
     $userController = new UtilisateurManager();
 //    $_SESSION['msgcpt']=$userController->GetNblivre($_SESSION['keyIdUser']);
     $_SESSION['msgcpt']=$userController->getNbMessage($_SESSION['keyIdUser']);
+    $_SESSION['msgnonlu']=$userController->getNbMessageNonLu($_SESSION['keyIdUser']);
 }
 ?>
 <!DOCTYPE html>

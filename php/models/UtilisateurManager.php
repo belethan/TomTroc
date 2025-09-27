@@ -144,4 +144,12 @@ class UtilisateurManager extends AbstractEntityManager
         $user=$result->fetch();
         return $user['nbMsg'];
     }
+    Public function getNbMessageNonLu($id):int{
+        $sql="SELECT COUNT(*) as nbMsgNonlu FROM Messagerie WHERE (Pour_Messagerie=:id) and (Message_new=1)";
+        $result=$this->db->query($sql,[
+            'id' => $id
+        ]);
+        $user=$result->fetch();
+        return $user['nbMsgNonlu'];
+    }
 }
