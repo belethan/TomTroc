@@ -5,6 +5,8 @@
 
 >Vous trouverez ci-dessous les instructions pour installer le projet sur votre serveur.
 ne pas oublier de modifier le fichier de configuration.
+> Vous pouvez aussi vous connecter au GitHub en cliquant sur le lien suivant :
+> https://github.com/belethan/TomTroc
 
 Pour commencer nous allons installer la base de données MYSQL Version 8.4.4.
 L' utilisateur principal pour MYSQL est root avec root en mot de passe, il est conseillé de modifier.
