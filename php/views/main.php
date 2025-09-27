@@ -17,6 +17,7 @@ if (isset($_SESSION['user']) && ($_SESSION['user']->getId()>0))
     $_SESSION['msgnonlu']=$userController->getNbMessageNonLu($_SESSION['keyIdUser']);
 }
 else{
+    /* affichage erreur */
     utils::logError("Le login ou le mot de passe est invalide");
 }
 ?>
