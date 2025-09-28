@@ -52,6 +52,7 @@ class UtilisateurManager extends AbstractEntityManager
             'MdpUtilisateur' => $password
         ]);
         $user=$result->fetch();
+
         if($user)
         {
             $useractif->hydrate($user);
@@ -63,6 +64,7 @@ class UtilisateurManager extends AbstractEntityManager
         {
             $useractif->setMailUtilisateur($mail);
             $_SESSION['user']=$useractif;
+            utils::logError("Erreur d'authentification, Login ou mot de passe incorrect");
             //return false;
             Utils::redirect("connectUser");
         }

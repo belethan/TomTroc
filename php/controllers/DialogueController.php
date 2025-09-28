@@ -10,7 +10,10 @@ class DialogueController
     private function checkIfUserIsConnected(): void
     {
         // On vérifie que l'utilisateur est connecté.
-        if (!isset($_SESSION['user'])) {
+//        if (!isset($_SESSION['user'])) {
+//            Utils::redirect("connectUser");
+//        }
+        if (!(isset($_SESSION['user']) && (!empty($_SESSION['user'])) && ($_SESSION['user']->getId()>0))){
             Utils::redirect("connectUser");
         }
     }
@@ -83,7 +86,7 @@ class DialogueController
         /* Ecrire un Message */
         $EcrireA = $_GET['keyIdUser'];      // clé Utilisateur à envoyer le message
         $DelaPart = $_SESSION['keyIdUser'];     //Clé Utilisateur connecté et Identifié
-        $this->checkIfUserAsMessage($EcrireA);
+        $this->checkIfUserAsMessage($EcrireA);      //vérifie si il y a des messages pour le user connecté
             /* Afficher les dialogues de l'utilisateur DeLaPart Celui qui est connecté*/
         $messageManager = new DialogueManager();
         $messages = $messageManager->getUserMessages($DelaPart);

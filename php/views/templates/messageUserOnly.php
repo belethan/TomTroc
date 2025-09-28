@@ -19,7 +19,7 @@
                     <span><?=$msg->getheureComplet() ?></span>
                 </div>
                 <div class="message <?php if ($msg->getDeMessagerie() == $userobjet->getId()) echo 'right'; else echo 'left'; ?>">
-                    <?= htmlspecialchars($msg->getMsgMessagerie()) ?>
+                    <?= htmlspecialchars_decode($msg->getMsgMessagerie()) ?>
                 </div>
             </div>
         <?php endforeach; ?>

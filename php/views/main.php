@@ -9,7 +9,7 @@
 // conteneur de messages non lu via chat
 $_SESSION['msgcpt']=0;
 $_SESSION['msgnonlu']=0;
-if (isset($_SESSION['user']) && ($_SESSION['user']->getId()>0))
+if (isset($_SESSION['user']) && (!empty($_SESSION['user'])) && ($_SESSION['user']->getId()>0))
 {
     // Initialisation du gestionnaire d'utilisateurs
     $userController = new UtilisateurManager();
@@ -18,7 +18,10 @@ if (isset($_SESSION['user']) && ($_SESSION['user']->getId()>0))
 }
 else{
     /* affichage erreur */
-    utils::logError("Le login ou le mot de passe est invalide");
+    if ((isset($_SESSION['alert'])) && (!empty($_SESSION['alert']))){
+        utils::logError("Le login ou le mot de passe est invalide");
+    }
+
 }
 ?>
 <!DOCTYPE html>
@@ -69,13 +72,12 @@ else{
             </button>
         </div>
     </header>
-    <?php if (!empty($_SESSION['alert'])): ?>
+    <?php if ((isset($_SESSION['alert'])) && (!empty($_SESSION['alert']))): ?>
         <div id="alertMessage" class="alert alert-<?= $_SESSION['alert']['type']; ?> alert-dismissible fade show" role="alert">
            <?= $_SESSION['alert']['message']; ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
         </div>
         <?php unset($_SESSION['alert']); ?>
-
     <?php endif; ?>
     <main>
         <?= $content /* Ici est affiché le contenu réel de la page. */ ?>

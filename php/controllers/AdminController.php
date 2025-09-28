@@ -17,6 +17,7 @@ class AdminController
 
     public function loginUser(): void
     {
+        unset($_SESSION['alert']);
         // Initialisation du gestionnaire d'utilisateurs
         $userController = new UtilisateurManager();
         // Récupération sécurisée des données d'entrée
@@ -35,15 +36,13 @@ class AdminController
 
         if ($isAuthenticated) {
             // Authentification réussie
-            $_SESSION['error'] = ""; // Réinitialisation du message d'erreur
             $view = new View("Accueil");
             $view->render("home");
         } else {
             // Erreur d'identifiants
-            $_SESSION['error'] = "Identifiants incorrects.";
-            //$this->displayConnectionForm();
+            utils::logError("Erreur d'authentification, Login ou mot de passe incorrect");
+            $_SESSION['user']=Null;
             Utils::redirect("connectUser");
-
         }
     }
 
