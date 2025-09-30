@@ -14,7 +14,7 @@
             <button type="submit">S'inscrire</button>
         </form>
         <div class="login-link">
-            <p>Déjà inscrit ? <a href="index.php?action=inscription">Connectez-vous</a></p>
+            <p>Déjà inscrit ? <a href="index.php?action=connectUser">Connectez-vous</a></p>
         </div>
     </div>
     <div class="right-column">

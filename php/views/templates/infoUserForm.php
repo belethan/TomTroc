@@ -116,7 +116,7 @@
     <?php if (!empty($livres)): ?>
         <div class="modal fade" id="confirmDellivreModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
-                <form action="index.php?action=livredelete&keylivre=<?=$livre->getId();?>" method="POST">
+                <form action="index.php?action=livredelete&keylivre" method="POST">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Confirmation suppression</h5>
