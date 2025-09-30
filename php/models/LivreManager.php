@@ -153,7 +153,7 @@ class LivreManager extends AbstractEntityManager
         return $books; // Renvoie un tableau, même s'il est vide
     }
 
-    public function DelLivreByid(int $keylivre) : PDOStatement
+    public function DelLivreByid($keylivre) : PDOStatement
     {
         $sql = "DELETE FROM livres WHERE id = :keylivre";
         $result = $this->db->query($sql,['keylivre' => $keylivre]);
